@@ -40,54 +40,25 @@
 						<li data-bs-target="#carouselExampleDark" data-bs-slide-to="2"></li>
 					</ol>
 					<div class="carousel-inner">
-						<div class="carousel-item active bg-dark-gery">
+						@php $s=1; @endphp
+						@foreach($slider as $sliderRow)
+						<div class="carousel-item bg-dark-gery @if($s++ == 1) active @endif">
 							<div class="row d-flex align-items-center">
 								<div class="col d-none d-lg-flex justify-content-center">
 									<div class="">
-										<h3 class="h3 fw-light">Has just arrived!</h3>
-										<h1 class="h1">Huge Summer Collection</h1>
-										<p class="pb-3">Swimwear, Tops, Shorts, Sunglasses &amp; much more...</p>
-										<div class=""> <a class="btn btn-dark btn-ecomm" href="javascript:;">Shop Now <i class='bx bx-chevron-right'></i></a>
+										<h3 class="h3 fw-light">{{$sliderRow->text1}}</h3>
+										<h1 class="h1">{{$sliderRow->text2}}</h1>
+										<p class="pb-3">{{$sliderRow->text3}}</p>
+										<div class=""> <a class="btn btn-dark btn-ecomm" href="{{$sliderRow->link}}">Shop Now <i class='bx bx-chevron-right'></i></a>
 										</div>
 									</div>
 								</div>
 								<div class="col">
-									<img src="{{url('frontend/images/slider/04.png')}}" class="img-fluid" alt="...">
+									<img src="{{url('uploads/slider/'.$sliderRow->image)}}" class="img-fluid" alt="{{$sliderRow->title}}">
 								</div>
 							</div>
 						</div>
-						<div class="carousel-item bg-dark-gery">
-							<div class="row d-flex align-items-center">
-								<div class="col d-none d-lg-flex justify-content-center">
-									<div class="">
-										<h3 class="h3 fw-light">Hurry up! Limited time offer.</h3>
-										<h1 class="h1">Women Sportswear Sale</h1>
-										<p class="pb-3">Sneakers, Keds, Sweatshirts, Hoodies &amp; much more...</p>
-										<div class=""> <a class="btn btn-dark btn-ecomm" href="javascript:;">Shop Now <i class='bx bx-chevron-right'></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<img src="{{url('frontend/images/slider/05.png')}}" class="img-fluid" alt="...">
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item bg-dark-gery">
-							<div class="row d-flex align-items-center">
-								<div class="col d-none d-lg-flex justify-content-center">
-									<div class="">
-										<p class="h3 fw-light">Complete your look with</p>
-										<p class="h1">New Men's Accessories</p>
-										<p class="pb-3">Hats &amp; Caps, Sunglasses, Bags &amp; much more...</p>
-										<div class=""> <a class="btn btn-dark btn-ecomm" href="javascript:;">Shop Now <i class='bx bx-chevron-right'></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<img src="{{url('frontend/images/slider/03.png')}}" class="img-fluid" alt="...">
-								</div>
-							</div>
-						</div>
+						@endforeach
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleDark" role="button" data-bs-slide="prev">	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Previous</span>
@@ -145,51 +116,23 @@
 				<section class="py-4">
 					<div class="container">
 						<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+							@foreach($randomcat as $randomcatRow)
 							<div class="col">
 								<div class="card rounded-0 border shadow-none">
 									<div class="row g-0 align-items-center">
 										<div class="col">
-											<img src="{{url('frontend/images/promo/01.png')}}" class="img-fluid" alt="" />
+											<img src="{{url('uploads/category/'.$randomcatRow->image)}}" class="img-fluid" alt="" />
 										</div>
 										<div class="col">
 											<div class="card-body">
-												<h5 class="card-title text-uppercase">Mens' Wear</h5>
-												<p class="card-text text-uppercase">Starting at $9</p>	<a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
+												<h5 class="card-title text-uppercase">{{$randomcatRow->category}}</h5>
+												<p class="card-text text-uppercase">Best Offer Available</p>	<a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col">
-								<div class="card rounded-0 border shadow-none">
-									<div class="row g-0 align-items-center">
-										<div class="col">
-											<img src="{{url('frontend/images/promo/02.png')}}" class="img-fluid" alt="" />
-										</div>
-										<div class="col">
-											<div class="card-body">
-												<h5 class="card-title text-uppercase">Womens' Wear</h5>
-												<p class="card-text text-uppercase">Starting at $9</p>	<a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div class="card rounded-0 border shadow-none">
-									<div class="row g-0 align-items-center">
-										<div class="col">
-											<img src="{{url('frontend/images/promo/03.png')}}" class="img-fluid" alt="" />
-										</div>
-										<div class="col">
-											<div class="card-body">
-												<h5 class="card-title text-uppercase">Kids' Wear</h5>
-												<p class="card-text text-uppercase">Starting at $9</p>	<a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							@endforeach
 						</div>
 						<!--end row-->
 					</div>
@@ -205,6 +148,7 @@
 						<hr/>
 						<div class="product-grid">
 							<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+								@foreach($featuredpro as $featuredproRow)
 								<div class="col">
 									<div class="card rounded-0 product-card">
 										<div class="card-header bg-transparent border-bottom-0">
@@ -220,19 +164,20 @@
 											</div>
 										</div>
 										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/01.png')}}" class="card-img-top" alt="...">
+											<img src="{{url('uploads/product/'.$featuredproRow->image)}}" class="card-img-top" alt="{{$featuredproRow->product}}">
 										</a>
 										<div class="card-body">
 											<div class="product-info">
-												<a href="javascript:;">
+												<!-- <a href="javascript:;">
 													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
+												</a> -->
 												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
+													<h6 class="product-name mb-2">{{$featuredproRow->product}}</h6>
 												</a>
 												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"><span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
+													<div class="mb-1 product-price">
+														<!-- <span class="me-1 text-decoration-line-through">$99.00</span> -->
+														<span class="fs-5">₹ {{$featuredproRow->price}}</span>
 													</div>
 													<div class="cursor-pointer ms-auto">
 														<i class="bx bxs-star text-warning"></i>
@@ -252,328 +197,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/02.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-light-4"></i>
-														<i class="bx bxs-star text-light-4"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/03.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-light-4"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/04.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/05.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-light-4"></i>
-														<i class="bx bxs-star text-light-4"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/06.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/07.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-light-4"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/08.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto"> <i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-														<i class="bx bxs-star text-warning"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								@endforeach
 							</div>
 							<!--end row-->
 						</div>
@@ -590,6 +214,7 @@
 						<hr/>
 						<div class="product-grid">
 							<div class="new-arrivals owl-carousel owl-theme">
+								@foreach($newarrival as $newarrivalRow)
 								<div class="item">
 									<div class="card rounded-0 product-card">
 										<div class="card-header bg-transparent border-bottom-0">
@@ -601,21 +226,24 @@
 											</div>
 										</div>
 										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/09.png')}}" class="card-img-top" alt="...">
+											<img src="{{url('uploads/product/'.$newarrivalRow->image)}}" class="card-img-top" alt="{{$newarrivalRow->title}}">
 										</a>
 										<div class="card-body">
 											<div class="product-info">
 												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
+													<h6 class="product-name mb-2">{{$newarrivalRow->product}}</h6>
 												</a>
 												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
+													<div class="mb-1 product-price"> 
+														<!-- <span class="me-1 text-decoration-line-through">$99.00</span> -->
+														<span class="fs-5">₹ {{$newarrivalRow->price}}</span>
 													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
+													<div class="cursor-pointer ms-auto">
+														<i class="bx bxs-star text-warning"></i>
+														<i class="bx bxs-star text-warning"></i>
+														<i class="bx bxs-star text-warning"></i>
+														<i class="bx bxs-star text-warning"></i>
+														<i class="bx bxs-star text-warning"></i>
 													</div>
 												</div>
 												<div class="product-action mt-2">
@@ -628,486 +256,13 @@
 										</div>
 									</div>
 								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/10.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/11.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>4.9</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/12.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/13.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>3.9</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/14.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/15.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/16.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/17.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>4.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/18.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/19.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>4.5</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card">
-										<div class="card-header bg-transparent border-bottom-0">
-											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
-													</div>
-												</a>
-											</div>
-										</div>
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/20.png')}}" class="card-img-top" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="product-info">
-												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
-												</a>
-												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price"> <span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="fs-5">$49.00</span>
-													</div>
-													<div class="cursor-pointer ms-auto">	<span>5.0</span>  <i class="bx bxs-star text-white"></i>
-													</div>
-												</div>
-												<div class="product-action mt-2">
-													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								@endforeach
 							</div>
 						</div>
 					</div>
 				</section>
 				<!--end New Arrivals-->
-				<!--start Advertise banners-->
-				<section class="py-4">
-					<div class="container">
-						<div class="add-banner">
-							<div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-4">
-								<div class="col d-flex">
-									<div class="card rounded-0 w-100 border shadow-none">
-										<img src="{{url('frontend/images/promo/04.png')}}" class="card-img-top" alt="...">
-										<div class="position-absolute top-0 end-0 m-3 product-discount"><span class="">-10%</span>
-										</div>
-										<div class="card-body">
-											<h5 class="card-title">Sunglasses Sale</h5>
-											<p class="card-text">See all Sunglasses and get 10% off at all Sunglasses</p> <a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP BY GLASSES</a>
-										</div>
-									</div>
-								</div>
-								<div class="col d-flex">
-									<div class="card rounded-0 w-100 border shadow-none">
-										<div class="position-absolute top-0 end-0 m-3 product-discount"><span class="">-80%</span>
-										</div>
-										<div class="card-body text-center mt-5">
-											<h5 class="card-title">Cosmetics Sales</h5>
-											<p class="card-text">Buy Cosmetics products and get 30% off at all Cosmetics</p> <a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP BY COSMETICS</a>
-										</div>
-										<img src="{{url('frontend/images/promo/08.png')}}" class="card-img-top" alt="...">
-									</div>
-								</div>
-								<div class="col d-flex">
-									<div class="card rounded-0 w-100 border shadow-none">
-										<img src="{{url('frontend/images/promo/06.png')}}" class="card-img h-100" alt="...">
-										<div class="card-img-overlay text-center top-20">
-											<div class="border border-white border-3 py-3 bg-dark-3">
-												<h5 class="card-title text-white">Fashion Summer Sale</h5>
-												<p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">Up to 80% off</p>
-												<p class="card-text fs-5 text-white">On top Fashion Brands</p>	<a href="javascript:;" class="btn btn-white btn-ecomm">SHOP BY FASHION</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col d-flex">
-									<div class="card rounded-0 w-100 border shadow-none">
-										<div class="position-absolute top-0 end-0 m-3 product-discount"><span class="">-50%</span>
-										</div>
-										<div class="card-body text-center">
-											<img src="{{url('frontend/images/promo/07.png')}}" class="card-img-top" alt="...">
-											<h5 class="card-title fs-1 text-uppercase">Super Sale</h5>
-											<p class="card-text text-uppercase fs-4 lh-1 mb-2">Up to 50% off</p>
-											<p class="card-text">On All Electronic</p> <a href="javascript:;" class="btn btn-dark btn-ecomm">HURRY UP!</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--end row-->
-						</div>
-					</div>
-				</section>
-				<!--end Advertise banners-->
+
 				<!--start categories-->
 				<section class="py-4">
 					<div class="container">
@@ -1118,138 +273,19 @@
 						<hr/>
 						<div class="product-grid">
 							<div class="browse-category owl-carousel owl-theme">
+								@foreach($category as $categoryRow)
 								<div class="item">
 									<div class="card rounded-0 product-card border">
 										<div class="card-body">
-											<img src="{{url('frontend/images/categories/01.png')}}" class="img-fluid" alt="...">
+											<img src="{{url('uploads/category/'.$categoryRow->image)}}" class="img-fluid" alt="{{$categoryRow->category}}">
 										</div>
 										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Fashion</h6>
-											<p class="mb-0 font-12 text-uppercase">10 Products</p>
+											<h6 class="mb-1 text-uppercase">{{$categoryRow->category}}</h6>
+											<!-- <p class="mb-0 font-12 text-uppercase">10 Products</p> -->
 										</div>
 									</div>
 								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/02.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Watches</h6>
-											<p class="mb-0 font-12 text-uppercase">8 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/03.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Shoes</h6>
-											<p class="mb-0 font-12 text-uppercase">14 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/04.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Bags</h6>
-											<p class="mb-0 font-12 text-uppercase">6 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/05.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Electronis</h6>
-											<p class="mb-0 font-12 text-uppercase">6 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/06.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Headphones</h6>
-											<p class="mb-0 font-12 text-uppercase">5 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/07.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Furniture</h6>
-											<p class="mb-0 font-12 text-uppercase">20 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/08.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Jewelry</h6>
-											<p class="mb-0 font-12 text-uppercase">16 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/09.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Sports</h6>
-											<p class="mb-0 font-12 text-uppercase">28 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/10.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Vegetable</h6>
-											<p class="mb-0 font-12 text-uppercase">15 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/11.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Medical</h6>
-											<p class="mb-0 font-12 text-uppercase">24 Products</p>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="card-body">
-											<img src="{{url('frontend/images/categories/12.png')}}" class="img-fluid" alt="...">
-										</div>
-										<div class="card-footer text-center">
-											<h6 class="mb-1 text-uppercase">Sunglasses</h6>
-											<p class="mb-0 font-12 text-uppercase">18 Products</p>
-										</div>
-									</div>
-								</div>
+								@endforeach
 							</div>
 						</div>
 					</div>
@@ -1300,231 +336,8 @@
 					</div>
 				</section>
 				<!--end support info-->
-				<!--start News-->
-				<section class="py-4">
-					<div class="container">
-						<div class="d-flex align-items-center">
-							<h5 class="text-uppercase mb-0">Latest News</h5>
-							<a href="blog.html" class="btn btn-dark ms-auto rounded-0">View All News<i class='bx bx-chevron-right'></i></a>
-						</div>
-						<hr/>
-						<div class="product-grid">
-							<div class="latest-news owl-carousel owl-theme">
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="news-date">
-											<div class="date-number">24</div>
-											<div class="date-month">FEB</div>
-										</div>
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/blogs/01.png')}}" class="card-img-top border-bottom" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="news-title">
-												<a href="javascript:;">
-													<h5 class="mb-3 text-capitalize">Blog Short Title</h5>
-												</a>
-											</div>
-											<p class="news-content mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus sem. Aenean...</p>
-										</div>
-										<div class="card-footer border-top">
-											<a href="javascript:;">
-												<p class="mb-0"><small>0 Comments</small>
-												</p>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="news-date">
-											<div class="date-number">24</div>
-											<div class="date-month">FEB</div>
-										</div>
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/blogs/02.png')}}" class="card-img-top border-bottom" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="news-title">
-												<a href="javascript:;">
-													<h5 class="mb-3 text-capitalize">Blog Short Title</h5>
-												</a>
-											</div>
-											<p class="news-content mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus sem. Aenean...</p>
-										</div>
-										<div class="card-footer border-top">
-											<a href="javascript:;">
-												<p class="mb-0"><small>0 Comments</small>
-												</p>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="news-date">
-											<div class="date-number">24</div>
-											<div class="date-month">FEB</div>
-										</div>
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/blogs/03.png')}}" class="card-img-top border-bottom" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="news-title">
-												<a href="javascript:;">
-													<h5 class="mb-3 text-capitalize">Blog Short Title</h5>
-												</a>
-											</div>
-											<p class="news-content mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus sem. Aenean...</p>
-										</div>
-										<div class="card-footer border-top">
-											<a href="javascript:;">
-												<p class="mb-0"><small>0 Comments</small>
-												</p>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="news-date">
-											<div class="date-number">24</div>
-											<div class="date-month">FEB</div>
-										</div>
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/blogs/04.png')}}" class="card-img-top border-bottom" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="news-title">
-												<a href="javascript:;">
-													<h5 class="mb-3 text-capitalize">Blog Short Title</h5>
-												</a>
-											</div>
-											<p class="news-content mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus sem. Aenean...</p>
-										</div>
-										<div class="card-footer border-top">
-											<a href="javascript:;">
-												<p class="mb-0"><small>0 Comments</small>
-												</p>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="news-date">
-											<div class="date-number">24</div>
-											<div class="date-month">FEB</div>
-										</div>
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/blogs/05.png')}}" class="card-img-top border-bottom" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="news-title">
-												<a href="javascript:;">
-													<h5 class="mb-3 text-capitalize">Blog Short Title</h5>
-												</a>
-											</div>
-											<p class="news-content mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus sem. Aenean...</p>
-										</div>
-										<div class="card-footer border-top">
-											<a href="javascript:;">
-												<p class="mb-0"><small>0 Comments</small>
-												</p>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card rounded-0 product-card border">
-										<div class="news-date">
-											<div class="date-number">24</div>
-											<div class="date-month">FEB</div>
-										</div>
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/blogs/06.png')}}" class="card-img-top border-bottom" alt="...">
-										</a>
-										<div class="card-body">
-											<div class="news-title">
-												<a href="javascript:;">
-													<h5 class="mb-3 text-capitalize">Blog Short Title</h5>
-												</a>
-											</div>
-											<p class="news-content mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus sem. Aenean...</p>
-										</div>
-										<div class="card-footer border-top">
-											<a href="javascript:;">
-												<p class="mb-0"><small>0 Comments</small>
-												</p>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<!--end News-->
-				<!--start brands-->
-				<section class="py-4">
-					<div class="container">
-						<h3 class="d-none">Brands</h3>
-						<div class="brand-grid">
-							<div class="brands-shops owl-carousel owl-theme border">
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/01.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/02.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/03.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/04.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/05.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/06.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-								<div class="item border-end">
-									<div class="p-4">
-										<a href="javascript:;">
-											<img src="{{url('frontend/images/brands/07.png')}}" class="img-fluid" alt="...">
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<!--end brands-->
+
+
 				<!--start bottom products section-->
 				<section class="py-4 border-top">
 					<div class="container">

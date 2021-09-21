@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 10,2);
             $table->integer('category');
             $table->integer('subcat');
+            $table->integer('avail_qty')->default(0);
             $table->string('meta_title')->nullable();
             $table->longText('meta_keywords')->nullable();
             $table->longText('meta_description')->nullable();

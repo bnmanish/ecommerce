@@ -98,6 +98,14 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Quantity</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="quantity" value="{{$product->avail_qty}}">
+                                            <p class="text-danger">{{$errors->first('quantity')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-lg-2 col-form-label">Meta Title</label>
                                         <div class="col-lg-10">
                                             <input type="text" class="form-control" name="meta_title" value="{{$product->meta_title}}">

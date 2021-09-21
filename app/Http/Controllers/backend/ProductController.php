@@ -47,6 +47,7 @@ class ProductController extends Controller
 			'price'	=>	'required|numeric|min:1',
 			'category'	=>	'required',
 			'subcategory'	=>	'required',
+			'quantity'	=>	'required|numeric|min:0',
 			'status'	=>	'required',
 		],$message);
 
@@ -58,6 +59,7 @@ class ProductController extends Controller
 		$pro->price = $request->price;
 		$pro->category = $request->category;
 		$pro->subcat = $request->subcategory;
+		$pro->avail_qty = $request->quantity;
 		$pro->meta_title = $request->meta_title;
 		$pro->meta_keywords = $request->meta_keywords;
 		$pro->meta_description = $request->meta_description;
@@ -115,6 +117,7 @@ class ProductController extends Controller
 			'price'	=>	'required|numeric|min:1',
 			'category'	=>	'required',
 			'subcategory'	=>	'required',
+			'quantity'	=>	'required|numeric|min:0',
 			'status'	=>	'required',
 		],$message);
 
@@ -134,6 +137,7 @@ class ProductController extends Controller
 				'price' => $request->price,
 				'category' => $request->category,
 				'subcat' => $request->subcategory,
+				'avail_qty' => $request->quantity,
 				'meta_title' => $request->meta_title,
 				'meta_keywords' => $request->meta_keywords,
 				'meta_description' => $request->meta_description,
@@ -149,6 +153,7 @@ class ProductController extends Controller
 				'price' => $request->price,
 				'category' => $request->category,
 				'subcat' => $request->subcategory,
+				'avail_qty' => $request->quantity,
 				'meta_title' => $request->meta_title,
 				'meta_keywords' => $request->meta_keywords,
 				'meta_description' => $request->meta_description,
