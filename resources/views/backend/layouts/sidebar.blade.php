@@ -25,6 +25,14 @@
             </li>
 
             <li>
+                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Pages</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('add.page')}}"><i class="fa fa-plus"></i> Add Page</a></li>
+                    <li><a href="{{route('manage.page')}}"><i class="fa fa-th-large"></i> Pages</a></li>
+                </ul>
+            </li>
+
+            <li>
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Slider</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{route('add.slider')}}"><i class="fa fa-plus"></i> Add Slider</a></li>

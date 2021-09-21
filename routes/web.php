@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SocialmediaController;
 use App\Http\Controllers\backend\MediaController;
 use App\Http\Controllers\backend\SliderController;
+use App\Http\Controllers\backend\PageController;
 // Admin Controllers
 
 // Frontend controllers
@@ -114,6 +115,15 @@ Route::group(array('prefix'=>'admin','middleware' => ['auth', 'admin']), functio
 	Route::post('edit-store-slider/{id}',[SliderController::class,'editStore'])->name('edit.store.slider');
 	Route::get('delete-slider/{id}',[SliderController::class,'delete'])->name('delete.slider');
 	// Slider
+
+	// Page
+	Route::get('add-page',[PageController::class,'add'])->name('add.page');
+	Route::post('store-page',[PageController::class,'store'])->name('store.page');
+	Route::get('manage-page',[PageController::class,'manage'])->name('manage.page');
+	Route::get('edit-page/{id}',[PageController::class,'edit'])->name('edit.page');
+	Route::post('edit-store-page/{id}',[PageController::class,'editStore'])->name('edit.store.page');
+	Route::get('delete-page/{id}',[PageController::class,'delete'])->name('delete.page');
+	// Page
 
 });
 

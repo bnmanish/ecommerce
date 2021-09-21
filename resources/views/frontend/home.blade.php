@@ -3,8 +3,31 @@
 
 <head>
 	<!-- Required meta tags -->
+	<title>{{$page->meta_title}}</title>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- required metas -->
+	<meta name="keywords" content="{{$page->meta_keywords}}">
+	<meta name="description" content="{{$page->meta_description}}">
+	<meta property="og:title" content="{{$page->meta_title}}"/>
+	  
+	<meta property="og:url" content="{{url('/')}}" />
+	<meta property="og:description" content="{{$page->meta_description}}"/>
+	<meta property="og:type" content="Website"/>
+	<meta name="twitter:title" content="{{$page->meta_title}}" />
+	<meta name="twitter:description" content="{{$page->meta_description}}" />
+	<meta itemprop="title" content="{{$page->meta_title}}" />
+	<meta itemprop="description" content="{{$page->meta_description}}" />
+	<link rel="canonical" href="{{url('/')}}" />
+
+  	<meta property="og:site_name" content="Service" />
+	<meta name="robots" content="noindex">
+	<meta name="googlebot" content="noindex">
+	<!-- required metas -->
+
+
 	<!--favicon-->
 	<link rel="icon" href="{{url('frontend/images/favicon-32x32.png')}}" type="image/png" />
 	<!--plugins-->
@@ -20,7 +43,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 	<link href="{{url('frontend/css/app.css')}}" rel="stylesheet">
 	<link href="{{url('frontend/css/icons.css')}}" rel="stylesheet">
-	<title>Shopingo - eCommerce HTML Template</title>
+
+	
 </head>
 
 <body>
