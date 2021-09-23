@@ -11,18 +11,20 @@
 	<!-- required metas -->
 	<meta name="keywords" content="{{$page->meta_keywords}}">
 	<meta name="description" content="{{$page->meta_description}}">
-	<meta property="og:title" content="{{$page->meta_title}}"/>
-	  
+
+	<meta property="og:title" content="{{$page->meta_title}}"/>  
 	<meta property="og:url" content="{{url('/')}}" />
 	<meta property="og:description" content="{{$page->meta_description}}"/>
 	<meta property="og:type" content="Website"/>
+	<meta property="og:site_name" content="Ecommerce" />
+
 	<meta name="twitter:title" content="{{$page->meta_title}}" />
 	<meta name="twitter:description" content="{{$page->meta_description}}" />
 	<meta itemprop="title" content="{{$page->meta_title}}" />
+
 	<meta itemprop="description" content="{{$page->meta_description}}" />
 	<link rel="canonical" href="{{url('/')}}" />
-
-  	<meta property="og:site_name" content="Service" />
+	
 	<meta name="robots" content="noindex">
 	<meta name="googlebot" content="noindex">
 	<!-- required metas -->

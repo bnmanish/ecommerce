@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 21, 2021 at 09:48 PM
+-- Generation Time: Sep 23, 2021 at 10:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -126,7 +126,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2021_07_28_020259_create_social_media_table', 7),
 (17, '2021_07_30_221949_create_media_table', 8),
 (18, '2021_08_14_164211_create_sliders_table', 9),
-(19, '2021_09_21_230858_create_pages_table', 10);
+(19, '2021_09_21_230858_create_pages_table', 10),
+(20, '2021_09_24_004014_create_webiste_settings_table', 11);
 
 -- --------------------------------------------------------
 
@@ -411,6 +412,42 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `co
 (1, 'B N Manish', 'bnmanish006@gmail.com', NULL, '$2y$10$FhwOZOBkeJlTPCt8bo2KvO2GisBuYwPkRSPHs2esrKygwf3myvTs.', '342343', 1, 'admin', NULL, '2021-05-05 18:04:14', '2021-05-09 12:07:01'),
 (2, 'Manish', 'bnmanish@gmail.com', NULL, '$2y$10$1egshqSG5q/vSXPeSfC8lO/xEHcqNb1a4hs6oRyzVwSObNJ5YKKj2', '234234234', 1, 'admin', NULL, '2021-05-05 18:04:14', '2021-05-14 18:44:13');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webiste_settings`
+--
+
+CREATE TABLE `webiste_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gplus` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `head_content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_text` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `copyright` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `webiste_settings`
+--
+
+INSERT INTO `webiste_settings` (`id`, `facebook`, `instagram`, `twitter`, `gplus`, `linkedin`, `youtube`, `site_title`, `head_content`, `logo`, `favicon`, `email1`, `email2`, `contact1`, `contact2`, `address`, `footer_text`, `copyright`, `created_at`, `updated_at`) VALUES
+(1, 'https://www.facebook.com/bnmanish95/', 'https://www.instagram.com/itsbnmanish/', 'https://twitter.com/itsbnmanish', 'wdsd', 'https://www.linkedin.com/in/b-n-manish-a14780135/', 'https://www.youtube.com/channel/UCBMvmNb9aHlYx0AzyXpFDWw', 'B N Manish', 'Enter your head content here', '1632430196.png', '1632430196.png', 'bnmanish006@gmail.com', 'itsbnmanish@gmail.com', '8116648011', '8116648011', 'New Delhi,Delhi,India - 59', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'copyright © 2021. All right reserved.', NULL, '2021-09-23 20:50:42');
+
 --
 -- Indexes for dumped tables
 --
@@ -521,6 +558,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `webiste_settings`
+--
+ALTER TABLE `webiste_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -546,7 +589,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -595,6 +638,12 @@ ALTER TABLE `sub_categories`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `webiste_settings`
+--
+ALTER TABLE `webiste_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

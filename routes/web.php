@@ -13,6 +13,7 @@ use App\Http\Controllers\backend\SocialmediaController;
 use App\Http\Controllers\backend\MediaController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\PageController;
+use App\Http\Controllers\backend\SettingController;
 // Admin Controllers
 
 // Frontend controllers
@@ -123,6 +124,11 @@ Route::group(array('prefix'=>'admin','middleware' => ['auth', 'admin']), functio
 	Route::get('edit-page/{id}',[PageController::class,'edit'])->name('edit.page');
 	Route::post('edit-store-page/{id}',[PageController::class,'editStore'])->name('edit.store.page');
 	Route::get('delete-page/{id}',[PageController::class,'delete'])->name('delete.page');
+	// Page
+
+	// Page
+	Route::get('website-setting',[SettingController::class,'websiteSetting'])->name('website.setting');
+	Route::post('save-website-setting/{id}',[SettingController::class,'saveWebsiteSetting'])->name('save.website.setting');
 	// Page
 
 });
