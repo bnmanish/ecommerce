@@ -14,6 +14,8 @@ use App\Http\Controllers\backend\MediaController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\PageController;
 use App\Http\Controllers\backend\SettingController;
+use App\Http\Controllers\backend\AdditionalpageController;
+use App\Http\Controllers\backend\TestimonialController;
 // Admin Controllers
 
 // Frontend controllers
@@ -126,10 +128,28 @@ Route::group(array('prefix'=>'admin','middleware' => ['auth', 'admin']), functio
 	Route::get('delete-page/{id}',[PageController::class,'delete'])->name('delete.page');
 	// Page
 
-	// Page
+	// Setting
 	Route::get('website-setting',[SettingController::class,'websiteSetting'])->name('website.setting');
 	Route::post('save-website-setting/{id}',[SettingController::class,'saveWebsiteSetting'])->name('save.website.setting');
-	// Page
+	// Setting
+
+	// Additional Pages
+	Route::get('add-additional-page',[AdditionalpageController::class,'add'])->name('add.additional.page');
+	Route::post('store-additional-page',[AdditionalpageController::class,'store'])->name('store.additional.page');
+	Route::get('manage-additional-page',[AdditionalpageController::class,'manage'])->name('manage.additional.page');
+	Route::get('edit-additional-page/{id}',[AdditionalpageController::class,'edit'])->name('edit.additional.page');
+	Route::post('edit-store-additional-page/{id}',[AdditionalpageController::class,'editStore'])->name('edit.store.additional.page');
+	Route::get('delete-additional-page/{id}',[AdditionalpageController::class,'delete'])->name('delete.additional.page');
+	// Additional Pages
+
+	// Testimonials
+	Route::get('add-testimonial',[TestimonialController::class,'add'])->name('add.testimonial');
+	Route::post('store-testimonial',[TestimonialController::class,'store'])->name('store.testimonial');
+	Route::get('manage-testimonial',[TestimonialController::class,'manage'])->name('manage.testimonial');
+	// Route::get('edit-testimonial/{id}',[TestimonialController::class,'edit'])->name('edit.testimonial');
+	// Route::post('edit-store-testimonial/{id}',[TestimonialController::class,'editStore'])->name('edit.store.testimonial');
+	Route::get('delete-testimonial/{id}',[TestimonialController::class,'delete'])->name('delete.testimonial');
+	// Testimonials
 
 });
 

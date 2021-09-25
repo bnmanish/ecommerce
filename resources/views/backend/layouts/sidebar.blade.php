@@ -27,8 +27,8 @@
             <li>
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Pages</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('add.page')}}"><i class="fa fa-plus"></i> Add Page</a></li>
                     <li><a href="{{route('manage.page')}}"><i class="fa fa-th-large"></i> Pages</a></li>
+                    <li><a href="{{route('manage.additional.page')}}"><i class="fa fa-th-large"></i> Additional Pages</a></li>
                 </ul>
             </li>
 
@@ -78,6 +78,18 @@
                     <li><a href="{{route('add.media')}}"><i class="fa fa-plus"></i> Add Media</a></li>
                     <li><a href="{{route('manage.media')}}"><i class="fa fa-th-large"></i> Media</a></li>
                 </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Testimonials</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('add.testimonial')}}"><i class="fa fa-plus"></i> Add Testimonial</a></li>
+                    <li><a href="{{route('manage.testimonial')}}"><i class="fa fa-th-large"></i> Testimonials</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{{route('website.setting')}}"><i class="fa fa-user"></i> <span class="nav-label">Settings</span></a>
             </li>
 
         </ul>

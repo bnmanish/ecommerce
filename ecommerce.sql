@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2021 at 10:51 PM
+-- Generation Time: Sep 25, 2021 at 02:02 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `ecommerce`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `additional_pages`
+--
+
+CREATE TABLE `additional_pages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keywords` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page_content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `banner` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` int(11) NOT NULL DEFAULT 0 COMMENT '0=header,1=footer,2=both',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=disable,1=enabled',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `additional_pages`
+--
+
+INSERT INTO `additional_pages` (`id`, `page_title`, `url`, `meta_title`, `meta_keywords`, `meta_description`, `page_content`, `banner`, `position`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'Privacy Policy', 'privacy-policy', 'Privacy Policy', 'Privacy Policy', 'Privacy Policy', '<p>Privacy Policy<br></p>', NULL, 0, 1, '2021-09-25 09:32:54', '2021-09-25 11:36:41');
 
 -- --------------------------------------------------------
 
@@ -127,7 +155,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2021_07_30_221949_create_media_table', 8),
 (18, '2021_08_14_164211_create_sliders_table', 9),
 (19, '2021_09_21_230858_create_pages_table', 10),
-(20, '2021_09_24_004014_create_webiste_settings_table', 11);
+(20, '2021_09_24_004014_create_webiste_settings_table', 11),
+(21, '2021_09_25_143358_create_additional_pages_table', 12),
+(22, '2021_09_25_171225_create_testimonials_table', 13);
 
 -- --------------------------------------------------------
 
@@ -247,7 +277,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `meta_title`, `meta_keywords`, `meta_description`, `short_content`, `content`, `banner`, `created_at`, `updated_at`) VALUES
-(1, 'Home', 'Home', 'Home', 'Home', '<p>Home<br></p>', '<p>Home<br></p>', '1632252234.png', '2021-09-21 19:23:54', '2021-09-21 19:23:54');
+(1, 'Home Page', 'Best Ecommerce Website in the world | One stop shopping place', 'Home Page', 'Home Page', '<p>Home Page<br></p>', '<p>Home Page<br></p>', '1632562610.png', '2021-09-25 09:36:50', '2021-09-25 09:36:50');
 
 -- --------------------------------------------------------
 
@@ -387,6 +417,30 @@ INSERT INTO `sub_categories` (`id`, `sub_category`, `url`, `category_id`, `meta_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`id`, `title`, `name`, `position`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Testimonial1', 'Mohan Lal', 'Customer', '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br></p>', '2021-09-25 11:59:17', '2021-09-25 11:59:17'),
+(2, 'Testimonial2', 'Raman Ram', 'Customer', '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br></p>', '2021-09-25 12:00:19', '2021-09-25 12:00:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -446,11 +500,17 @@ CREATE TABLE `webiste_settings` (
 --
 
 INSERT INTO `webiste_settings` (`id`, `facebook`, `instagram`, `twitter`, `gplus`, `linkedin`, `youtube`, `site_title`, `head_content`, `logo`, `favicon`, `email1`, `email2`, `contact1`, `contact2`, `address`, `footer_text`, `copyright`, `created_at`, `updated_at`) VALUES
-(1, 'https://www.facebook.com/bnmanish95/', 'https://www.instagram.com/itsbnmanish/', 'https://twitter.com/itsbnmanish', 'wdsd', 'https://www.linkedin.com/in/b-n-manish-a14780135/', 'https://www.youtube.com/channel/UCBMvmNb9aHlYx0AzyXpFDWw', 'B N Manish', 'Enter your head content here', '1632430196.png', '1632430196.png', 'bnmanish006@gmail.com', 'itsbnmanish@gmail.com', '8116648011', '8116648011', 'New Delhi,Delhi,India - 59', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'copyright © 2021. All right reserved.', NULL, '2021-09-23 20:50:42');
+(1, 'https://www.facebook.com/bnmanish95/', 'https://www.instagram.com/itsbnmanish/', 'https://twitter.com/itsbnmanish', 'wdsd', 'https://www.linkedin.com/in/b-n-manish-a14780135/', 'https://www.youtube.com/channel/UCBMvmNb9aHlYx0AzyXpFDWw', 'B N Manish', '<meta name=\"robots\" content=\"noindex\">\r\n<meta name=\"googlebot\" content=\"noindex\">', '1632430196.png', '1632430196.png', 'bnmanish006@gmail.com', 'itsbnmanish@gmail.com', '8116648011', '8116648011', 'New Delhi,Delhi,India - 59', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'copyright © 2021. All right reserved.', NULL, '2021-09-23 20:57:19');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `additional_pages`
+--
+ALTER TABLE `additional_pages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
@@ -551,6 +611,12 @@ ALTER TABLE `sub_categories`
   ADD UNIQUE KEY `sub_categories_url_unique` (`url`);
 
 --
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -566,6 +632,12 @@ ALTER TABLE `webiste_settings`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `additional_pages`
+--
+ALTER TABLE `additional_pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -589,7 +661,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -632,6 +704,12 @@ ALTER TABLE `social_media`
 --
 ALTER TABLE `sub_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
