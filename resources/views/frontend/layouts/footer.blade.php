@@ -1,3 +1,10 @@
+@php
+	
+	
+	$setting = App\Models\WebisteSetting::first();
+
+
+@endphp
 <footer>
 	<section class="py-4 border-top bg-light">
 		<div class="container">
@@ -7,21 +14,22 @@
 						<h6 class="mb-3 text-uppercase">Contact Info</h6>
 						<div class="address mb-3">
 							<p class="mb-0 text-uppercase">Address</p>
-							<p class="mb-0 font-12">123 Street Name, City, Australia</p>
+							<p class="mb-0 font-12">{{$setting->address}}</p>
 						</div>
 						<div class="phone mb-3">
 							<p class="mb-0 text-uppercase">Phone</p>
-							<p class="mb-0 font-13">Toll Free (123) 472-796</p>
-							<p class="mb-0 font-13">Mobile : +91-9910XXXX</p>
+							<p class="mb-0 font-13"><a href='tel:{{$setting->contact1}}'>Mobile : {{$setting->contact1}}</a></p>
+							{{--<p class="mb-0 font-13">Mobile : {{$setting->contact2}}</p>--}}
 						</div>
 						<div class="email mb-3">
 							<p class="mb-0 text-uppercase">Email</p>
-							<p class="mb-0 font-13">mail@example.com</p>
+							<p class="mb-0 font-13"><a href="mailto:{{$setting->email1}}"> {{$setting->email1}}</a></p>
+							<p class="mb-0 font-13"><a href="mailto:{{$setting->email2}}"> {{$setting->email2}}</a></p>
 						</div>
-						<div class="working-days mb-3">
+						<!-- <div class="working-days mb-3">
 							<p class="mb-0 text-uppercase">WORKING DAYS</p>
 							<p class="mb-0 font-13">Mon - FRI / 9:30 AM - 6:30 PM</p>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="col">
@@ -42,12 +50,12 @@
 							</li>
 							<li class="mb-1"><a href="javascript:;"><i class='bx bx-chevron-right'></i> Bags & Wallets</a>
 							</li>
-							<li class="mb-1"><a href="javascript:;"><i class='bx bx-chevron-right'></i> Sneakers & Athletic</a>
+							<!-- <li class="mb-1"><a href="javascript:;"><i class='bx bx-chevron-right'></i> Sneakers & Athletic</a>
 							</li>
 							<li class="mb-1"><a href="javascript:;"><i class='bx bx-chevron-right'></i> Electronis</a>
 							</li>
 							<li class="mb-1"><a href="javascript:;"><i class='bx bx-chevron-right'></i> Furniture</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -78,7 +86,7 @@
 							<input type="text" class="form-control radius-30" placeholder="Enter Your Email" />
 							<div class="mt-2 d-grid">	<a href="javascript:;" class="btn btn-dark btn-ecomm radius-30">Subscribe</a>
 							</div>
-							<p class="mt-2 mb-0 font-13">Subscribe to our newsletter to receive early discount offers, updates and new products info.</p>
+							<p class="mt-2 mb-0 font-13">Subscribe to our newsletter for exclusive offer!</p>
 						</div>
 						<div class="download-app mt-3">
 							<h6 class="mb-3 text-uppercase">Download our app</h6>
