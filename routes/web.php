@@ -20,6 +20,7 @@ use App\Http\Controllers\backend\TestimonialController;
 
 // Frontend controllers
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\AboutController;
 // Frontend controllers
 
 
@@ -37,6 +38,10 @@ use App\Http\Controllers\frontend\HomeController;
 
 // Frontend Route starts
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/about-us', [AboutController::class, 'aboutus'])->name('aboutus');
+Route::get('/contact-us', [AboutController::class, 'contactus'])->name('contactus');
+
+Route::get('product/{url}', [HomeController::class, 'productDetails'])->name('product.details');
 // Frontend Routes starts
 
 // Admin Route starts

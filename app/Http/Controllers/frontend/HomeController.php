@@ -23,4 +23,13 @@ class HomeController extends Controller
 		return view('frontend/home')->with(['slider'=>$slider,'randomcat'=>$randomCat,'featuredpro'=>$featuredpro,'newarrival'=>$newarrival,'category'=>$category,'page'=>$page]);
 	}
 
+
+	public function productDetails($url){
+
+		$product = Product::where('url',$url)->first();
+		return view('frontend/product/product_details')->with(['product'=>$product]);
+
+	}
+
+
 }

@@ -8,7 +8,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- required metas -->
 	<meta name="keywords" content="{{$page->meta_keywords}}">
 	<meta name="description" content="{{$page->meta_description}}">
 
@@ -189,7 +188,7 @@
 												</a>
 											</div>
 										</div>
-										<a href="product-details.html">
+										<a href="{{route('product.details',$featuredproRow->url)}}">
 											<img src="{{url('uploads/product/'.$featuredproRow->image)}}" class="card-img-top" alt="{{$featuredproRow->product}}">
 										</a>
 										<div class="card-body">
@@ -317,6 +316,154 @@
 					</div>
 				</section>
 				<!--end categories-->
+
+				<!-- Brand -->
+				<section class="py-4">
+					<div class="container">
+						<h4>Our Top Brands</h4>
+						<hr>
+						<div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-xl-5 g-4">
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/01.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/02.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/03.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/04.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/05.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/06.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/07.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/08.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/09.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/10.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/11.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/12.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/13.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/14.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card border shadow-none">
+									<div class="card-body">
+										<a href="javscript:;">
+											<img src="frontend/images/brands/15.png" class="img-fluid" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- Brand -->
+
+
 				<!--start support info-->
 				<section class="py-4 bg-light">
 					<div class="container">
