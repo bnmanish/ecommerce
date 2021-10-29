@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('product');
             $table->string('url')->unique();
-            $table->decimal('price', 10,2);
+            $table->decimal('price', 10,2)->default(0);
             $table->integer('category');
             $table->integer('subcat');
             $table->integer('avail_qty')->default(0);

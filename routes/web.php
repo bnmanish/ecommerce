@@ -21,6 +21,8 @@ use App\Http\Controllers\backend\TestimonialController;
 // Frontend controllers
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\AboutController;
+use App\Http\Controllers\frontend\ContactController;
+use App\Http\Controllers\frontend\ShopController;
 // Frontend controllers
 
 
@@ -38,16 +40,17 @@ use App\Http\Controllers\frontend\AboutController;
 
 // Frontend Route starts
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/about-us', [AboutController::class, 'aboutus'])->name('aboutus');
-Route::get('/contact-us', [AboutController::class, 'contactus'])->name('contactus');
+Route::get('about-us', [AboutController::class, 'aboutus'])->name('aboutus');
+Route::get('contact-us', [ContactController::class, 'contactus'])->name('contactus');
+Route::get('shop', [ShopController::class, 'shop'])->name('shop');
 
 Route::get('product/{url}', [HomeController::class, 'productDetails'])->name('product.details');
 // Frontend Routes starts
 
 // Admin Route starts
-Route::get('/admin/login', [LoginController::class, 'adminLogin'])->name('adminlogin');
-Route::post('/admin/logedin', [LoginController::class, 'adminLogedin'])->name('adminlogedin');
-Route::get('/admin/logout', [LoginController::class, 'adminlogout'])->name('adminlogout');
+Route::get('admin/login', [LoginController::class, 'adminLogin'])->name('adminlogin');
+Route::post('admin/logedin', [LoginController::class, 'adminLogedin'])->name('adminlogedin');
+Route::get('admin/logout', [LoginController::class, 'adminlogout'])->name('adminlogout');
 
 Route::group(array('prefix'=>'admin','middleware' => ['auth', 'admin']), function (){
 

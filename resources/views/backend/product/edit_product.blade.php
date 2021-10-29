@@ -53,6 +53,14 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Product Code</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control pro" name="product_code" value="{{$product->product_code}}">
+                                            <p class="text-danger">{{$errors->first('product_code')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-lg-2 col-form-label">URL</label>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control url" name="url" value="{{$product->url}}">
@@ -64,10 +72,26 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Cost Price</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="cost_price" value="{{$product->cost_price}}">
+                                            <p class="text-danger">{{$errors->first('cost_price')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-lg-2 col-form-label">Price</label>
                                         <div class="col-lg-10">
                                             <input type="number" class="form-control" name="price" value="{{$product->price}}">
                                             <p class="text-danger">{{$errors->first('price')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Max Selling Price</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="max_selling_price" value="{{$product->max_selling_price}}">
+                                            <p class="text-danger">{{$errors->first('max_selling_price')}}</p>
                                         </div>
                                     </div>
 
@@ -102,6 +126,14 @@
                                         <div class="col-lg-10">
                                             <input type="number" class="form-control" name="quantity" value="{{$product->avail_qty}}">
                                             <p class="text-danger">{{$errors->first('quantity')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Min Stock Qty</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="min_stock_qty" value="{{$product->min_stock_qty}}">
+                                            <p class="text-danger">{{$errors->first('min_stock_qty')}}</p>
                                         </div>
                                     </div>
 

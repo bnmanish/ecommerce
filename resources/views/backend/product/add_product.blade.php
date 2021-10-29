@@ -44,11 +44,20 @@
                             <div class="ibox-content">
                                 <form method="post" action="{{route('store.product')}}" enctype="multipart/form-data">
                                     @csrf
+
                                     <div class="form-group row">
                                         <label class="col-lg-2 col-form-label">Product Name</label>
                                         <div class="col-lg-10">
                                             <input type="text" class="form-control pro" name="product_name" value="{{old('product_name')}}">
                                             <p class="text-danger">{{$errors->first('product_name')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Product Code</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control pro" name="product_code" value="{{old('product_code')}}">
+                                            <p class="text-danger">{{$errors->first('product_code')}}</p>
                                         </div>
                                     </div>
 
@@ -64,10 +73,26 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Cost Price</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="cost_price" value="{{old('cost_price')}}">
+                                            <p class="text-danger">{{$errors->first('cost_price')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-lg-2 col-form-label">Price</label>
                                         <div class="col-lg-10">
                                             <input type="number" class="form-control" name="price" value="{{old('price')}}">
                                             <p class="text-danger">{{$errors->first('price')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Max Selling Price</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="max_selling_price" value="{{old('max_selling_price')}}">
+                                            <p class="text-danger">{{$errors->first('max_selling_price')}}</p>
                                         </div>
                                     </div>
 
@@ -99,6 +124,14 @@
                                         <div class="col-lg-10">
                                             <input type="number" class="form-control" name="quantity" value="{{old('quantity')}}">
                                             <p class="text-danger">{{$errors->first('quantity')}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 col-form-label">Min Stock Qty</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" name="min_stock_qty" value="{{old('min_stock_qty')}}">
+                                            <p class="text-danger">{{$errors->first('min_stock_qty')}}</p>
                                         </div>
                                     </div>
 

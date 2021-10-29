@@ -33,6 +33,8 @@ class ProductController extends Controller
 		$message = array(
 			'product_name.required' => 'Product name is required field!',
 			'product_name.max' => 'Product name lenght must be less than 255 charecter!',
+			'product_code.required' => 'Product Code is required field!',
+			'product_code.unique' => 'Product Code must be unique!',
 			'url.required' => 'Product url is required field!',
 			'url.unique' => 'Product url must be unique!',
 			'price.required' => 'Price is required field!',
@@ -43,6 +45,7 @@ class ProductController extends Controller
 
 		$this->validate($request,[
 			'product_name'	=>	'required|max:255',
+			'product_code'	=>	'required|unique:products',
 			'url'	=>	'required|unique:products',
 			'price'	=>	'required|numeric|min:1',
 			'category'	=>	'required',
@@ -55,11 +58,15 @@ class ProductController extends Controller
 
 		$pro = new Product;
 		$pro->product = $request->product_name;
+		$pro->product_code = $request->product_code;
 		$pro->url = $request->url;
+		$pro->cost_price = $request->cost_price;
 		$pro->price = $request->price;
+		$pro->max_selling_price = $request->max_selling_price;
 		$pro->category = $request->category;
 		$pro->subcat = $request->subcategory;
 		$pro->avail_qty = $request->quantity;
+		$pro->min_stock_qty = $request->min_stock_qty;
 		$pro->meta_title = $request->meta_title;
 		$pro->meta_keywords = $request->meta_keywords;
 		$pro->meta_description = $request->meta_description;
@@ -103,6 +110,8 @@ class ProductController extends Controller
 		$message = array(
 			'product_name.required' => 'Product name is required field!',
 			'product_name.max' => 'Product name lenght must be less than 255 charecter!',
+			'product_code.required' => 'Product Code is required field!',
+			'product_code.unique' => 'Product Code must be unique!',
 			'url.required' => 'Product url is required field!',
 			'url.unique' => 'Product url must be unique!',
 			'price.required' => 'Price is required field!',
@@ -114,6 +123,7 @@ class ProductController extends Controller
 		$this->validate($request,[
 			'product_name'	=>	'required|max:255',
 			'url'	=>	'required|unique:products,url,'.$id,
+			'product_code'	=>	'required|unique:products,product_code,'.$id,
 			'price'	=>	'required|numeric|min:1',
 			'category'	=>	'required',
 			'subcategory'	=>	'required',
@@ -133,11 +143,15 @@ class ProductController extends Controller
 
 			$data = array(
 				'product' => $request->product_name,
+				'product_code' => $request->product_code,
 				'url' => $request->url,
+				'cost_price' => $request->cost_price,
 				'price' => $request->price,
+				'max_selling_price' => $request->max_selling_price,
 				'category' => $request->category,
 				'subcat' => $request->subcategory,
 				'avail_qty' => $request->quantity,
+				'min_stock_qty' => $request->min_stock_qty,
 				'meta_title' => $request->meta_title,
 				'meta_keywords' => $request->meta_keywords,
 				'meta_description' => $request->meta_description,
@@ -149,11 +163,15 @@ class ProductController extends Controller
 		}else{
 			$data = array(
 				'product' => $request->product_name,
+				'product_code' => $request->product_code,
 				'url' => $request->url,
+				'cost_price' => $request->cost_price,
 				'price' => $request->price,
+				'max_selling_price' => $request->max_selling_price,
 				'category' => $request->category,
 				'subcat' => $request->subcategory,
 				'avail_qty' => $request->quantity,
+				'min_stock_qty' => $request->min_stock_qty,
 				'meta_title' => $request->meta_title,
 				'meta_keywords' => $request->meta_keywords,
 				'meta_description' => $request->meta_description,

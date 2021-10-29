@@ -170,9 +170,8 @@
 				<ul class="navbar-nav">
 					<li class="nav-item active"> <a class="nav-link" href="{{route('home')}}">Home </a></li>
 					<li class="nav-item"> <a class="nav-link" href="{{route('aboutus')}}">About Us</a></li>
-
-					<li class="nav-item dropdown">	<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="abc" data-bs-toggle="dropdown">
-						Shop  <i class='bx bx-chevron-down'></i></a>
+					<li class="nav-item dropdown">	<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+						Categories  <i class='bx bx-chevron-down'></i></a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret" href="#">Category1 <i class='bx bx-chevron-right float-end'></i></a>
 								<ul class="submenu dropdown-menu">
@@ -187,7 +186,8 @@
 
 						</ul>
 					</li>
-					<li class="nav-item"> <a class="nav-link" href="contact-us.html">Contact Us</a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{route('shop')}}">Shop</a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{route('contactus')}}">Contact Us</a></li>
 					<li class="nav-item dropdown">	<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">My Account  <i class='bx bx-chevron-down'></i></a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="account-dashboard.html">Dashboard</a>
