@@ -23,6 +23,7 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\AboutController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\ShopController;
+use App\Http\Controllers\frontend\DashboardController as UserDashboardController;
 // Frontend controllers
 
 
@@ -44,7 +45,27 @@ Route::get('about-us', [AboutController::class, 'aboutus'])->name('aboutus');
 Route::get('contact-us', [ContactController::class, 'contactus'])->name('contactus');
 Route::get('shop', [ShopController::class, 'shop'])->name('shop');
 
+// user signin & signup
+Route::get('signin', [LoginController::class, 'signin'])->name('signin');
+Route::post('user-login', [LoginController::class, 'userlogin'])->name('user.login');
+Route::get('signup', [LoginController::class, 'signup'])->name('signup');
+Route::post('register', [LoginController::class, 'register'])->name('register');
+// user signin & signup
+
 Route::get('product/{url}', [HomeController::class, 'productDetails'])->name('product.details');
+
+
+Route::group(array('middleware' => ['auth']), function (){
+
+	Route::get('dashboard', [UserDashboardController::class, 'dashboard'])->name('user.dashboard');
+	Route::get('logout', [UserDashboardController::class, 'logout'])->name('user.logout');
+
+});
+
+
+
+
+
 // Frontend Routes starts
 
 // Admin Route starts

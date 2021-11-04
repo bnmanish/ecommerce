@@ -12,6 +12,6 @@ class ShopController extends Controller
 {
     public function shop(){
         $page = Page::where('id',4)->first();
-        return view('frontend/shop')->with(['page'=>$page]);
+        return view('frontend/shop/shop')->with(['page'=>$page]);
     }
 }

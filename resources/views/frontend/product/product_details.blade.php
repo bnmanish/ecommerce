@@ -718,6 +718,7 @@
 	<!--app JS-->
 	<script src="{{url('frontend/js/app.js')}}"></script>
 	<script src="{{url('frontend/js/product-details.js')}}"></script>
+	@include('frontend/common')
 </body>
 
 </html>

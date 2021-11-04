@@ -24,7 +24,6 @@
 	<meta itemprop="description" content="{{$page->meta_description}}" />
 	<link rel="canonical" href="{{route('aboutus')}}" />
 	<!-- required metas -->
-
 	<!--favicon-->
 	<link rel="icon" href="{{url('frontend/images/favicon-32x32.png')}}" type="image/png" />
 	<!--plugins-->
@@ -32,6 +31,7 @@
 	<link href="{{url('frontend/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 	<link href="{{url('frontend/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
 	<link href="{{url('frontend/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+	<link href="{{url('frontend/plugins/nouislider/nouislider.min.css')}}" rel="stylesheet" />
 	<!-- loader-->
 	<link href="{{url('frontend/css/pace.min.css')}}" rel="stylesheet" />
 	<script src="{{url('frontend/js/pace.min.js')}}"></script>
@@ -59,8 +59,7 @@
 							<div class="ms-auto">
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb mb-0 p-0">
-										<li class="breadcrumb-item"><a href="{{route('home')}}"><i
-													class="bx bx-home-alt"></i> Home</a>
+										<li class="breadcrumb-item"><a href="{{route('home')}}"><i class="bx bx-home-alt"></i> Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">{{$page->title}}</li>
 									</ol>
@@ -70,26 +69,79 @@
 					</div>
 				</section>
 				<!--end breadcrumb-->
-				<!--start page content-->
-				<section class="py-0 py-lg-4 px-3 px-sm-0">
-					<div class="container page-content">
-						<h4>Our Story</h4>
-						<?=$page->content;?>
+				<!--start shop cart-->
+				<section class="">
+					<div class="container">
+						<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+							<div class="row row-cols-1 row-cols-xl-2">
+								<div class="col mx-auto">
+									<div class="card">
+										<div class="card-body">
+											<div class="border p-4 rounded">
+												<div class="text-center">
+													<h3 class="">Sign in</h3>
+													<p>Don't have an account yet? <a href="{{route('signup')}}">Sign up here</a>
+													</p>
+												</div>
+												<div class="d-grid">
+													<a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span class="d-flex justify-content-center align-items-center">
+														<img class="me-2" src="{{url('frontend/images/icons/search.svg')}}" width="16" alt="Image Description">
+														<span>Sign in with Google</span>
+														</span>
+													</a> <a href="javascript:;" class="btn btn-white"><i class="bx bxl-facebook"></i>Sign in with Facebook</a>
+												</div>
+												<div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
+													<hr/>
+												</div>
+												<div class="form-body">
+													<form class="row g-3" method="post" action="{{route('user.login')}}">
+														@csrf
+														<div class="col-12">
+															<label for="inputEmailAddress" class="form-label">Email Address</label>
+															<input type="email" class="form-control" id="inputEmailAddress" placeholder="email" name="email">
+														</div>
+														<div class="col-12">
+															<label for="inputChoosePassword" class="form-label">Enter Password</label>
+															<div class="input-group" id="show_hide_password">
+																<input type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="********" name="password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-check form-switch">
+																<input name="remember" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="remember" checked>
+																<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+															</div>
+														</div>
+														<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
+														</div>
+														<div class="col-12">
+															<div class="d-grid">
+																<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--end row-->
+						</div>
 					</div>
 				</section>
-
-				<!--end start page content-->
+				<!--end shop cart-->
 			</div>
 		</div>
 		<!--end page wrapper -->
 		<!--start footer section-->
 		@include('frontend/layouts/footer')
 		<!--end footer section-->
-		<!--Start Back To Top Button-->	<a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 	</div>
 	<!--end wrapper-->
-
+	
 	<!-- Bootstrap JS -->
 	<script src="{{url('frontend/js/bootstrap.bundle.min.js')}}"></script>
 	<!--plugins-->
@@ -101,6 +153,8 @@
 	<script src="{{url('frontend/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
 	<!--app JS-->
 	<script src="{{url('frontend/js/app.js')}}"></script>
+	<!--Password show & hide js -->
+	<script src="{{url('frontend/js/show-hide-password.js')}}"></script>
 	@include('frontend/common')
 </body>
 

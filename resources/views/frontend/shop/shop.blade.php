@@ -3,8 +3,28 @@
 
 <head>
 	<!-- Required meta tags -->
+	<title>{{$page->meta_title}}</title>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="keywords" content="{{$page->meta_keywords}}">
+	<meta name="description" content="{{$page->meta_description}}">
+
+	<meta property="og:title" content="{{$page->meta_title}}"/>  
+	<meta property="og:url" content="{{route('aboutus')}}" />
+	<meta property="og:description" content="{{$page->meta_description}}"/>
+	<meta property="og:type" content="Website"/>
+	<meta property="og:site_name" content="Ecommerce" />
+
+	<meta name="twitter:title" content="{{$page->meta_title}}" />
+	<meta name="twitter:description" content="{{$page->meta_description}}" />
+	<meta itemprop="title" content="{{$page->meta_title}}" />
+
+	<meta itemprop="description" content="{{$page->meta_description}}" />
+	<link rel="canonical" href="{{route('aboutus')}}" />
+	<!-- required metas -->
+
 	<!--favicon-->
 	<link rel="icon" href="{{url('frontend/images/favicon-32x32.png')}}" type="image/png" />
 	<!--plugins-->
@@ -37,15 +57,13 @@
 				<section class="py-3 border-bottom border-top d-none d-md-flex bg-light">
 					<div class="container">
 						<div class="page-breadcrumb d-flex align-items-center">
-							<h3 class="breadcrumb-title pe-3">Shop Grid Left Sidebar</h3>
+							<h3 class="breadcrumb-title pe-3">{{$page->title}}</h3>
 							<div class="ms-auto">
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb mb-0 p-0">
-										<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i> Home</a>
+										<li class="breadcrumb-item"><a href="{{route('home')}}"><i class="bx bx-home-alt"></i> Home</a>
 										</li>
-										<li class="breadcrumb-item"><a href="javascript:;">Shop</a>
-										</li>
-										<li class="breadcrumb-item active" aria-current="page">Shop Left Sidebar</li>
+										<li class="breadcrumb-item active" aria-current="page">{{$page->title}}</li>
 									</ol>
 								</nav>
 							</div>
@@ -57,6 +75,7 @@
 				<section class="py-4">
 					<div class="container">
 						<div class="row">
+							<!-- left side bar -->
 							<div class="col-12 col-xl-3">
 								<div class="btn-mobile-filter d-xl-none"><i class='bx bx-slider-alt'></i>
 								</div>
@@ -68,28 +87,6 @@
 												<div class="btn-mobile-filter-close btn-close ms-auto cursor-pointer"></div>
 											</div>
 											<hr class="d-flex d-xl-none" />
-											<div class="product-categories">
-												<h6 class="text-uppercase mb-3">Categories</h6>
-												<ul class="list-unstyled mb-0 categories-list">
-													<li><a href="javascript:;">Clothings <span class="float-end badge rounded-pill bg-primary">42</span></a>
-													</li>
-													<li><a href="javascript:;">Sunglasses <span class="float-end badge rounded-pill bg-primary">32</span></a>
-													</li>
-													<li><a href="javascript:;">Bags <span class="float-end badge rounded-pill bg-primary">17</span></a>
-													</li>
-													<li><a href="javascript:;">Watches <span class="float-end badge rounded-pill bg-primary">217</span></a>
-													</li>
-													<li><a href="javascript:;">Furniture <span class="float-end badge rounded-pill bg-primary">28</span></a>
-													</li>
-													<li><a href="javascript:;">Shoes <span class="float-end badge rounded-pill bg-primary">145</span></a>
-													</li>
-													<li><a href="javascript:;">Accessories <span class="float-end badge rounded-pill bg-primary">15</span></a>
-													</li>
-													<li><a href="javascript:;">Headphones <span class="float-end badge rounded-pill bg-primary">8</span></a>
-													</li>
-												</ul>
-											</div>
-											<hr>
 											<div class="price-range">
 												<h6 class="text-uppercase mb-3">Price</h6>
 												<div class="my-4" id="slider"></div>
@@ -101,38 +98,8 @@
 												</div>
 											</div>
 											<hr>
-											<div class="size-range">
-												<h6 class="text-uppercase mb-3">Size</h6>
-												<ul class="list-unstyled mb-0 categories-list">
-													<li>
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="Small">
-															<label class="form-check-label" for="Small">Small</label>
-														</div>
-													</li>
-													<li>
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="Medium">
-															<label class="form-check-label" for="Medium">Medium</label>
-														</div>
-													</li>
-													<li>
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="Large">
-															<label class="form-check-label" for="Large">Large</label>
-														</div>
-													</li>
-													<li>
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="ExtraLarge">
-															<label class="form-check-label" for="ExtraLarge">Extra Large</label>
-														</div>
-													</li>
-												</ul>
-											</div>
-											<hr>
 											<div class="product-brands">
-												<h6 class="text-uppercase mb-3">Brands</h6>
+												<h6 class="text-uppercase mb-3">Categories</h6>
 												<ul class="list-unstyled mb-0 categories-list">
 													<li>
 														<div class="form-check">
@@ -172,58 +139,12 @@
 													</li>
 												</ul>
 											</div>
-											<hr>
-											<div class="product-colors">
-												<h6 class="text-uppercase mb-3">Colors</h6>
-												<ul class="list-unstyled mb-0 categories-list">
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-black"></div>
-															<p class="mb-0 ms-3">Black</p>
-														</div>
-													</li>
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-warning"></div>
-															<p class="mb-0 ms-3">Yellow</p>
-														</div>
-													</li>
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-danger"></div>
-															<p class="mb-0 ms-3">Red</p>
-														</div>
-													</li>
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-primary"></div>
-															<p class="mb-0 ms-3">Blue</p>
-														</div>
-													</li>
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-white"></div>
-															<p class="mb-0 ms-3">White</p>
-														</div>
-													</li>
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-success"></div>
-															<p class="mb-0 ms-3">Green</p>
-														</div>
-													</li>
-													<li>
-														<div class="d-flex align-items-center cursor-pointer">
-															<div class="color-indigator bg-info"></div>
-															<p class="mb-0 ms-3">Sky Blue</p>
-														</div>
-													</li>
-												</ul>
-											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<!-- left side bar -->
+							<!-- product area right side-->
 							<div class="col-12 col-xl-9">
 								<div class="product-wrapper">
 									<div class="toolbox d-flex align-items-center mb-3 gap-2">
@@ -685,6 +606,7 @@
 									</nav>
 								</div>
 							</div>
+							<!-- product area right side -->
 						</div>
 						<!--end row-->
 					</div>
@@ -825,6 +747,7 @@
 	<script src="{{url('frontend/js/product-gallery.js')}}"></script>
 	<!--app JS-->
 	<script src="{{url('frontend/js/app.js')}}"></script>
+	@include('frontend/common')
 </body>
 
 </html>

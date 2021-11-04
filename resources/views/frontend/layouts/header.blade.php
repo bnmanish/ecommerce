@@ -14,7 +14,9 @@
 	<div class="top-menu border-bottom">
 		<div class="container">
 			<nav class="navbar navbar-expand">
-				<div class="shiping-title text-uppercase font-13 d-none d-sm-flex">Welcome to our eTrans store!</div>
+				<div class="shiping-title text-uppercase font-13 d-none d-sm-flex">
+					Welcome &nbsp;&nbsp; <a href="#"><b>{{ Auth::user() ? Auth::user()->name : 'Guest' }}</b></a>
+				</div>
 				<ul class="navbar-nav ms-auto d-none d-lg-flex">
 					<li class="nav-item"> <a class="nav-link" href="order-tracking.html">Track Order</a>
 					</li>
@@ -29,7 +31,7 @@
 					<li class="nav-item">	<a class="nav-link" href="javascript:;">Help & FAQs</a>
 					</li>
 				</ul>
-				<ul class="navbar-nav">
+				<!-- <ul class="navbar-nav">
 					<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">USD</a>
 						<ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><a class="dropdown-item" href="#">USD</a>
@@ -61,7 +63,7 @@
 				        class="flag-icon flag-icon-ae me-2"></i><span>Arabic</span></a>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
 				<ul class="navbar-nav social-link ms-lg-2 ms-auto">
 					<li class="nav-item"> <a class="nav-link" href="javascript:;"><i class='bx bxl-facebook'></i></a>
 					</li>
@@ -110,7 +112,7 @@
 					<div class="top-cart-icons float-end">
 						<nav class="navbar navbar-expand">
 							<ul class="navbar-nav ms-auto">
-								<li class="nav-item"><a href="account-dashboard.html" class="nav-link cart-link"><i class='bx bx-user'></i></a>
+								<li class="nav-item"><a href="{{route('user.dashboard')}}" class="nav-link cart-link"><i class='bx bx-user'></i></a>
 								</li>
 								<li class="nav-item"><a href="wishlist.html" class="nav-link cart-link"><i class='bx bx-heart'></i></a>
 								</li>
@@ -188,20 +190,13 @@
 					</li>
 					<li class="nav-item"> <a class="nav-link" href="{{route('shop')}}">Shop</a></li>
 					<li class="nav-item"> <a class="nav-link" href="{{route('contactus')}}">Contact Us</a></li>
-					<li class="nav-item dropdown">	<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">My Account  <i class='bx bx-chevron-down'></i></a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="account-dashboard.html">Dashboard</a>
-							</li>
-							<li><a class="dropdown-item" href="account-downloads.html">Downloads</a>
-							</li>
-							<li><a class="dropdown-item" href="account-orders.html">Orders</a>
-							</li>
-							<li><a class="dropdown-item" href="account-payment-methods.html">Payment Methods</a>
-							</li>
-							<li><a class="dropdown-item" href="account-user-details.html">User Details</a>
-							</li>
-						</ul>
-					</li>
+					@if(Auth::user())
+					<li class="nav-item"> <a class="nav-link" href="{{route('user.dashboard')}}">Dashboard</a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{route('user.logout')}}">Logout</a></li>
+					@else
+					<li class="nav-item"> <a class="nav-link" href="{{route('signin')}}">Sign In</a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{route('signup')}}">Sign Up</a></li>
+					@endif
 				</ul>
 			</nav>
 		</div>

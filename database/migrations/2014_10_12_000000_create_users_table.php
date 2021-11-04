@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('status')->default(0)->comment('0=disable,1=enabled');
+            $table->integer('is_email_verified')->default(0)->comment('0=no,1=yes');
+            $table->integer('is_contact_verified')->default(0)->comment('0=no,1=yes');
             $table->string('user_type',40)->default('user')->comment('user,admin');
             $table->string('contact')->nullable();
             $table->rememberToken();

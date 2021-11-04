@@ -1582,6 +1582,23 @@ body.bg-theme15 {
 	text-align: justify;
 }
 
+#danger-alert{
+	position: fixed;
+    top: 10px;
+    right: 10px;
+    border-radius: 10px;
+    border: 2px solid #e71e31;
+    z-index: 999;
+}
+
+#success-alert{
+	position: fixed;
+    top: 10px;
+    right: 10px;
+    border-radius: 10px;
+    border: 2px solid #35c482;
+    z-index: 999;
+}
 
 
 /*custom css*/

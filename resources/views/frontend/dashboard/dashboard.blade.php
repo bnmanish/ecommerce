@@ -24,7 +24,6 @@
 	<meta itemprop="description" content="{{$page->meta_description}}" />
 	<link rel="canonical" href="{{route('aboutus')}}" />
 	<!-- required metas -->
-
 	<!--favicon-->
 	<link rel="icon" href="{{url('frontend/images/favicon-32x32.png')}}" type="image/png" />
 	<!--plugins-->
@@ -32,6 +31,7 @@
 	<link href="{{url('frontend/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 	<link href="{{url('frontend/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
 	<link href="{{url('frontend/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+	<link href="{{url('frontend/plugins/nouislider/nouislider.min.css')}}" rel="stylesheet" />
 	<!-- loader-->
 	<link href="{{url('frontend/css/pace.min.css')}}" rel="stylesheet" />
 	<script src="{{url('frontend/js/pace.min.js')}}"></script>
@@ -59,8 +59,7 @@
 							<div class="ms-auto">
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb mb-0 p-0">
-										<li class="breadcrumb-item"><a href="{{route('home')}}"><i
-													class="bx bx-home-alt"></i> Home</a>
+										<li class="breadcrumb-item"><a href="{{route('home')}}"><i class="bx bx-home-alt"></i> Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">{{$page->title}}</li>
 									</ol>
@@ -70,26 +69,53 @@
 					</div>
 				</section>
 				<!--end breadcrumb-->
-				<!--start page content-->
-				<section class="py-0 py-lg-4 px-3 px-sm-0">
-					<div class="container page-content">
-						<h4>Our Story</h4>
-						<?=$page->content;?>
+				<!--start shop cart-->
+				<section class="py-4">
+					<div class="container">
+						<h3 class="d-none">Account</h3>
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="card shadow-none mb-3 mb-lg-0 border rounded-0">
+											<div class="card-body">
+												<div class="list-group list-group-flush">	<a href="account-dashboard.html" class="list-group-item active d-flex justify-content-between align-items-center">Dashboard <i class='bx bx-tachometer fs-5'></i></a>
+													<a href="account-orders.html" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i class='bx bx-cart-alt fs-5'></i></a>
+													<a href="account-downloads.html" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i class='bx bx-download fs-5'></i></a>
+													<a href="account-addresses.html" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i class='bx bx-home-smile fs-5'></i></a>
+													<a href="account-payment-methods.html" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i class='bx bx-credit-card fs-5'></i></a>
+													<a href="account-user-details.html" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Account Details <i class='bx bx-user-circle fs-5'></i></a>
+													<a href="#" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Logout <i class='bx bx-log-out fs-5'></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-8">
+										<div class="card shadow-none mb-0">
+											<div class="card-body">
+												<p>Hello <strong>Madison Ruiz</strong> (not <strong>Madison Ruiz?</strong>  <a href="javascript:;">Logout</a>)</p>
+												<p>From your account dashboard you can view your Recent Orders, manage your shipping and billing addesses and edit your password and account details</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--end row-->
+							</div>
+						</div>
 					</div>
 				</section>
-
-				<!--end start page content-->
+				<!--end shop cart-->
 			</div>
 		</div>
 		<!--end page wrapper -->
 		<!--start footer section-->
 		@include('frontend/layouts/footer')
 		<!--end footer section-->
-		<!--Start Back To Top Button-->	<a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 	</div>
 	<!--end wrapper-->
-
+	
 	<!-- Bootstrap JS -->
 	<script src="{{url('frontend/js/bootstrap.bundle.min.js')}}"></script>
 	<!--plugins-->
