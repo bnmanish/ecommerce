@@ -1601,4 +1601,11 @@ body.bg-theme15 {
 }
 
 
+.prcard{
+     background-color: #ffffff!important; 
+     -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; 
+     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+
 /*custom css*/

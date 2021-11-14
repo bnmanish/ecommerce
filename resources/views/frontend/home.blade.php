@@ -41,7 +41,7 @@
 	<script src="{{url('frontend/js/pace.min.js')}}"></script>
 	<!-- Bootstrap CSS -->
 	<link href="{{url('frontend/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> -->
 	<link href="{{url('frontend/css/app.css')}}" rel="stylesheet">
 	<link href="{{url('frontend/css/icons.css')}}" rel="stylesheet">
 
@@ -175,7 +175,7 @@
 							<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
 								@foreach($featuredpro as $featuredproRow)
 								<div class="col">
-									<div class="card rounded-0 product-card">
+									<div class="card rounded-0 product-card prcard">
 										<div class="card-header bg-transparent border-bottom-0">
 											<div class="d-flex align-items-center justify-content-end gap-3">
 												<a href="javascript:;">
@@ -215,7 +215,6 @@
 												<div class="product-action mt-2">
 													<div class="d-grid gap-2">
 														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
 													</div>
 												</div>
 											</div>
