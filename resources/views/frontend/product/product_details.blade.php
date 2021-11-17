@@ -164,20 +164,6 @@
 									</a>
 								</li>
 								<li class="nav-item" role="presentation">
-									<a class="nav-link" data-bs-toggle="tab" href="#more-info" role="tab" aria-selected="false">
-										<div class="d-flex align-items-center">
-											<div class="tab-title text-uppercase fw-500">More Info</div>
-										</div>
-									</a>
-								</li>
-								<li class="nav-item" role="presentation">
-									<a class="nav-link" data-bs-toggle="tab" href="#tags" role="tab" aria-selected="false">
-										<div class="d-flex align-items-center">
-											<div class="tab-title text-uppercase fw-500">Tags</div>
-										</div>
-									</a>
-								</li>
-								<li class="nav-item" role="presentation">
 									<a class="nav-link" data-bs-toggle="tab" href="#reviews" role="tab" aria-selected="false">
 										<div class="d-flex align-items-center">
 											<div class="tab-title text-uppercase fw-500">(3) Reviews</div>
@@ -197,26 +183,7 @@
 									<p class="mb-1">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone.</p>
 									<p class="mb-1">Seitan aliquip quis cardigan american apparel, butcher voluptate nisi.</p>
 								</div>
-								<div class="tab-pane fade" id="more-info" role="tabpanel">
-									<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-								</div>
-								<div class="tab-pane fade" id="tags" role="tabpanel">
-									<div class="tags-box w-50">	<a href="javascript:;" class="tag-link">Cloths</a>
-										<a href="javascript:;" class="tag-link">Electronis</a>
-										<a href="javascript:;" class="tag-link">Furniture</a>
-										<a href="javascript:;" class="tag-link">Sports</a>
-										<a href="javascript:;" class="tag-link">Men Wear</a>
-										<a href="javascript:;" class="tag-link">Women Wear</a>
-										<a href="javascript:;" class="tag-link">Laptops</a>
-										<a href="javascript:;" class="tag-link">Formal Shirts</a>
-										<a href="javascript:;" class="tag-link">Topwear</a>
-										<a href="javascript:;" class="tag-link">Headphones</a>
-										<a href="javascript:;" class="tag-link">Bottom Wear</a>
-										<a href="javascript:;" class="tag-link">Bags</a>
-										<a href="javascript:;" class="tag-link">Sofa</a>
-										<a href="javascript:;" class="tag-link">Shoes</a>
-									</div>
-								</div>
+								
 								<div class="tab-pane fade" id="reviews" role="tabpanel">
 									<div class="row">
 										<div class="col col-lg-8">
