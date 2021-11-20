@@ -121,7 +121,7 @@
 														<div class="col-12">
 															<div class="form-check form-switch">
 																<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="term" value="abc">
-																<label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to Terms & Conditions</label>
+																<label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to <a href="{{url('terms-and-condition')}}">Terms & Conditions</a></label>
 																<p class="text-danger m-0">{{$errors->first('term')}}</p>
 															</div>
 														</div>

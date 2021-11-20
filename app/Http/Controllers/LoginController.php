@@ -56,8 +56,12 @@ class LoginController extends Controller
         return view('frontend/auth/signup')->with(['page'=>$page]);
     }
 
-    public function register(Request $request){
+    public function verifyOtp(){
+        $page = Page::where('id',8)->first();
+        return view('frontend/verify_otp')->with(['page'=>$page]);
+    }
 
+    public function register(Request $request){
         $message = array(
             'name.required' =>  'Please fill the name!',
             'email.required' =>  'Please fill the email!',
@@ -82,7 +86,46 @@ class LoginController extends Controller
         $email = $request->email;
         $password = $request->password;
         $mobile = $request->contact;
-        $term = $request->term;
+        // $term = $request->term;
+        $emailotp = rand(1000,9999);
+
+        $data = array(
+            'name'  =>  $name,
+            'email'  =>  $email,
+            'password'  =>  $password,
+            'mobile'  =>  $mobile,
+            'emailotp'  =>  $emailotp,
+        );
+
+        Session::forget('urdata');
+        Session::push('urdata',$data);
+
+        sendOtpOnMail($email,$name,$emailotp);
+
+        return redirect()->route('verifyotp')->with(['email'=>$email,'mobile'=>$mobile]);
+
+    }
+
+
+    public function matchOtp(Request $request){
+
+        $name = Session::get('urdata')[0]['name'];
+        $email = Session::get('urdata')[0]['email'];
+        $password = Session::get('urdata')[0]['password'];
+        $mobile = Session::get('urdata')[0]['mobile'];
+        $emailotp = Session::get('urdata')[0]['emailotp'];
+
+        $message = array(
+            'emailotp.required' =>  'Please enter otp!',
+        );
+
+        $this->validate($request,[
+            'emailotp'  =>  'required',
+        ],$message);
+
+        if($emailotp != $request->emailotp){
+            return redirect()->back()->with(['message'=>'Please enter correct OTP sent to your email!']);
+        }
 
         $user = new User;
         $user->name = $name;
@@ -90,8 +133,11 @@ class LoginController extends Controller
         $user->contact = $mobile;
         $user->password = Hash::make($password);
         $user->user_type = 'user';
+        $user->is_email_verified = 1;
         $user->status = 1;
         $user->save();
+
+        Session::forget('urdata');
 
         if(Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])){
             Session::flash('success','Welcome <b>'.Auth::user()->name.'</b><br>You are registered Successfully');
@@ -101,7 +147,9 @@ class LoginController extends Controller
             return redirect()->route('signin');
         }
 
+
     }
+
 
     public function userlogin(Request $request){
 

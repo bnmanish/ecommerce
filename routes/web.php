@@ -50,6 +50,8 @@ Route::get('signin', [LoginController::class, 'signin'])->name('signin');
 Route::post('user-login', [LoginController::class, 'userlogin'])->name('user.login');
 Route::get('signup', [LoginController::class, 'signup'])->name('signup');
 Route::post('register', [LoginController::class, 'register'])->name('register');
+Route::get('verify-otp', [LoginController::class, 'verifyOtp'])->name('verifyotp');
+Route::post('match-otp', [LoginController::class, 'matchOtp'])->name('matchotp');
 // user signin & signup
 
 Route::get('product/{url}', [HomeController::class, 'productDetails'])->name('product.details');
