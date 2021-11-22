@@ -174,16 +174,18 @@
 						<div class="product-grid">
 							<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
 								@foreach($featuredpro as $featuredproRow)
+								@php
+									$wishlistclass = "";
+									if($featuredproRow->user_id == @Auth::user()->id && $featuredproRow->product_id == $featuredproRow->id){
+										$wishlistclass = "bg-danger text-white";
+									}
+								@endphp
 								<div class="col">
 									<div class="card rounded-0 product-card prcard">
 										<div class="card-header bg-transparent border-bottom-0">
 											<div class="d-flex align-items-center justify-content-end gap-3">
-												<a href="javascript:;">
-													<div class="product-compare"><span><i class='bx bx-git-compare'></i> Compare</span>
-													</div>
-												</a>
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
+												<a href="javascript:;" onclick="return addWishlist({{$featuredproRow->id}})">
+													<div id="prowish-{{$featuredproRow->id}}" class="product-wishlist @php echo $wishlistclass; @endphp "> <i class='bx bx-heart'></i>
 													</div>
 												</a>
 											</div>

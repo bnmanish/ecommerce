@@ -24,6 +24,7 @@ use App\Http\Controllers\frontend\AboutController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\ShopController;
 use App\Http\Controllers\frontend\DashboardController as UserDashboardController;
+use App\Http\Controllers\frontend\WishlistController;
 // Frontend controllers
 
 
@@ -61,8 +62,10 @@ Route::group(array('middleware' => ['auth']), function (){
 
 	Route::get('dashboard', [UserDashboardController::class, 'dashboard'])->name('user.dashboard');
 	Route::get('logout', [UserDashboardController::class, 'logout'])->name('user.logout');
-
+	Route::get('wishlist', [WishlistController::class, 'wishlist'])->name('user.wishlist');
+	Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
 });
+Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
 
 
 

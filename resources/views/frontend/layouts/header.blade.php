@@ -84,7 +84,7 @@
 						</div>
 						<div class="logo d-none d-lg-flex">
 							<a href="{{route('home')}}">
-								<img src="{{url('frontend/images/logo-icon.png')}}" class="logo-icon" alt="" />
+								<img src="{{url('frontend/images/logo-icon.png')}}" class="logo-icon" alt="Ecommerce" />
 							</a>
 						</div>
 					</div>
@@ -112,9 +112,16 @@
 					<div class="top-cart-icons float-end">
 						<nav class="navbar navbar-expand">
 							<ul class="navbar-nav ms-auto">
-								<li class="nav-item"><a href="{{route('user.dashboard')}}" class="nav-link cart-link"><i class='bx bx-user'></i></a>
+								<li class="nav-item">
+									<a href="{{route('user.dashboard')}}" class="nav-link cart-link">
+										<i class='bx bx-user'></i>
+								</a>
 								</li>
-								<li class="nav-item"><a href="wishlist.html" class="nav-link cart-link"><i class='bx bx-heart'></i></a>
+								<li class="nav-item">
+									<a href="{{route('user.wishlist')}}" class="nav-link position-relative cart-link">
+										<span class="alert-count">8</span>
+										<i class='bx bx-heart'></i>
+									</a>
 								</li>
 								<li class="nav-item dropdown dropdown-large">
 									<a href="#" class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link" data-bs-toggle="dropdown">	<span class="alert-count">8</span>

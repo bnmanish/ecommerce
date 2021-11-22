@@ -26,6 +26,10 @@ class CreateProductsTable extends Migration
             $table->longText('meta_description')->nullable();
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('product_code')->unique();
+            $table->decimal('cost_price', 10,2)->default(0);
+            $table->decimal('max_selling_price', 10,2)->default(0);
+            $table->integer('min_stock_qty')->default(20);
             $table->integer('sequence')->nullable();
             $table->integer('status')->default(0)->comment('0=disable,1=enabled');
             $table->timestamps();

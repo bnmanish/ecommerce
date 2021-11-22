@@ -1,6 +1,6 @@
 <?php
 
-use Mail;
+// use Mail;
 
 
 function sendOtpOnMail($email,$name,$otp){
