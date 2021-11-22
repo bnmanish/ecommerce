@@ -23,7 +23,6 @@
 			type: "POST",
 			data: {id:id,_token:"{{ csrf_token() }}"},
 			success: function(response){
-				console.log(response)
 				if(response.status == true){
 					$( "#prowish-"+id ).addClass( "bg-danger text-white" );
 					$('.wishcount').html(response.count);
