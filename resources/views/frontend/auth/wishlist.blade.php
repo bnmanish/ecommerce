@@ -74,23 +74,25 @@
 					<div class="container">
 						<div class="product-grid">
 							<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3">
-
-								<div class="col">
+								@foreach($product as $productRow)
+								<div class="col wishpro-{{$productRow->id}}">
 									<div class="card rounded-0 product-card">
-										<a href="product-details.html">
-											<img src="{{url('frontend/images/products/01.png')}}" class="card-img-top" alt="...">
+										<a href="{{route('product.details',$productRow->url)}}">
+											<img src="{{url('uploads/product/'.$productRow->image)}}" class="card-img-top" alt="{{$productRow->product}}">
 										</a>
 										<div class="card-body">
 											<div class="product-info">
 												<a href="javascript:;">
-													<p class="product-catergory font-13 mb-1">Catergory Name</p>
-												</a>
-												<a href="javascript:;">
-													<h6 class="product-name mb-2">Product Short Name</h6>
+													<h6 class="product-name mb-2">{{$productRow->product}}</h6>
 												</a>
 												<div class="d-flex align-items-center">
-													<div class="mb-1 product-price">	<span class="me-1 text-decoration-line-through">$99.00</span>
-														<span class="text-white fs-5">$49.00</span>
+													<div class="mb-1 product-price">
+														@if($productRow->max_selling_price == 0)
+															<span class="text-primary fs-5">₹ {{$productRow->price}}</span>
+														@else
+															<span class="me-1 text-decoration-line-through text-danget">₹ {{$productRow->max_selling_price}}</span>
+															<span class="text-primary fs-5">₹ {{$productRow->price}}</span>
+														@endif
 													</div>
 													<div class="cursor-pointer ms-auto">	<i class="bx bxs-star text-white"></i>
 														<i class="bx bxs-star text-white"></i>
@@ -102,14 +104,14 @@
 												<div class="product-action mt-2">
 													<div class="d-grid gap-2">
 														<a href="javascript:;" class="btn btn-white btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>	
-														<a href="javascript:;" class="btn btn-light btn-ecomm"><i class='bx bx-trash'></i>Remove From List</a>
+														<a href="javascript:;" onclick="return deleteWishlist({{$productRow->id}})" class="btn btn-light btn-ecomm"><i class='bx bx-trash'></i>Remove From List</a>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
+								@endforeach
 							</div>
 							<!--end row-->
 						</div>

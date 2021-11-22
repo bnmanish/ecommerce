@@ -23,8 +23,10 @@
 			type: "POST",
 			data: {id:id,_token:"{{ csrf_token() }}"},
 			success: function(response){
+				console.log(response)
 				if(response.status == true){
 					$( "#prowish-"+id ).addClass( "bg-danger text-white" );
+					$('.wishcount').html(response.count);
 					$('.ajaxmsgtxt').html(response.message);
 					$('.ajaxmsg').show();
 					setTimeout(function(){
@@ -32,6 +34,7 @@
 					},5000);
 				}else{
 					$( "#prowish-"+id ).removeClass( "bg-danger text-white" );
+					$('.wishcount').html(response.count);
 					$('.ajaxmsgtxt').html(response.message);
 					$('.ajaxmsg').show();
 					setTimeout(function(){
@@ -40,6 +43,25 @@
 				}
 			}
 		});
+	}
+
+	function deleteWishlist(id){
+
+		$.ajax({
+			url:'{{route('delete.wishlist')}}',
+			method:'POST',
+			data:{id:id,_token:'{{csrf_token()}}'},
+			success:function(response){
+				$('.wishpro-'+id).hide();
+				$('.ajaxmsgtxt').html(response.message);
+				$('.ajaxmsg').show();
+				setTimeout(function(){
+					$('.alermsg').hide();
+				},5000);
+			}
+
+		});
+
 	}
 
 	setTimeout(function(){

@@ -176,7 +176,7 @@
 								@foreach($featuredpro as $featuredproRow)
 								@php
 									$wishlistclass = "";
-									if($featuredproRow->user_id == @Auth::user()->id && $featuredproRow->product_id == $featuredproRow->id){
+									if(in_array($featuredproRow->id,$cartarr)){
 										$wishlistclass = "bg-danger text-white";
 									}
 								@endphp

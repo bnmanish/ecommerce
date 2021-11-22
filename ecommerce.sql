@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2021 at 11:35 PM
+-- Generation Time: Nov 22, 2021 at 09:22 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -158,7 +158,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2021_09_21_230858_create_pages_table', 10),
 (20, '2021_09_24_004014_create_webiste_settings_table', 11),
 (21, '2021_09_25_143358_create_additional_pages_table', 12),
-(22, '2021_09_25_171225_create_testimonials_table', 13);
+(22, '2021_09_25_171225_create_testimonials_table', 13),
+(23, '2021_11_21_225020_create_wishlists_table', 14);
 
 -- --------------------------------------------------------
 
@@ -285,7 +286,8 @@ INSERT INTO `pages` (`id`, `title`, `meta_title`, `meta_keywords`, `meta_descrip
 (5, 'User Signin', 'User Signin', 'User Signin', 'User Signin', '<p>User Signin<br></p>', '<p>User Signin<br></p>', NULL, '2021-10-31 03:21:30', '2021-10-31 03:21:30'),
 (6, 'User Signup', 'User Signup', 'User Signup', 'User Signup', '<p>User Signup<br></p>', '<p>User Signup<br></p>', NULL, '2021-10-31 03:23:44', '2021-10-31 03:23:44'),
 (7, 'Dashboard', 'Dashboard', 'Dashboard', 'Dashboard', '<p>Dashboard<br></p>', '<p>Dashboard<br></p>', NULL, '2021-10-31 17:20:28', '2021-10-31 17:20:28'),
-(8, 'Verify Otp', 'Verify Otp', 'Verify Otp', 'Verify Otp', '<p>Verify Otp<br></p>', '<p>Verify Otp<br></p>', NULL, '2021-11-20 21:18:38', '2021-11-20 21:18:38');
+(8, 'Verify Otp', 'Verify Otp', 'Verify Otp', 'Verify Otp', '<p>Verify Otp<br></p>', '<p>Verify Otp<br></p>', NULL, '2021-11-20 21:18:38', '2021-11-20 21:18:38'),
+(9, 'Wishlist', 'Wishlist', 'Wishlist', 'Wishlist', '<p>Wishlist&nbsp;&nbsp;&nbsp;&nbsp;<br></p>', '<p>Wishlist<br></p>', NULL, '2021-11-21 15:34:37', '2021-11-21 15:34:37');
 
 -- --------------------------------------------------------
 
@@ -477,9 +479,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `contact`, `user_type`, `remember_token`, `is_email_verified`, `is_contact_verified`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'B N Manish', 'bnmanish006@gmail.com', NULL, '$2y$10$FhwOZOBkeJlTPCt8bo2KvO2GisBuYwPkRSPHs2esrKygwf3myvTs.', '342343', 'admin', NULL, 1, 1, 1, '2021-05-05 18:04:14', '2021-10-31 14:52:33'),
-(18, 'BNM', 'bnmanish1995@gmail.com', NULL, '$2y$10$NlNlPSN.vEfxpaNdUN8eGOJrT3aOuRsboSKZZZTf3QSGvem174yAe', '8116648011', 'user', NULL, 1, 0, 1, '2021-11-20 22:26:08', '2021-11-20 22:26:08'),
-(20, 'My Webtesh', 'mywebtech006@gmail.com', NULL, '$2y$10$CTZ495qGuPmqoH1/rfLSWeBZFXqbuPz49ad/M74u.wlY8Aw0VoPOW', '1231231231', 'user', NULL, 1, 0, 1, '2021-11-20 22:31:40', '2021-11-20 22:31:40');
+(1, 'Super Admin', 'bnmanish006@gmail.com', NULL, '$2y$10$FhwOZOBkeJlTPCt8bo2KvO2GisBuYwPkRSPHs2esrKygwf3myvTs.', '342343', 'admin', NULL, 1, 1, 1, '2021-05-05 18:04:14', '2021-11-21 15:33:01'),
+(21, 'B N Manish', 'bnmanish1995@gmail.com', NULL, '$2y$10$wLYPE8woQm2rbHRLYxRCauc4rSxahnmuUexwy9oxEu3fkfmiAGekK', '8116648011', 'user', NULL, 1, 0, 1, '2021-11-21 13:11:30', '2021-11-21 13:11:30'),
+(23, 'Karim Khan', 'mywebtech006@gmail.com', NULL, '$2y$10$ME663c8ftOHPm1/cZAM29uONglwpi9UolViU.yKhld9Eb0zzoeTqK', '7894561302', 'user', NULL, 1, 0, 1, '2021-11-22 18:55:18', '2021-11-22 18:55:18');
 
 -- --------------------------------------------------------
 
@@ -516,6 +518,34 @@ CREATE TABLE `webiste_settings` (
 
 INSERT INTO `webiste_settings` (`id`, `facebook`, `instagram`, `twitter`, `gplus`, `linkedin`, `youtube`, `site_title`, `head_content`, `logo`, `favicon`, `email1`, `email2`, `contact1`, `contact2`, `address`, `footer_text`, `copyright`, `created_at`, `updated_at`) VALUES
 (1, 'https://www.facebook.com/bnmanish95/', 'https://www.instagram.com/itsbnmanish/', 'https://twitter.com/itsbnmanish', 'wdsd', 'https://www.linkedin.com/in/b-n-manish-a14780135/', 'https://www.youtube.com/channel/UCBMvmNb9aHlYx0AzyXpFDWw', 'B N Manish', '<meta name=\"robots\" content=\"noindex\">\r\n<meta name=\"googlebot\" content=\"noindex\">', '1632430196.png', '1632430196.png', 'bnmanish006@gmail.com', 'itsbnmanish@gmail.com', '8116648011', '8116648011', 'New Delhi,Delhi,India - 59', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'copyright © 2021. All right reserved.', NULL, '2021-10-10 17:20:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlists`
+--
+
+CREATE TABLE `wishlists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `wishlists`
+--
+
+INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
+(8, 1, 4, '2021-11-21 19:03:30', '2021-11-21 19:03:30'),
+(9, 1, 8, '2021-11-21 19:04:44', '2021-11-21 19:04:44'),
+(11, 1, 3, '2021-11-21 19:05:59', '2021-11-21 19:05:59'),
+(30, 21, 8, '2021-11-21 19:23:05', '2021-11-21 19:23:05'),
+(31, 21, 2, '2021-11-22 18:49:20', '2021-11-22 18:49:20'),
+(32, 21, 5, '2021-11-22 18:49:32', '2021-11-22 18:49:32'),
+(45, 23, 2, '2021-11-22 20:22:05', '2021-11-22 20:22:05'),
+(47, 23, 8, '2021-11-22 20:22:07', '2021-11-22 20:22:07');
 
 --
 -- Indexes for dumped tables
@@ -646,6 +676,12 @@ ALTER TABLE `webiste_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -677,7 +713,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -695,7 +731,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -731,13 +767,19 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `webiste_settings`
 --
 ALTER TABLE `webiste_settings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

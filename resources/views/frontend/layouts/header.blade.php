@@ -1,3 +1,8 @@
+@php
+	
+	$wishlist = App\Models\Wishlist::where('user_id',@Auth::user()->id)->count();
+
+@endphp
 <div class="discount-alert d-none d-lg-block">
 	<div class="alert alert-dismissible fade show shadow-none rounded-0 mb-0 border-bottom">
 		<div class="d-lg-flex align-items-center gap-2 justify-content-center">
@@ -119,7 +124,7 @@
 								</li>
 								<li class="nav-item">
 									<a href="{{route('user.wishlist')}}" class="nav-link position-relative cart-link">
-										<span class="alert-count">8</span>
+										<span class="alert-count wishcount">{{$wishlist}}</span>
 										<i class='bx bx-heart'></i>
 									</a>
 								</li>

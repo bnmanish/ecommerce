@@ -66,6 +66,7 @@ Route::group(array('middleware' => ['auth']), function (){
 	Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
 });
 Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
+Route::post('delete-from-wishlist', [WishlistController::class, 'deleteFromWishlist'])->name('delete.wishlist');
 
 
 
