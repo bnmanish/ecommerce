@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 22, 2021 at 09:22 PM
+-- Generation Time: Nov 23, 2021 at 07:37 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -538,14 +538,9 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(8, 1, 4, '2021-11-21 19:03:30', '2021-11-21 19:03:30'),
-(9, 1, 8, '2021-11-21 19:04:44', '2021-11-21 19:04:44'),
-(11, 1, 3, '2021-11-21 19:05:59', '2021-11-21 19:05:59'),
-(30, 21, 8, '2021-11-21 19:23:05', '2021-11-21 19:23:05'),
-(31, 21, 2, '2021-11-22 18:49:20', '2021-11-22 18:49:20'),
-(32, 21, 5, '2021-11-22 18:49:32', '2021-11-22 18:49:32'),
-(45, 23, 2, '2021-11-22 20:22:05', '2021-11-22 20:22:05'),
-(47, 23, 8, '2021-11-22 20:22:07', '2021-11-22 20:22:07');
+(78, 21, 7, '2021-11-23 10:57:53', '2021-11-23 10:57:53'),
+(79, 21, 2, '2021-11-23 10:58:07', '2021-11-23 10:58:07'),
+(80, 21, 4, '2021-11-23 10:59:15', '2021-11-23 10:59:15');
 
 --
 -- Indexes for dumped tables
@@ -779,7 +774,7 @@ ALTER TABLE `webiste_settings`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

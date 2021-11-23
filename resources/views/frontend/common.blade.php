@@ -24,7 +24,7 @@
 			data: {id:id,_token:"{{ csrf_token() }}"},
 			success: function(response){
 				if(response.status == true){
-					$( "#prowish-"+id ).addClass( "bg-danger text-white" );
+					$( ".prowish-"+id ).addClass( "bg-danger text-white" );
 					$('.wishcount').html(response.count);
 					$('.ajaxmsgtxt').html(response.message);
 					$('.ajaxmsg').show();
@@ -32,7 +32,7 @@
 						$('.alermsg').hide();
 					},5000);
 				}else{
-					$( "#prowish-"+id ).removeClass( "bg-danger text-white" );
+					$( ".prowish-"+id ).removeClass( "bg-danger text-white" );
 					$('.wishcount').html(response.count);
 					$('.ajaxmsgtxt').html(response.message);
 					$('.ajaxmsg').show();
@@ -59,6 +59,26 @@
 				},5000);
 			}
 
+		});
+
+	}
+
+	function addCart(id){
+		
+		$.ajax({
+			url: "{{route('add.cart')}}",
+			method: "POST",
+			data: {id:id,_token:"{{ csrf_token() }}"},
+			success:function(response){
+				console.log(response)
+				if(response.status == true){
+					$('.procart-'+id).html("<i class='bx bxs-cart-add'></i>Remove From Cart").addClass('btn-danger').removeClass(' btn-dark');
+					$('.cartcount').html(response.count);
+				}else{
+					$('.procart-'+id).html("<i class='bx bxs-cart-add'></i>Add To Cart").addClass('btn-dark').removeClass('btn-danger');
+					$('.cartcount').html(response.count);
+				}
+			}
 		});
 
 	}

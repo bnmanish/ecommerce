@@ -1,6 +1,7 @@
 @php
 	
 	$wishlist = App\Models\Wishlist::where('user_id',@Auth::user()->id)->count();
+	$cartcount = count(Session::get('proid'));
 
 @endphp
 <div class="discount-alert d-none d-lg-block">
@@ -129,7 +130,7 @@
 									</a>
 								</li>
 								<li class="nav-item dropdown dropdown-large">
-									<a href="#" class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link" data-bs-toggle="dropdown">	<span class="alert-count">8</span>
+									<a href="#" class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link" data-bs-toggle="dropdown">	<span class="alert-count cartcount">{{$cartcount}}</span>
 										<i class='bx bx-shopping-bag'></i>
 									</a>
 									<div class="dropdown-menu dropdown-menu-end">

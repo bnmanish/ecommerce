@@ -25,6 +25,7 @@ use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\ShopController;
 use App\Http\Controllers\frontend\DashboardController as UserDashboardController;
 use App\Http\Controllers\frontend\WishlistController;
+use App\Http\Controllers\frontend\CartController;
 // Frontend controllers
 
 
@@ -66,6 +67,7 @@ Route::group(array('middleware' => ['auth']), function (){
 	Route::post('delete-from-wishlist', [WishlistController::class, 'deleteFromWishlist'])->name('delete.wishlist');
 });
 Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
+Route::post('add-to-cart', [CartController::class, 'addCart'])->name('add.cart');
 
 
 

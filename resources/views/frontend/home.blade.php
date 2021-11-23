@@ -179,13 +179,19 @@
 									if(in_array($featuredproRow->id,$cartarr)){
 										$wishlistclass = "bg-danger text-white";
 									}
+
+									$cartclass = "btn-dark";
+									if(in_array($featuredproRow->id,Session::get('proid'))){
+										$cartclass = "btn-danger";
+									}
+
 								@endphp
 								<div class="col">
 									<div class="card rounded-0 product-card prcard">
 										<div class="card-header bg-transparent border-bottom-0">
 											<div class="d-flex align-items-center justify-content-end gap-3">
 												<a href="javascript:;" onclick="return addWishlist({{$featuredproRow->id}})">
-													<div id="prowish-{{$featuredproRow->id}}" class="product-wishlist @php echo $wishlistclass; @endphp "> <i class='bx bx-heart'></i>
+													<div class="prowish-{{$featuredproRow->id}} product-wishlist @php echo $wishlistclass; @endphp "> <i class='bx bx-heart'></i>
 													</div>
 												</a>
 											</div>
@@ -216,7 +222,7 @@
 												</div>
 												<div class="product-action mt-2">
 													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
+														<a href="javascript:;" onclick="return addCart({{$featuredproRow->id}})" class="procart-{{$featuredproRow->id}} btn btn-ecomm @php echo $cartclass; @endphp">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
 													</div>
 												</div>
 											</div>
@@ -241,12 +247,18 @@
 						<div class="product-grid">
 							<div class="new-arrivals owl-carousel owl-theme">
 								@foreach($newarrival as $newarrivalRow)
+								@php
+									$wishlistclass = "";
+									if(in_array($newarrivalRow->id,$cartarr)){
+										$wishlistclass = "bg-danger text-white";
+									}
+								@endphp
 								<div class="item">
 									<div class="card rounded-0 product-card">
 										<div class="card-header bg-transparent border-bottom-0">
 											<div class="d-flex align-items-center justify-content-end">
-												<a href="javascript:;">
-													<div class="product-wishlist"> <i class='bx bx-heart'></i>
+												<a href="javascript:;" onclick="return addWishlist({{$newarrivalRow->id}})">
+													<div class="prowish-{{$newarrivalRow->id}} product-wishlist @php echo $wishlistclass; @endphp "> <i class='bx bx-heart'></i>
 													</div>
 												</a>
 											</div>
@@ -275,7 +287,6 @@
 												<div class="product-action mt-2">
 													<div class="d-grid gap-2">
 														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
-														<a href="javascript:;" class="btn btn-light btn-ecomm" data-bs-toggle="modal" data-bs-target="#QuickViewProduct"><i class='bx bx-zoom-in'></i>Quick View</a>
 													</div>
 												</div>
 											</div>
