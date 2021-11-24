@@ -181,8 +181,10 @@
 									}
 
 									$cartclass = "btn-dark";
-									if(in_array($featuredproRow->id,Session::get('proid'))){
+									$btnlvl = "<i class='bx bxs-cart-add'></i> Add to Cart";
+									if(in_array($featuredproRow->id,Session::get('proid') ? : array())){
 										$cartclass = "btn-danger";
+										$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
 									}
 
 								@endphp
@@ -222,7 +224,7 @@
 												</div>
 												<div class="product-action mt-2">
 													<div class="d-grid gap-2">
-														<a href="javascript:;" onclick="return addCart({{$featuredproRow->id}})" class="procart-{{$featuredproRow->id}} btn btn-ecomm @php echo $cartclass; @endphp">	<i class='bx bxs-cart-add'></i>Add to Cart</a>
+														<a href="javascript:;" onclick="return addCart({{$featuredproRow->id}})" class="procart-{{$featuredproRow->id}} btn btn-ecomm @php echo $cartclass; @endphp">	<?=$btnlvl?></a>
 													</div>
 												</div>
 											</div>
@@ -252,6 +254,14 @@
 									if(in_array($newarrivalRow->id,$cartarr)){
 										$wishlistclass = "bg-danger text-white";
 									}
+
+									$cartclass = "btn-dark";
+									$btnlvl = "<i class='bx bxs-cart-add'></i> Add to Cart";
+									if(in_array($newarrivalRow->id,Session::get('proid') ? : array())){
+										$cartclass = "btn-danger";
+										$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
+									}
+
 								@endphp
 								<div class="item">
 									<div class="card rounded-0 product-card">
@@ -263,7 +273,7 @@
 												</a>
 											</div>
 										</div>
-										<a href="product-details.html">
+										<a href="{{route('product.details',$newarrivalRow->url)}}">
 											<img src="{{url('uploads/product/'.$newarrivalRow->image)}}" class="card-img-top" alt="{{$newarrivalRow->title}}">
 										</a>
 										<div class="card-body">
@@ -286,7 +296,7 @@
 												</div>
 												<div class="product-action mt-2">
 													<div class="d-grid gap-2">
-														<a href="javascript:;" class="btn btn-dark btn-ecomm"> <i class='bx bxs-cart-add'></i>Add to Cart</a>
+														<a href="javascript:;" onclick="return addCart({{$newarrivalRow->id}})" class="procart-{{$newarrivalRow->id}} btn btn-ecomm @php echo $cartclass; @endphp"> <?=$btnlvl?></a>
 													</div>
 												</div>
 											</div>

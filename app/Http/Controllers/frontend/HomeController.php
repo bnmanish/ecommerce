@@ -31,7 +31,8 @@ class HomeController extends Controller
 	public function productDetails($url){
 
 		$product = Product::where('url',$url)->first();
-		return view('frontend/product/product_details')->with(['product'=>$product]);
+		$cartarr = Wishlist::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
+		return view('frontend/product/product_details')->with(['product'=>$product,'cartarr'=>$cartarr]);
 
 	}
 

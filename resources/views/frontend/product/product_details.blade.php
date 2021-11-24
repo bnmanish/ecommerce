@@ -1,3 +1,18 @@
+@php
+	$wishlistclass = "btn-dark";
+	$wishbtnval = "<i class='bx bx-heart'></i> Add to Wishlist";
+	if(in_array($product->id,$cartarr)){
+		$wishlistclass = "btn-danger";
+		$wishbtnval = "<i class='bx bx-heart'></i> Remove From Wishlist";
+	}
+
+	$cartclass = "btn-dark";
+	$btnlvl = "<i class='bx bxs-cart-add'></i> Add to Cart";
+	if(in_array($product->id,Session::get('proid') ? : array())){
+		$cartclass = "btn-danger";
+		$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
+	}
+@endphp
 <!doctype html>
 <html lang="en">
 
@@ -116,16 +131,11 @@
 													</select>
 												</div>
 												<div class="col">
-													<a href="javascript:;" class="btn btn-white btn-ecomm">	<i class="bx bxs-cart-add"></i>Add to Cart</a>
+													<a href="javascript:;" class="btn btn-ecomm @php echo $cartclass; @endphp">	<?=$btnlvl?></a>
 												</div>
 												<div class="col">
-													<a href="javascript:;" class="btn btn-light btn-ecomm"><i class="bx bx-heart"></i>Add to Wishlist</a>
+													<a href="javascript:;" class="btn btn-ecomm @php echo $wishlistclass; @endphp"><?=$wishbtnval?></a>
 												</div>
-											</div>
-											<!--end row-->
-											<div class="d-flex gap-2 mt-3">
-												<a href="javascript:;" class="btn btn-white btn-ecomm">	<i class="bx bxs-cart-add"></i>Add to Cart</a> 
-												<a href="javascript:;" class="btn btn-light btn-ecomm"><i class="bx bx-heart"></i>Add to Wishlist</a>
 											</div>
 											<hr/>
 											<div class="product-sharing">
