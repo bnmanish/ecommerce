@@ -121,7 +121,7 @@
 												<dd class="col-sm-9">In India Only</dd>
 											</dl>
 											<div class="row row-cols-auto align-items-center mt-3">
-												<div class="col">
+												<!-- <div class="col">
 													<select class="form-select form-select-sm">
 														<option>1</option>
 														<option>2</option>
@@ -129,7 +129,7 @@
 														<option>4</option>
 														<option>5</option>
 													</select>
-												</div>
+												</div> -->
 												<div class="col">
 													<a href="javascript:;" class="btn btn-ecomm @php echo $cartclass; @endphp">	<?=$btnlvl?></a>
 												</div>

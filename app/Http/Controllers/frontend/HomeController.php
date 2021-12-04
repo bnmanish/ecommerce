@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Page;
+use Session;
 use Auth;
 use DB;
 
@@ -17,6 +18,7 @@ class HomeController extends Controller
 {
     
 	public function home(){
+		// return Session::all();
 		$slider = Slider::orderBy('sequence','asc')->get();
 		$randomCat = Category::inRandomOrder()->limit(3)->get();
 		$featuredpro = Product::orderBy('sequence','asc')->limit(16)->get();

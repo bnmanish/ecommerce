@@ -1,5 +1,4 @@
 @php
-	
 	$wishlist = App\Models\Wishlist::where('user_id',@Auth::user()->id)->count();
 	$cartcount = Session::get('proid') ? count(Session::get('proid')) : 0;
 
