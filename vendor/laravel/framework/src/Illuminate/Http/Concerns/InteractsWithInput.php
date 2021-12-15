@@ -54,7 +54,7 @@ trait InteractsWithInput
     {
         $header = $this->header('Authorization', '');
 
-        $position = strrpos($header, 'Bearer');
+        $position = strrpos($header, 'Bearer ');
 
         if ($position !== false) {
             $header = substr($header, $position + 7);
@@ -297,6 +297,17 @@ trait InteractsWithInput
     }
 
     /**
+     * Retrieve input from the request as a collection.
+     *
+     * @param  array|string|null  $key
+     * @return \Illuminate\Support\Collection
+     */
+    public function collect($key = null)
+    {
+        return collect(is_array($key) ? $this->only($key) : $this->input($key));
+    }
+
+    /**
      * Get a subset containing the provided keys with values from the input data.
      *
      * @param  array|mixed  $keys
@@ -480,14 +491,12 @@ trait InteractsWithInput
     /**
      * Dump the request items and end the script.
      *
-     * @param  array|mixed  $keys
+     * @param  mixed  $keys
      * @return void
      */
     public function dd(...$keys)
     {
-        $keys = is_array($keys) ? $keys : func_get_args();
-
-        call_user_func_array([$this, 'dump'], $keys);
+        $this->dump(...$keys);
 
         exit(1);
     }
@@ -495,7 +504,7 @@ trait InteractsWithInput
     /**
      * Dump the items.
      *
-     * @param  array  $keys
+     * @param  mixed  $keys
      * @return $this
      */
     public function dump($keys = [])
