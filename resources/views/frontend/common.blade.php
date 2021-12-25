@@ -68,7 +68,7 @@
 		$.ajax({
 			url: "{{route('add.cart')}}",
 			method: "POST",
-			data: {id:id,_token:"{{ csrf_token() }}"},
+			data: {id:id,qty:1,_token:"{{ csrf_token() }}"},
 			success:function(response){
 				console.log(response)
 				if(response.status == true){

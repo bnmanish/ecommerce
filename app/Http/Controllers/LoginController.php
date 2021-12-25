@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Page;
+use App\Models\Cart;
 use Session;
 use Auth;
 use Hash;
@@ -158,6 +159,20 @@ class LoginController extends Controller
         $remember = $request->remember;
         if(Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])){
             Session::flash('success','Welcome <b>'.Auth::user()->name.'</b>');
+
+            if(Session::get('proid')){
+                $arr = Session::get('proid');
+                for($i=0; $i < count($arr); $i++){
+                    $c = new Cart;
+                    $c->user_id = Auth::user()->id;
+                    $c->product_id = $arr[$i];
+                    $c->quantity = 1;
+                    $c->save();
+                }
+                Session::forget('proid');
+            }
+
+
             return redirect()->route('home');
         }else{
             Session::flash('error','Either email or password is not correct!');
