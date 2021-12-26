@@ -1,6 +1,10 @@
 @php
 	$wishlist = App\Models\Wishlist::where('user_id',@Auth::user()->id)->count();
-	$cartcount = Session::get('proid') ? count(Session::get('proid')) : 0;
+	if(Auth::user()){
+		$cartcount = App\Models\Cart::where('user_id',Auth::user()->id)->count();
+	}else{
+		$cartcount = Session::get('proid') ? count(Session::get('proid')) : 0;
+	}
 
 @endphp
 <div class="discount-alert d-none d-lg-block">

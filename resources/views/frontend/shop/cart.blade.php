@@ -174,7 +174,7 @@
 								</div>
 								@else
 								<div class="col-12">
-									<div class="text-danger">Cart is empty!</div>
+									<div class="text-danger text-center">Sorry! Your cart is empty!</div>
 								</div>
 								@endif
 							</div>

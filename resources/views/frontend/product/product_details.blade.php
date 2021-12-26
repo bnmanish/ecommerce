@@ -1,7 +1,7 @@
 @php
 	$wishlistclass = "btn-dark";
 	$wishbtnval = "<i class='bx bx-heart'></i> Add to Wishlist";
-	if(in_array($product->id,$cartarr)){
+	if(in_array($product->id,$wisharr)){
 		$wishlistclass = "btn-danger";
 		$wishbtnval = "<i class='bx bx-heart'></i> Remove From Wishlist";
 	}

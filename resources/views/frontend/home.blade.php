@@ -176,13 +176,13 @@
 								@foreach($featuredpro as $featuredproRow)
 								@php
 									$wishlistclass = "";
-									if(in_array($featuredproRow->id,$cartarr)){
+									if(in_array($featuredproRow->id,$wisharr)){
 										$wishlistclass = "bg-danger text-white";
 									}
 
 									$cartclass = "btn-dark";
 									$btnlvl = "<i class='bx bxs-cart-add'></i> Add to Cart";
-									if(in_array($featuredproRow->id,Session::get('proid') ? : array())){
+									if(in_array($featuredproRow->id,$cartArr)){
 										$cartclass = "btn-danger";
 										$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
 									}
@@ -251,13 +251,13 @@
 								@foreach($newarrival as $newarrivalRow)
 								@php
 									$wishlistclass = "";
-									if(in_array($newarrivalRow->id,$cartarr)){
+									if(in_array($newarrivalRow->id,$wisharr)){
 										$wishlistclass = "bg-danger text-white";
 									}
 
 									$cartclass = "btn-dark";
 									$btnlvl = "<i class='bx bxs-cart-add'></i> Add to Cart";
-									if(in_array($newarrivalRow->id,Session::get('proid') ? : array())){
+									if(in_array($newarrivalRow->id,$cartArr)){
 										$cartclass = "btn-danger";
 										$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
 									}

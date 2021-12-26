@@ -9,6 +9,7 @@ use App\Models\Slider;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Wishlist;
+use App\Models\Cart;
 use App\Models\Page;
 use Session;
 use Auth;
@@ -25,16 +26,25 @@ class HomeController extends Controller
 		$newarrival = Product::orderBy('sequence','asc')->limit(16)->get();
 		$category = Category::orderBy('sequence','asc')->limit(25)->get();
 		$page = Page::where('id',1)->first();
-		$cartarr = Wishlist::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
-		return view('frontend/home')->with(['slider'=>$slider,'randomcat'=>$randomCat,'featuredpro'=>$featuredpro,'newarrival'=>$newarrival,'category'=>$category,'page'=>$page,'cartarr'=>$cartarr]);
+		$wisharr = Wishlist::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
+
+		if(Auth::user()){
+			$cartArr = Cart::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
+		}else{
+			$cartArr = Session::get('proid') ? : array();
+		}
+		
+
+
+		return view('frontend/home')->with(['slider'=>$slider,'randomcat'=>$randomCat,'featuredpro'=>$featuredpro,'newarrival'=>$newarrival,'category'=>$category,'page'=>$page,'wisharr'=>$wisharr,'cartArr'=>$cartArr]);
 	}
 
 
 	public function productDetails($url){
 
 		$product = Product::where('url',$url)->first();
-		$cartarr = Wishlist::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
-		return view('frontend/product/product_details')->with(['product'=>$product,'cartarr'=>$cartarr]);
+		$wisharr = Wishlist::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
+		return view('frontend/product/product_details')->with(['product'=>$product,'wisharr'=>$wisharr]);
 
 	}
 

@@ -13,24 +13,38 @@ use DB;
 class CartController extends Controller
 {
     public function addCart(Request $request){
-        if(Session::get('proid')){
+        $arr = array();
+        if(Auth::user()){
+            $arr = Cart::where('user_id',Auth::user()->id)->pluck('product_id')->toArray();
+            if(in_array($request->id,$arr)){
+                Cart::where(['user_id'=>Auth::user()->id,'product_id'=>$request->id])->delete();
+                $status = false;
+                $message = "Product removed from cart!";
+            }else{
+                Cart::create(['user_id'=>Auth::user()->id,'product_id'=>$request->id,'quantity'=>1]);
+                $status = true;
+                $message = "Product added to cart!";
+            }
+            $arr = Cart::where('user_id',Auth::user()->id)->pluck('product_id')->toArray();
+        }else{
+            if(Session::get('proid')){
+                $arr = Session::get('proid');
+            }
+            if(in_array($request->id,$arr)){
+                $arrIndex = array_search($request->id, $arr);
+                Session::forget('proid.'.$arrIndex);
+                $status = false;
+                $message = "Product removed from cart!";
+            }else{
+                Session::push('proid',$request->id);
+                $status = true;
+                $message = "Product added to cart!";
+            }
             $arr = Session::get('proid');
-        }else{
-            $arr = array();
-        }
 
-        if(in_array($request->id,$arr)){
-            $arrIndex = array_search($request->id, $arr);
-            Session::forget('proid.'.$arrIndex);
-            $status = false;
-            $message = "Product removed from cart!";
-        }else{
-            Session::push('proid',$request->id);
-            $status = true;
-            $message = "Product added to cart!";
         }
-        $count = count(Session::get('proid'));
-        // return Session::get('proid');
+        
+        $count = count($arr);
         return response()->json(array('status'=>$status,'count'=>$count,'message'=>$message));
     }
 
