@@ -16,6 +16,7 @@ use App\Http\Controllers\backend\PageController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\backend\AdditionalpageController;
 use App\Http\Controllers\backend\TestimonialController;
+use App\Http\Controllers\backend\VariantController;
 // Admin Controllers
 
 // Frontend controllers
@@ -117,6 +118,15 @@ Route::group(array('prefix'=>'admin','middleware' => ['auth', 'admin']), functio
 	Route::get('delete-subcategory/{id}', [SubCategoryController::class, 'delete'])->name('delete.sub.category');
 	Route::get('subcategory-sequence', [SubCategoryController::class, 'sequence'])->name('sub.category.sequence');
 	//sub category routes
+
+	// Variant Route
+	Route::get('add-variant', [VariantController::class, 'add'])->name('add.variant');
+	Route::post('store-variant', [VariantController::class, 'store'])->name('store.variant');
+	Route::get('manage-variant', [VariantController::class, 'manage'])->name('manage.variant');
+	Route::get('edit-variant/{id}', [VariantController::class, 'edit'])->name('edit.variant');
+	Route::post('store-edit-variant/{id}', [VariantController::class, 'storeEdit'])->name('store.edit.variant');
+	Route::get('delete-variant/{id}', [VariantController::class, 'delete'])->name('delete.variant');
+	// Variant Route
 
 	// Product Route
 	Route::get('add-product', [ProductController::class, 'add'])->name('add.product');

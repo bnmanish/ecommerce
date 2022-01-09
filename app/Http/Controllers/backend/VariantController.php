@@ -1,0 +1,186 @@
+<?php
+
+namespace App\Http\Controllers\backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class VariantController extends Controller
+{
+
+    public function add(){
+        return view('backend/product/variant/add_variant');
+    }
+
+    public function store(Request $request){
+
+        $message = array(
+            'product_name.required' => 'Product name is required field!',
+            'product_name.max' => 'Product name lenght must be less than 255 charecter!',
+            'product_code.required' => 'Product Code is required field!',
+            'product_code.unique' => 'Product Code must be unique!',
+            'url.required' => 'Product url is required field!',
+            'url.unique' => 'Product url must be unique!',
+            'price.required' => 'Price is required field!',
+            'price.numeric' => 'Price must be a numeric value!',
+            'price.min' => 'Price cant be 0 or less than 0!',
+            'status.required' => 'Status is required!',
+        );
+
+        $this->validate($request,[
+            'product_name'  =>  'required|max:255',
+            'product_code'  =>  'required|unique:products',
+            'url'   =>  'required|unique:products',
+            'price' =>  'required|numeric|min:1',
+            'category'  =>  'required',
+            'subcategory'   =>  'required',
+            'quantity'  =>  'required|numeric|min:0',
+            'status'    =>  'required',
+        ],$message);
+
+        $img = $request->file('image');
+
+        $pro = new Product;
+        $pro->product = $request->product_name;
+        $pro->product_code = $request->product_code;
+        $pro->url = $request->url;
+        $pro->cost_price = $request->cost_price;
+        $pro->price = $request->price;
+        $pro->max_selling_price = $request->max_selling_price;
+        $pro->category = $request->category;
+        $pro->subcat = $request->subcategory;
+        $pro->avail_qty = $request->quantity;
+        $pro->min_stock_qty = $request->min_stock_qty;
+        $pro->meta_title = $request->meta_title;
+        $pro->meta_keywords = $request->meta_keywords;
+        $pro->meta_description = $request->meta_description;
+        $pro->description = $request->description;
+        if($img){
+            $imgname = time().'.'.$img->getClientOriginalExtension();
+            $img->move(base_path('public/uploads/product/'),$imgname);
+            $pro->image = $imgname;
+        }
+        $pro->status = $request->status;
+        $pro->save();
+
+        Session::flash('success','Product added successfully!');
+        return redirect()->route('manage.product');
+
+    }
+
+    public function manage(){
+        $product = DB::table('products')
+                    ->join('categories','products.category','=','categories.id')
+                    ->join('sub_categories','products.subcat','=','sub_categories.id')
+                    ->select('products.id','products.product','categories.category','sub_categories.sub_category','products.image','products.sequence','products.status','products.price')
+                    ->orderBy('products.product')
+                    ->get();
+        return view('backend/product/manage_product')->with(['product'=>$product]);
+    }
+
+    public function edit($id){
+
+        $category = Category::orderBy('category')->select('id','category')->get();
+        $product = Product::where('id',$id)->first();
+        $subcat = SubCategory::orderBy('sub_category')->where('category_id',$product->category)->get();
+
+
+        return view('backend/product/edit_product')->with(['category'=>$category,'product'=>$product,'subcat'=>$subcat]);
+
+    }
+
+    public function storeEdit(Request $request,$id){
+
+        $message = array(
+            'product_name.required' => 'Product name is required field!',
+            'product_name.max' => 'Product name lenght must be less than 255 charecter!',
+            'product_code.required' => 'Product Code is required field!',
+            'product_code.unique' => 'Product Code must be unique!',
+            'url.required' => 'Product url is required field!',
+            'url.unique' => 'Product url must be unique!',
+            'price.required' => 'Price is required field!',
+            'price.numeric' => 'Price must be a numeric value!',
+            'price.min' => 'Price cant be 0 or less than 0!',
+            'status.required' => 'Status is required!',
+        );
+
+        $this->validate($request,[
+            'product_name'  =>  'required|max:255',
+            'url'   =>  'required|unique:products,url,'.$id,
+            'product_code'  =>  'required|unique:products,product_code,'.$id,
+            'price' =>  'required|numeric|min:1',
+            'category'  =>  'required',
+            'subcategory'   =>  'required',
+            'quantity'  =>  'required|numeric|min:0',
+            'status'    =>  'required',
+        ],$message);
+
+        $img = $request->file('image');
+        if($img){
+
+            $oldimg = Product::find($id);
+            if(is_file(base_path('public/uploads/product/'.$oldimg->image))){
+                unlink(base_path('public/uploads/product/'.$oldimg->image));
+            }
+            $imgname = time().'.'.$img->getClientOriginalExtension();
+            $img->move(base_path('public/uploads/product/'),$imgname);
+
+            $data = array(
+                'product' => $request->product_name,
+                'product_code' => $request->product_code,
+                'url' => $request->url,
+                'cost_price' => $request->cost_price,
+                'price' => $request->price,
+                'max_selling_price' => $request->max_selling_price,
+                'category' => $request->category,
+                'subcat' => $request->subcategory,
+                'avail_qty' => $request->quantity,
+                'min_stock_qty' => $request->min_stock_qty,
+                'meta_title' => $request->meta_title,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
+                'description' => $request->description,
+                'image' => $imgname,
+                'status' => $request->status,
+            );
+
+        }else{
+            $data = array(
+                'product' => $request->product_name,
+                'product_code' => $request->product_code,
+                'url' => $request->url,
+                'cost_price' => $request->cost_price,
+                'price' => $request->price,
+                'max_selling_price' => $request->max_selling_price,
+                'category' => $request->category,
+                'subcat' => $request->subcategory,
+                'avail_qty' => $request->quantity,
+                'min_stock_qty' => $request->min_stock_qty,
+                'meta_title' => $request->meta_title,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
+                'description' => $request->description,
+                'status' => $request->status,
+            );
+        }
+
+        Product::where('id',$id)->update($data);
+        Session::flash('success','Updated successfully!');
+        return redirect()->route('manage.product');
+
+    }
+
+    public function delete($id){
+
+        $oldimg = Product::find($id);
+        if(is_file(base_path('public/uploads/product/'.$oldimg->image))){
+            unlink(base_path('public/uploads/product/'.$oldimg->image));
+        }
+        $oldimg->delete();
+        Session::flash('success','Deleted successfully!');
+        return redirect()->back();
+
+    }
+
+
+}

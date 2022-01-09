@@ -41,25 +41,11 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Category</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('add.category')}}"><i class="fa fa-plus"></i> Add Category</a></li>
-                    <li><a href="{{route('manage.category')}}"><i class="fa fa-th-large"></i> Categories</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Sub Category</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('add.sub.category')}}"><i class="fa fa-plus"></i> Add Sub Category</a></li>
-                    <li><a href="{{route('manage.sub.category')}}"><i class="fa fa-th-large"></i> Subcategories</a></li>
-                </ul>
-            </li>
-
-            <li>
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Product</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('add.product')}}"><i class="fa fa-plus"></i> Add Product</a></li>
+                    <li><a href="{{route('manage.category')}}"><i class="fa fa-th-large"></i> Categories</a></li>
+                    <li><a href="{{route('manage.sub.category')}}"><i class="fa fa-th-large"></i> Subcategories</a></li>
+                    <li><a href="{{route('manage.variant')}}"><i class="fa fa-th-large"></i> Manage Variant</a></li>
                     <li><a href="{{route('manage.product')}}"><i class="fa fa-th-large"></i> Products</a></li>
                 </ul>
             </li>
