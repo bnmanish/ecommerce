@@ -71,6 +71,8 @@ Route::group(array('middleware' => ['auth']), function (){
 
 	// User cart routes
 	Route::get('cart', [CartController::class, 'cart'])->name('cart');
+	Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clear.cart');
+	Route::post('delete-cart-product', [CartController::class, 'deleteCartProduct'])->name('delete.cart.product');
 
 });
 Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');

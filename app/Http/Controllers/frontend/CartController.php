@@ -59,5 +59,34 @@ class CartController extends Controller
         return view('frontend/shop/cart')->with(['page'=>$page,'cartpro'=>$cartpro]);
     }
 
+    public function clearCart(){
+
+        Cart::where('user_id',Auth::user()->id)->delete();
+        return redirect()->back();
+
+    }
+
+    public function deleteCartProduct(Request $request){
+        
+        $cart = Cart::where('id',$request->cartid)->delete();
+        if($cart){
+            $subtotal = 0;
+            $c = DB::table('carts')
+            ->join('products','carts.product_id','=','products.id')
+            ->select('carts.quantity','products.price')
+            ->where('carts.user_id',Auth::user()->id)
+            ->get();
+            foreach($c as $cRow){
+                $subtotal = $subtotal + ($cRow->quantity * $cRow->price);
+            }
+
+            return response()->json(array('status'=>true,'subtotal'=>number_format($subtotal,2),'message'=>'Product removed from cart!'));
+        }else{
+            return response()->json(array('status'=>false,'message'=>'Product already removed from cart!'));
+        }
+
+
+    }
+
 
 }
