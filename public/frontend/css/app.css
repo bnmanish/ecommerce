@@ -1623,5 +1623,13 @@ body.bg-theme15 {
      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
+.cart-product-cancel:hover{
+	cursor: pointer;
+}
+
 
 /*custom css*/
+
+.cart-list{
+	overflow: auto;
+}

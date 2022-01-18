@@ -27,6 +27,7 @@ use App\Http\Controllers\frontend\ShopController;
 use App\Http\Controllers\frontend\DashboardController as UserDashboardController;
 use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\OrderController;
 // Frontend controllers
 
 
@@ -68,15 +69,27 @@ Route::group(array('middleware' => ['auth']), function (){
 	// User wishlist route
 	Route::get('wishlist', [WishlistController::class, 'wishlist'])->name('user.wishlist');
 	Route::post('delete-from-wishlist', [WishlistController::class, 'deleteFromWishlist'])->name('delete.wishlist');
+	// User wishlist route
 
-	// User cart routes
+	// User cart & orders routes
 	Route::get('cart', [CartController::class, 'cart'])->name('cart');
 	Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clear.cart');
 	Route::post('delete-cart-product', [CartController::class, 'deleteCartProduct'])->name('delete.cart.product');
+	Route::post('update-cart-quantity', [CartController::class, 'updateCartQuantity'])->name('update.cart.quantity');
+	Route::post('verify-coupon-code', [CartController::class, 'verifyCouponCode'])->name('verify.coupon.code');
+	Route::any('checkout', [CartController::class, 'checkout'])->name('checkout');
+
+	Route::post('place-order', [OrderController::class, 'placeOrder'])->name('place.order');
+	// User cart & orders routes
+
 
 });
+
 Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('add.cart');
+Route::get('view-cart', [CartController::class, 'viewCart'])->name('view.cart');
+Route::post('remove-pro-minicart', [CartController::class, 'removeProMiniCart'])->name('remove.pro.mini.cart');
+
 
 
 

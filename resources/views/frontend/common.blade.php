@@ -88,6 +88,30 @@
 	},5000);
 
 
+	function viewCart(){
+		$.ajax({
+			url: "{{route('view.cart')}}",
+			method: "GET",
+			success:function(response){
+				$('.minicart').replaceWith(response);
+			}
+		});
+	}
+
+	function removeminiCartPro(cartid){
+		$.ajax({
+			url: "{{route('remove.pro.mini.cart')}}",
+			method: "POST",
+			data: {cartid:cartid,_token:"{{ csrf_token() }}"},
+			success:function(response){
+				console.log(response)
+				if(response.status == true){
+					$('.mincart-'+cartid).hide();
+					$('.cartcount').html(response.count);
+				}
+			}
+		});
+	}
 	
 
 

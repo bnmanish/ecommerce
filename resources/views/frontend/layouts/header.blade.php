@@ -40,39 +40,7 @@
 					<li class="nav-item">	<a class="nav-link" href="javascript:;">Help & FAQs</a>
 					</li>
 				</ul>
-				<!-- <ul class="navbar-nav">
-					<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">USD</a>
-						<ul class="dropdown-menu dropdown-menu-lg-end">
-							<li><a class="dropdown-item" href="#">USD</a>
-							</li>
-							<li><a class="dropdown-item" href="#">EUR</a>
-							</li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
-							<div class="lang d-flex gap-1">
-								<div><i class="flag-icon flag-icon-um"></i>
-								</div>
-								<div><span>ENG</span>
-								</div>
-							</div>
-						</a>
-						<div class="dropdown-menu dropdown-menu-lg-end">
-							<a class="dropdown-item d-flex allign-items-center" href="javascript:;"> <i class="flag-icon flag-icon-de me-2"></i><span>German</span>
-							</a>	<a class="dropdown-item d-flex allign-items-center" href="javascript:;"><i
-						class="flag-icon flag-icon-fr me-2"></i><span>French</span></a>
-							<a class="dropdown-item d-flex allign-items-center" href="javascript:;"><i
-						class="flag-icon flag-icon-um me-2"></i><span>English</span></a>
-							<a class="dropdown-item d-flex allign-items-center" href="javascript:;"><i
-						class="flag-icon flag-icon-in me-2"></i><span>Hindi</span></a>
-							<a class="dropdown-item d-flex allign-items-center" href="javascript:;"><i
-						class="flag-icon flag-icon-cn me-2"></i><span>Chinese</span></a>
-							<a class="dropdown-item d-flex allign-items-center" href="javascript:;"><i
-				        class="flag-icon flag-icon-ae me-2"></i><span>Arabic</span></a>
-						</div>
-					</li>
-				</ul> -->
+
 				<ul class="navbar-nav social-link ms-lg-2 ms-auto">
 					<li class="nav-item"> <a class="nav-link" href="javascript:;"><i class='bx bxl-facebook'></i></a>
 					</li>
@@ -132,44 +100,16 @@
 										<i class='bx bx-heart'></i>
 									</a>
 								</li>
-								<li class="nav-item dropdown dropdown-large">
+								<!-- cart -->
+								<li class="nav-item dropdown dropdown-large" onclick="viewCart()">
 									<a href="#" class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link" data-bs-toggle="dropdown">	<span class="alert-count cartcount">{{$cartcount}}</span>
 										<i class='bx bx-shopping-bag'></i>
 									</a>
 									<div class="dropdown-menu dropdown-menu-end">
-										<a href="{{route('cart')}}">
-											<div class="cart-header">
-												<p class="cart-header-title mb-0">8 ITEMS</p>
-												<p class="cart-header-clear ms-auto mb-0">VIEW CART</p>
-											</div>
-										</a>
-										<div class="cart-list">
-											<a class="dropdown-item" href="javascript:;">
-												<div class="d-flex align-items-center">
-													<div class="flex-grow-1">
-														<h6 class="cart-product-title">Men White T-Shirt</h6>
-														<p class="cart-product-price">1 X $29.00</p>
-													</div>
-													<div class="position-relative">
-														<div class="cart-product-cancel position-absolute"><i class='bx bx-x'></i>
-														</div>
-														<div class="cart-product">
-															<img src="{{url('frontend/images/products/01.png')}}" class="" alt="product image">
-														</div>
-													</div>
-												</div>
-											</a>
-										</div>
-										<a href="javascript:;">
-											<div class="text-center cart-footer d-flex align-items-center">
-												<h5 class="mb-0">TOTAL</h5>
-												<h5 class="mb-0 ms-auto">$189.00</h5>
-											</div>
-										</a>
-										<div class="d-grid p-3 border-top">	<a href="javascript:;" class="btn btn-dark btn-ecomm">CHECKOUT</a>
-										</div>
+										<div class="minicart"></div>
 									</div>
 								</li>
+								<!-- cart -->
 							</ul>
 						</nav>
 					</div>

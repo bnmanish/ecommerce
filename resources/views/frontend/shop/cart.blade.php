@@ -85,7 +85,7 @@
 											<div class="col-12 col-lg-5">
 												<div class="d-lg-flex align-items-center gap-2">
 													<div class="cart-img text-center text-lg-start">
-														<img src="{{url('uploads/product/'.$cartproRow->image)}}" width="130" alt="">
+														<img src="{{url('uploads/product/'.$cartproRow->image)}}" width="130" alt="{{$cartproRow->product}}">
 													</div>
 													<div class="cart-detail text-center text-lg-start">
 														<h6 class="mb-2">{{$cartproRow->product}}</h6>
@@ -97,11 +97,11 @@
 											</div>
 											<div class="col-12 col-lg-2">
 												<div class="cart-action text-center">
-													<input type="number" class="form-control rounded-0" value="{{$cartproRow->quantity}}" min="1">
+													<input type="number" id="qty-{{$cartproRow->id}}" class="form-control rounded-0" value="{{$cartproRow->quantity}}" min="1" onchange="quantity({{$cartproRow->id}})">
 												</div>
 											</div>
 											<div class="col-12 col-lg-2">
-												<div class="cart-action text-center">
+												<div class="cart-action text-center prototal-{{$cartproRow->id}}">
 													@php 
 														$ptotal = $cartproRow->price * $cartproRow->quantity;
 														$subtotal = $subtotal + $ptotal;
@@ -113,7 +113,6 @@
 												<div class="text-center">
 													<div class="d-flex gap-2 justify-content-center justify-content-lg-end">
 														<a href="javascript:;" class="btn btn-dark rounded-0 btn-ecomm" onclick="confirm('Sure! you want delete this product') ? removeCartPro({{$cartproRow->id}}) : '' "><i class='bx bx-x-circle'></i> Remove</a>
-														<!-- <a href="javascript:;" class="btn btn-light rounded-0 btn-ecomm"><i class='bx bx-heart me-0'></i></a> -->
 													</div>
 												</div>
 											</div>
@@ -123,66 +122,37 @@
 										<div class="d-lg-flex align-items-center gap-2">	
 											<a href="{{route('shop')}}" class="btn btn-dark btn-ecomm"><i class='bx bx-shopping-bag'></i> Continue Shoping</a>
 											<a href="{{route('clear.cart')}}" class="btn btn-light btn-ecomm ms-auto" onclick="return confirm('Sure! You want to clear cart')"><i class='bx bx-x-circle'></i> Clear Cart</a>
-											<!-- <a href="javascript:;" class="btn btn-white btn-ecomm"><i class='bx bx-refresh'></i> Update Cart</a> -->
 										</div>
 									</div>
 								</div>
 								<div class="col-12 col-xl-4">
-									<div class="checkout-form p-3 bg-light">
-										<div class="card rounded-0 border bg-transparent shadow-none">
-											<div class="card-body">
-												<p class="fs-5">Apply Discount Code</p>
-												<div class="input-group">
-													<input type="text" class="form-control rounded-0" placeholder="Enter discount code">
-													<button class="btn btn-dark btn-ecomm" type="button">Apply Discount</button>
+									<form method="post" action="{{route('checkout')}}">
+										@csrf
+										<div class="checkout-form p-3 bg-light">
+											<div class="card rounded-0 border bg-transparent shadow-none">
+												<div class="card-body">
+													<p class="fs-5">Apply Discount Code</p>
+													<div class="input-group">
+														<input name="couponcode" type="text" class="form-control rounded-0 couponcode" placeholder="Enter discount code">
+														<button class="btn btn-dark btn-ecomm" type="button" onclick="applyCoupon()">Apply Discount</button>
+													</div>
+												</div>
+											</div>
+
+											<div class="card rounded-0 border bg-transparent mb-0 shadow-none">
+												<div class="card-body">
+													<p class="mb-2">Subtotal: <span class="float-end stotal">₹ {{number_format($subtotal,2)}}</span></p>
+													<p class="mb-0 text-danger discount">Discount: <span class="float-end discountval"></span>
+													</p>
+													<div class="my-3 border-top"></div>
+													<h5 class="mb-0">Order Total: <span class="float-end total">₹ {{number_format($subtotal,2)}}</span></h5>
+													<div class="my-4"></div>
+													<div class="d-grid"> <button type="submit" class="btn btn-dark btn-ecomm">Proceed to Checkout</button>
+													</div>
 												</div>
 											</div>
 										</div>
-										<!-- <div class="card rounded-0 border bg-transparent shadow-none">
-											<div class="card-body">
-												<p class="fs-5">Estimate Shipping and Tax</p>
-												<div class="my-3 border-top"></div>
-												<div class="mb-3">
-													<label class="form-label">Country Name</label>
-													<select class="form-select rounded-0">
-														<option selected>United States</option>
-														<option value="1">Australia</option>
-														<option value="2">India</option>
-														<option value="3">Canada</option>
-													</select>
-												</div>
-												<div class="mb-3">
-													<label class="form-label">State/Province</label>
-													<select class="form-select rounded-0">
-														<option selected>California</option>
-														<option value="1">Texas</option>
-														<option value="2">Canada</option>
-													</select>
-												</div>
-												<div class="mb-0">
-													<label class="form-label">Zip/Postal Code</label>
-													<input type="email" class="form-control rounded-0">
-												</div>
-											</div>
-										</div> -->
-										<div class="card rounded-0 border bg-transparent mb-0 shadow-none">
-											<div class="card-body">
-												<p class="mb-2">Subtotal: <span class="float-end stotal">₹ {{number_format($subtotal,2)}}</span>
-												</p>
-												<!-- <p class="mb-2">Shipping: <span class="float-end">--</span>
-												</p>
-												<p class="mb-2">Taxes: <span class="float-end">$14.00</span>
-												</p>
-												<p class="mb-0">Discount: <span class="float-end">--</span>
-												</p> -->
-												<div class="my-3 border-top"></div>
-												<h5 class="mb-0">Order Total: <span class="float-end stotal">₹ {{number_format($subtotal,2)}}</span></h5>
-												<div class="my-4"></div>
-												<div class="d-grid"> <a href="javascript:;" class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
-												</div>
-											</div>
-										</div>
-									</div>
+									</form>
 								</div>
 								@else
 								<div class="col-12">
@@ -227,7 +197,10 @@
 				data:{cartid:cartid,_token:'{{csrf_token()}}'},
 				success:function(response){
 					if(response.status == true){
+						$('.discount').hide();
+						$('.couponcode').val('');
 						$('.stotal').html('₹ '+response.subtotal);
+						$('.total').html('₹ '+response.subtotal);
 					}
 					$('#cart-row-'+cartid).hide();
 					$('.ajaxmsgtxt').html(response.message);
@@ -238,6 +211,66 @@
 				}
 
 			});
+		}
+
+		function quantity(cartid){
+			var qty = $('#qty-'+cartid).val();
+
+			if(qty < 1){
+				$('#qty-'+cartid).val(1).change();
+				alert('quantity canot be less than 1!')
+				return false;
+			}
+
+			$.ajax({
+				url:'{{route('update.cart.quantity')}}',
+				method:'POST',
+				data:{cartid:cartid,qty:qty,_token:'{{csrf_token()}}'},
+				success:function(response){
+					$('.discount').hide();
+					$('.couponcode').val('');
+					$('.stotal').html('₹ '+response.subtotal);
+					$('.total').html('₹ '+response.subtotal);
+					$('.prototal-'+cartid).html('₹ '+response.prototal);
+					$('.ajaxmsgtxt').html(response.message);
+					$('.ajaxmsg').show();
+					setTimeout(function(){
+						$('.alermsg').hide();
+					},5000);
+				}
+			});
+		}
+
+
+		$('.discount').hide();
+		function applyCoupon(){
+			var couponcode = $('.couponcode').val();
+			if(couponcode == ''){
+				alert('Please enter a valid coupon code to apply discount!');
+				return false;
+			}
+
+			$.ajax({
+				url:'{{route('verify.coupon.code')}}',
+				method:'POST',
+				data:{couponcode:couponcode,_token:'{{csrf_token()}}'},
+				success:function(response){
+					console.log(response);
+					if(response.status == true){
+						$('.stotal').html('₹ '+response.subtotal);
+						$('.total').html('₹ '+response.total);
+						$('.discount').show();
+						$('.discountval').html('- ₹ '+response.discount);
+					}
+					$('.ajaxmsgtxt').html(response.message);
+					$('.ajaxmsg').show();
+					setTimeout(function(){
+						$('.alermsg').hide();
+					},5000);
+				}
+			});
+
+
 		}
 
 	</script>

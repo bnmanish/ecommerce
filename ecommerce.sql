@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 23, 2021 at 07:37 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
+-- Generation Time: Jan 18, 2022 at 09:49 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,6 +53,29 @@ INSERT INTO `additional_pages` (`id`, `page_title`, `url`, `meta_title`, `meta_k
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(48, 1, 4, 1, '2022-01-18 00:18:59', '2022-01-18 00:18:59'),
+(49, 1, 6, 1, '2022-01-18 00:18:59', '2022-01-18 00:18:59');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
@@ -83,6 +106,33 @@ INSERT INTO `categories` (`id`, `category`, `url`, `meta_title`, `meta_keywords`
 (7, 'Kitcheck & Dining', 'kitcheck-and-dining', 'Kitcheck & Dining', 'Kitcheck & Dining', 'Kitcheck & Dining', '<p>Kitcheck &amp; Dining<br></p>', '1632164958.jpg', 2, 1, '2021-05-24 19:11:28', '2021-09-20 19:09:18'),
 (8, 'Home Decor', 'home-decor', 'Home Decor', 'Home Decor', 'Home Decor', '<p>Home Decor<br></p>', '1632164949.jpg', 6, 1, '2021-05-24 19:15:10', '2021-09-20 19:09:09'),
 (9, 'Tools & Utility', 'tools-and-utility', 'Tools & Utility', 'Tools & Utility', 'Tools & Utility', '<p>Tools &amp; Utility<br></p>', '1632164941.jpg', 7, 1, '2021-05-24 19:15:52', '2021-09-20 19:09:01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coupon_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `coupon_type` int(11) NOT NULL DEFAULT 0 COMMENT '0=fixed discount,1=percentage discount',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=disable,1=enabled',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `title`, `coupon_code`, `amount`, `start_time`, `end_time`, `coupon_type`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'New Year Dhamaka Coupon', '123', '10.00', '2022-01-17 22:16:45', '2022-01-26 22:16:45', 1, 1, '2022-01-14 22:17:50', '2022-01-17 23:47:31'),
+(3, 'New Year Dhamaka Coupon', 'NEW2022 1', '10.00', '2022-01-13 22:16:45', '2022-01-21 22:16:45', 0, 1, '2022-01-14 22:17:50', '2022-01-17 23:28:45');
 
 -- --------------------------------------------------------
 
@@ -159,7 +209,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2021_09_24_004014_create_webiste_settings_table', 11),
 (21, '2021_09_25_143358_create_additional_pages_table', 12),
 (22, '2021_09_25_171225_create_testimonials_table', 13),
-(23, '2021_11_21_225020_create_wishlists_table', 14);
+(23, '2021_11_21_225020_create_wishlists_table', 14),
+(24, '2021_12_26_013347_create_carts_table', 15),
+(26, '2022_01_10_020208_create_variants_table', 16),
+(28, '2022_01_15_033644_create_coupons_table', 17),
+(29, '2022_01_18_232714_create_orders_table', 18),
+(30, '2022_01_19_002322_create_order_details_table', 19),
+(31, '2022_01_19_003733_create_order_addresses_table', 20);
 
 -- --------------------------------------------------------
 
@@ -258,6 +314,71 @@ CREATE TABLE `oauth_refresh_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `coupon_id` int(11) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT 0.00,
+  `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `total` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `order_date` date NOT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'cash on delivery/PayUmoney/Paypal etc.',
+  `payment_thrugh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'cash/PayUmoney/Paypal etc.',
+  `payment_refrence_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'cash/PayUmoney/Paypal etc.',
+  `payment_status` enum('Unpaid','Paid') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Unpaid',
+  `order_status` enum('Pending','Processed','Shipped','Delivered','Cancelled','Returned') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Processed',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_addresses`
+--
+
+CREATE TABLE `order_addresses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pincode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `landmark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `ptotal` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pages`
 --
 
@@ -287,7 +408,9 @@ INSERT INTO `pages` (`id`, `title`, `meta_title`, `meta_keywords`, `meta_descrip
 (6, 'User Signup', 'User Signup', 'User Signup', 'User Signup', '<p>User Signup<br></p>', '<p>User Signup<br></p>', NULL, '2021-10-31 03:23:44', '2021-10-31 03:23:44'),
 (7, 'Dashboard', 'Dashboard', 'Dashboard', 'Dashboard', '<p>Dashboard<br></p>', '<p>Dashboard<br></p>', NULL, '2021-10-31 17:20:28', '2021-10-31 17:20:28'),
 (8, 'Verify Otp', 'Verify Otp', 'Verify Otp', 'Verify Otp', '<p>Verify Otp<br></p>', '<p>Verify Otp<br></p>', NULL, '2021-11-20 21:18:38', '2021-11-20 21:18:38'),
-(9, 'Wishlist', 'Wishlist', 'Wishlist', 'Wishlist', '<p>Wishlist&nbsp;&nbsp;&nbsp;&nbsp;<br></p>', '<p>Wishlist<br></p>', NULL, '2021-11-21 15:34:37', '2021-11-21 15:34:37');
+(9, 'Wishlist', 'Wishlist', 'Wishlist', 'Wishlist', '<p>Wishlist&nbsp;&nbsp;&nbsp;&nbsp;<br></p>', '<p>Wishlist<br></p>', NULL, '2021-11-21 15:34:37', '2021-11-21 15:34:37'),
+(10, 'Cart', 'Cart', 'Cart', 'Cart', '<p>Cart<br></p>', '<p>Cart<br></p>', NULL, '2021-12-25 19:23:00', '2021-12-25 19:23:00'),
+(11, 'Checkout', 'Checkout', 'Checkout', 'Checkout', '<p>Checkout<br></p>', '<p>Checkout<br></p>', NULL, '2022-01-16 00:54:42', '2022-01-16 00:54:42');
 
 -- --------------------------------------------------------
 
@@ -486,6 +609,20 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `co
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `variants`
+--
+
+CREATE TABLE `variants` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `variant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=disable,1=enabled',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `webiste_settings`
 --
 
@@ -553,11 +690,24 @@ ALTER TABLE `additional_pages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `categories_url_unique` (`url`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `coupons_coupon_code_unique` (`coupon_code`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -613,6 +763,25 @@ ALTER TABLE `oauth_refresh_tokens`
   ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `orders_order_no_unique` (`order_no`);
+
+--
+-- Indexes for table `order_addresses`
+--
+ALTER TABLE `order_addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pages`
 --
 ALTER TABLE `pages`
@@ -665,6 +834,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `variants`
+--
+ALTER TABLE `variants`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `webiste_settings`
 --
 ALTER TABLE `webiste_settings`
@@ -687,10 +862,22 @@ ALTER TABLE `additional_pages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -708,7 +895,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -723,10 +910,28 @@ ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_addresses`
+--
+ALTER TABLE `order_addresses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -765,6 +970,12 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `variants`
+--
+ALTER TABLE `variants`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `webiste_settings`
 --
 ALTER TABLE `webiste_settings`
@@ -774,7 +985,7 @@ ALTER TABLE `webiste_settings`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
