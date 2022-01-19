@@ -233,13 +233,13 @@
 														@if($discountval != false && $discount_type != false)
 															@php
 																if($discount_type == 0){
-												                $discount = $discountval;
-												                $total = $subtotal - $discount;
-												            }
-												            if($discount_type == 1){
-												                $discount = (($subtotal * $discountval)/100);
-												                $total = $subtotal - $discount;
-												            }
+													                $discount = $discountval;
+													                $total = $subtotal - $discount;
+													            }
+													            if($discount_type == 1){
+													                $discount = (($subtotal * $discountval)/100);
+													                $total = $subtotal - $discount;
+													            }
 															@endphp
 															<p class="mb-0 text-danger">Discount: <span class="float-end">- ₹ {{number_format($discount,2)}}</span></p>
 														@else

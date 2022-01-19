@@ -198,6 +198,18 @@ class CartController extends Controller
 
     public function checkout(Request $request){
 
+        $cartpro = DB::table('carts')
+        ->join('products','carts.product_id','=','products.id')
+        ->join('users','carts.user_id','=','users.id')
+        ->select('carts.id','carts.quantity','carts.product_id','products.product','products.product_code','products.url','products.price','products.max_selling_price','products.image')
+        ->where('carts.user_id',Auth::user()->id)
+        ->get();
+
+        if(count($cartpro) < 1){
+            Session::flash('success','Please add some product in cart to checkout!');
+            return redirect()->route('home');
+        }
+
         $couponcode = $request->couponcode;
         $discountval = false;
         $discount_type = false;

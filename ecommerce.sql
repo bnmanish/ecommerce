@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2022 at 09:49 PM
+-- Generation Time: Jan 19, 2022 at 08:04 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -64,14 +64,6 @@ CREATE TABLE `carts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(48, 1, 4, 1, '2022-01-18 00:18:59', '2022-01-18 00:18:59'),
-(49, 1, 6, 1, '2022-01-18 00:18:59', '2022-01-18 00:18:59');
 
 -- --------------------------------------------------------
 
@@ -336,6 +328,13 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_no`, `user_id`, `coupon_id`, `discount`, `subtotal`, `total`, `order_date`, `payment_date`, `payment_method`, `payment_thrugh`, `payment_refrence_no`, `payment_status`, `order_status`, `created_at`, `updated_at`) VALUES
+(1, 'ORD1642617567', 1, 1, '180.10', '1801.00', '1620.90', '2022-01-20', NULL, 'Cash on Delivery', NULL, NULL, 'Unpaid', 'Processed', '2022-01-19 18:39:27', '2022-01-19 18:39:27');
+
 -- --------------------------------------------------------
 
 --
@@ -358,6 +357,13 @@ CREATE TABLE `order_addresses` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `order_addresses`
+--
+
+INSERT INTO `order_addresses` (`id`, `order_id`, `user_id`, `name`, `email`, `contact`, `pincode`, `area`, `landmark`, `state`, `country`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Super Admin', 'bnmanish006@gmail.com', '8116648011', '110059', 'Mamura', 'Noida Sec 59 Metro', 'Uttar Pradesh', 'India', '2022-01-19 18:39:27', '2022-01-19 18:39:27');
+
 -- --------------------------------------------------------
 
 --
@@ -375,6 +381,14 @@ CREATE TABLE `order_details` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `user_id`, `product_id`, `quantity`, `price`, `ptotal`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 4, 1, '1345.00', '1345.00', '2022-01-19 18:39:27', '2022-01-19 18:39:27'),
+(2, 1, 1, 6, 1, '456.00', '456.00', '2022-01-19 18:39:27', '2022-01-19 18:39:27');
 
 -- --------------------------------------------------------
 
@@ -913,19 +927,19 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_addresses`
 --
 ALTER TABLE `order_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pages`
