@@ -25,6 +25,7 @@
 			success: function(response){
 				if(response.status == true){
 					$( ".prowish-"+id ).addClass( "bg-danger text-white" );
+					$('.prowishdet-'+id).html("<i class='bx bx-heart'></i> Remove From Wishlist").addClass('btn-danger').removeClass('btn-dark');
 					$('.wishcount').html(response.count);
 					$('.ajaxmsgtxt').html(response.message);
 					$('.ajaxmsg').show();
@@ -33,6 +34,7 @@
 					},5000);
 				}else{
 					$( ".prowish-"+id ).removeClass( "bg-danger text-white" );
+					$('.prowishdet-'+id).html("<i class='bx bx-heart'></i> Add to Wishlist").addClass('btn-dark').removeClass('btn-danger');
 					$('.wishcount').html(response.count);
 					$('.ajaxmsgtxt').html(response.message);
 					$('.ajaxmsg').show();

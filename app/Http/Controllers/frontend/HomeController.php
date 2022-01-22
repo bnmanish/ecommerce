@@ -15,6 +15,8 @@ use Session;
 use Auth;
 use DB;
 
+use GuzzleHttp\Client;
+
 class HomeController extends Controller
 {
     
@@ -42,10 +44,36 @@ class HomeController extends Controller
 
 	public function productDetails($url){
 
+		// return Session::get('proid');
+
 		$product = Product::where('url',$url)->first();
 		$wisharr = Wishlist::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
-		return view('frontend/product/product_details')->with(['product'=>$product,'wisharr'=>$wisharr]);
+		$cartarr = Cart::where('user_id',@Auth::user()->id)->pluck('product_id')->toArray();
+		return view('frontend/product/product_details')->with(['product'=>$product,'wisharr'=>$wisharr,'cartarr'=>$cartarr]);
 
+	}
+
+	public function test(){
+
+		$client = new \GuzzleHttp\Client([
+			'allow_redirects'=>true,
+		]);
+		
+		$response = $client->request('POST', 'http://httpbin.org/post', [
+			'allow_redirects'=> ['strict'=>true],
+		    'form_params' => [
+		        'field_name' => 'abc',
+		        'other_field' => '123',
+		        'nested_field' => [
+		            'nested' => 'hello'
+		        ]
+		    ]
+		]);
+		$request->getParams()->set('redirect.strict', true);
+
+		// return $response;
+		echo $response->getStatusCode();
+		
 	}
 
 

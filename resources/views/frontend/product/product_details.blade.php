@@ -8,10 +8,21 @@
 
 	$cartclass = "btn-dark";
 	$btnlvl = "<i class='bx bxs-cart-add'></i> Add to Cart";
-	if(in_array($product->id,Session::get('proid') ? : array())){
-		$cartclass = "btn-danger";
-		$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
+	if(Auth::user()){
+		if(in_array($product->id,$cartarr)){
+			$cartclass = "btn-danger";
+			$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
+
+		}
+	}else{
+		if(in_array($product->id,Session::get('proid') ? : array())){
+			$cartclass = "btn-danger";
+			$btnlvl = "<i class='bx bxs-cart-add'></i> Remove from Cart";
+
+		}
 	}
+	
+
 @endphp
 <!doctype html>
 <html lang="en">
@@ -116,9 +127,11 @@
 												<h4 class="mb-0">₹ {{$product->price}}</h4>
 											</div>
 											
-											<dl class="row mt-3">	<dt class="col-sm-3">Product id</dt>
-												<dd class="col-sm-9">#BHU5879</dd>	<dt class="col-sm-3">Delivery</dt>
-												<dd class="col-sm-9">In India Only</dd>
+											<dl class="row mt-3">	
+												<dt class="col-sm-3">Product id</dt>
+												<dd class="col-sm-9">{{$product->product_code}}</dd>	
+												<!-- <dt class="col-sm-3">Delivery</dt>
+												<dd class="col-sm-9">In India Only</dd> -->
 											</dl>
 											<div class="row row-cols-auto align-items-center mt-3">
 												<!-- <div class="col">
@@ -131,10 +144,10 @@
 													</select>
 												</div> -->
 												<div class="col">
-													<a href="javascript:;" class="btn btn-ecomm @php echo $cartclass; @endphp">	<?=$btnlvl?></a>
+													<a href="javascript:;" class="btn btn-ecomm @php echo $cartclass; @endphp procart-{{$product->id}}" onclick="return addCart({{$product->id}})">	<?=$btnlvl?></a>
 												</div>
 												<div class="col">
-													<a href="javascript:;" class="btn btn-ecomm @php echo $wishlistclass; @endphp"><?=$wishbtnval?></a>
+													<a href="javascript:;" class="btn btn-ecomm @php echo $wishlistclass; @endphp prowishdet-{{$product->id}}" onclick="return addWishlist({{$product->id}})"><?=$wishbtnval?></a>
 												</div>
 											</div>
 											<hr/>
@@ -183,15 +196,9 @@
 							</ul>
 							<div class="tab-content pt-3">
 								<div class="tab-pane fade show active" id="discription" role="tabpanel">
-									<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi.</p>
-									<ul>
-										<li>Not just for commute</li>
-										<li>Branded tongue and cuff</li>
-										<li>Super fast and amazing</li>
-										<li>Lorem sed do eiusmod tempor</li>
-									</ul>
-									<p class="mb-1">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone.</p>
-									<p class="mb-1">Seitan aliquip quis cardigan american apparel, butcher voluptate nisi.</p>
+
+									{!!$product->description!!}
+
 								</div>
 								
 								<div class="tab-pane fade" id="reviews" role="tabpanel">

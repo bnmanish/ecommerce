@@ -45,6 +45,7 @@ use App\Http\Controllers\frontend\OrderController;
 
 // Frontend Route starts
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/test', [HomeController::class, 'test']);
 Route::get('about-us', [AboutController::class, 'aboutus'])->name('aboutus');
 Route::get('contact-us', [ContactController::class, 'contactus'])->name('contactus');
 Route::get('shop', [ShopController::class, 'shop'])->name('shop');
