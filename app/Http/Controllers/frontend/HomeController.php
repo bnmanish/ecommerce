@@ -55,25 +55,24 @@ class HomeController extends Controller
 
 	public function test(){
 
-		$client = new \GuzzleHttp\Client([
-			'allow_redirects'=>true,
-		]);
-		
-		$response = $client->request('POST', 'http://httpbin.org/post', [
-			'allow_redirects'=> ['strict'=>true],
-		    'form_params' => [
-		        'field_name' => 'abc',
-		        'other_field' => '123',
-		        'nested_field' => [
-		            'nested' => 'hello'
-		        ]
-		    ]
-		]);
-		$request->getParams()->set('redirect.strict', true);
+		    $client = new \GuzzleHttp\Client();
+		    
+			// $response = $client->request('GET', 'https://api.github.com/repos/guzzle/guzzle');
 
-		// return $response;
-		echo $response->getStatusCode();
-		
+			// echo $response->getStatusCode().'<br>'; // 200
+			// echo $response->getHeaderLine('content-type').'<br>'; // 'application/json; charset=utf8'
+			// echo $response->getBody().'<br>'; // '{"id": 1420053, "name": "guzzle", ...}'
+
+			// echo "End echo statement";
+
+			// Send an asynchronous request.
+			$request = new \GuzzleHttp\Psr7\Request('GET', 'http://httpbin.org');
+			$promise = $client->sendAsync($request)->then(function ($response) {
+			    echo 'I completed! ' . $response->getBody();
+			});
+
+			// $promise->wait();
+
 	}
 
 

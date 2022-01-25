@@ -83,6 +83,11 @@ Route::group(array('middleware' => ['auth']), function (){
 	Route::post('place-order', [OrderController::class, 'placeOrder'])->name('place.order');
 	// User cart & orders routes
 
+	// PayUmoney Required route
+	Route::post('payumoney-success', [OrderController::class, 'payuMoneySuccess'])->name('payumoney.success');
+	Route::post('payumoney-failure', [OrderController::class, 'payuMoneyFailure'])->name('payumoney.failure');
+	// PayUmoney Required route
+
 
 });
 

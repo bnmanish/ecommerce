@@ -9,6 +9,7 @@ use App\Models\OrderDetail;
 use App\Models\OrderAddress;
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Models\Page;
 use Session;
 use Auth;
 use DB;
@@ -18,6 +19,7 @@ class OrderController extends Controller
     
     public function placeOrder(Request $request){
 
+        // return $request->all();
 
         $userid = Auth::user()->id;
         $coupon_code = $request->cc;
@@ -31,6 +33,7 @@ class OrderController extends Controller
         $country = $request->country;
         $payment_method = $request->payment_method;
         $subtotal = 0;
+        $orderno = 'ECOM/ORD/'.time();
 
         $cart = DB::table('carts')
         ->join('products','carts.product_id','=','products.id')
@@ -70,7 +73,7 @@ class OrderController extends Controller
         }
 
         $order = new Order;
-        $order->order_no = 'ORD'.time();
+        $order->order_no = $orderno;
         $order->user_id = $userid;
         $order->coupon_id = $coupon_id;
         $order->discount = $discount;
@@ -114,10 +117,98 @@ class OrderController extends Controller
             Cart::where(['user_id'=>$userid,'product_id'=>$cartRow->product_id])->delete();
         }
 
-        Session::flash('success','Order made successfullly!');
-        return redirect()->route('home');
+        if($payment_method == 'PayUmoney'){
+
+            $posted = array(
+              'key' =>  env('PAYU_MERCHANT_KEY'),
+              'salt' =>  env('PAYU_SALT'),
+              'txnid' =>  $orderno,
+              'amount'  =>  $total,
+              'firstname' =>  $name,
+              'email' =>  $email,
+              'phone' =>  $contact,
+              'productinfo' =>  'product info',
+              'surl'  =>  route('payumoney.success'),
+              'furl'  =>  route('payumoney.failure'),
+              'service_provider'  =>  env('SERVICE_PROVIDER'),
+              'address1'  =>  $area,
+              'address2'  =>  $landmark,
+              'city'  =>  $state,
+              'country'  =>  $country,
+              'zipcode'  =>  $pincode,
+            );
+
+            return view('payumoney/payumoney')->with(['posted'=>$posted]);
+        }
+        
+    }
+
+    public function payuMoneySuccess(Request $request){
+
+        $page = Page::where('id',12)->first();
+
+        $status=$request->status;
+        $firstname=$request->firstname;
+        $amount=$request->amount;
+        $txnid=$request->txnid;
+        $posted_hash=$request->hash;
+        $key=$request->key;
+        $productinfo=$request->productinfo;
+        $email=$request->email;
+        $salt= env('PAYU_SALT');
+
+        // Salt should be same Post Request 
+
+        If (isset($request->additionalCharges)) {
+               $additionalCharges=$request->additionalCharges;
+                $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+        } else {
+            $retHashSeq = $salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+        }
+        $hash = hash("sha512", $retHashSeq);
+        if ($hash != $posted_hash) {
+            // echo "Invalid Transaction. Please try again";
+            return view('payumoney/payumoney_success')->with(['page'=>$page]);
+        } else {
+            return view('payumoney/payumoney_success')->with(['page'=>$page,'status'=>$status,'txnid'=>$txnid,'amount'=>$amount]);
+        }
+
+    }
+
+    public function payuMoneyFailure(Request $request){
+        $page = Page::where('id',13)->first();
+
+        $status=$request->status;
+        $firstname=$request->firstname;
+        $amount=$request->amount;
+        $txnid=$request->txnid;
+
+        $posted_hash=$request->hash;
+        $key=$request->key;
+        $productinfo=$request->productinfo;
+        $email=$request->email;
+        $salt= env('PAYU_SALT');
+
+        // Salt should be same Post Request 
+
+        If (isset($request->additionalCharges)) {
+            $additionalCharges=$request->additionalCharges;
+            $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+        } else {
+            $retHashSeq = $salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+        }
+        $hash = hash("sha512", $retHashSeq);
+        if ($hash != $posted_hash) {
+            echo "Invalid Transaction. Please try again";
+        } else {
+            return view('payumoney/payumoney_failure')->with(['status'=>$status,'txnid'=>$txnid]);
+        } 
+
+
         
 
     }
+
+
 
 }
