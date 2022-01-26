@@ -74,7 +74,7 @@
           <div class="container">
             <div class="card py-3 mt-sm-3">
               <div class="card-body text-center">
-                <h2 class="h4 pb-3">Order Payment id fail!</h2>
+                <h2 class="h4 pb-3">Sorry! Order Payment fail!</h2>
                 <p class="fs-sm mb-2">Your order has been placed but order is still unpaid.</p>
                 <p class="fs-sm mb-2">Your order no is: <span class="fw-medium">{{$txnid}}.</span>
                 <p class="fs-sm mb-2">You pay this order again from "My Order" section : <span class="fw-medium">{{$txnid}}.</span>

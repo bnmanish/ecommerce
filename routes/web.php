@@ -83,18 +83,17 @@ Route::group(array('middleware' => ['auth']), function (){
 	Route::post('place-order', [OrderController::class, 'placeOrder'])->name('place.order');
 	// User cart & orders routes
 
-	// PayUmoney Required route
-	Route::post('payumoney-success', [OrderController::class, 'payuMoneySuccess'])->name('payumoney.success');
-	Route::post('payumoney-failure', [OrderController::class, 'payuMoneyFailure'])->name('payumoney.failure');
-	// PayUmoney Required route
-
-
 });
 
 Route::post('add-to-wishlist', [WishlistController::class, 'addWishlist'])->name('add.wishlist');
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('add.cart');
 Route::get('view-cart', [CartController::class, 'viewCart'])->name('view.cart');
 Route::post('remove-pro-minicart', [CartController::class, 'removeProMiniCart'])->name('remove.pro.mini.cart');
+
+// PayUmoney Required route
+Route::post('payumoney-success', [OrderController::class, 'payuMoneySuccess'])->name('payumoney.success');
+Route::post('payumoney-failure', [OrderController::class, 'payuMoneyFailure'])->name('payumoney.failure');
+// PayUmoney Required route
 
 
 

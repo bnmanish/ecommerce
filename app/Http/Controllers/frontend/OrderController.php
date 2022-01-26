@@ -140,6 +140,12 @@ class OrderController extends Controller
 
             return view('payumoney/payumoney')->with(['posted'=>$posted]);
         }
+
+        if($payment_method == 'Cash on Delivery'){
+
+            Session::flash('success','Your order has placed!');
+            return redirect()->route('home');
+        }
         
     }
 
@@ -170,6 +176,8 @@ class OrderController extends Controller
             // echo "Invalid Transaction. Please try again";
             return view('payumoney/payumoney_success')->with(['page'=>$page]);
         } else {
+            $date = date('Y-m-d');
+            Order::where('order_no',$txnid)->update(['payment_status'=>'Paid','payment_date'=>$date,'payment_thrugh'=>'PayUmoney']);
             return view('payumoney/payumoney_success')->with(['page'=>$page,'status'=>$status,'txnid'=>$txnid,'amount'=>$amount]);
         }
 
