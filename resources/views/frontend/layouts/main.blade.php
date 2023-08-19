@@ -94,50 +94,8 @@
                                 <li class="header__menu--items">
                                     <a class="header__menu--link" href="{{route('about.us')}}">About Us</a>
                                 </li>
-                                <li class="header__menu--items mega__menu--items">
-                                    <a class="header__menu--link" href="shop.html">Shop <span class="menu__plus--icon">+</span></a>
-                                    <ul class="header__mega--menu d-flex">
-                                        <li class="header__mega--menu__li">
-                                            <span class="header__mega--subtitle">Column One</span>
-                                            <ul class="header__mega--sub__menu">
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="shop.html">Shop Left Sidebar</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="shop-grid.html">Shop Grid</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="shop-grid-list.html">Shop Grid List</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="shop-list.html">Shop List</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="header__mega--menu__li">
-                                            <span class="header__mega--subtitle">Column Two</span>
-                                            <ul class="header__mega--sub__menu">
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="product-details.html">Standard Product</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="product-variable.html">Video Product</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="product-variable.html">Variable Product</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="product-left-sidebar.html">Product Left Sidebar</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="product-gallery.html">Product Gallery</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="header__mega--menu__li">
-                                            <span class="header__mega--subtitle">Column Three</span>
-                                            <ul class="header__mega--sub__menu">
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="my-account.html">My Account</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="my-account-2.html">My Account 2</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="404.html">404 Page</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="login.html">Login Page</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="faq.html">Faq Page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="header__mega--menu__li">
-                                            <span class="header__mega--subtitle">Column Four</span>
-                                            <ul class="header__mega--sub__menu">
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="compare.html">Compare Pages</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="cart.html">Cart Page</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="checkout.html">Checkout page</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="wishlist.html">Wishlist Page</a></li>
-                                                <li class="header__mega--sub__menu_li"><a class="header__mega--sub__menu--title" href="404.html">Error Page</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="header__menu--items">
+                                    <a class="header__menu--link" href="{{route('products')}}">Shop</a>
                                 </li>
                                 <li class="header__menu--items">
                                     <a class="header__menu--link" href="blog.html">Blog <span class="menu__plus--icon">+</span> </a>
@@ -155,7 +113,7 @@
                                         <li class="header__sub--menu__items"><a href="contact.html" class="header__sub--menu__link">Contact Us</a></li>
                                         <li class="header__sub--menu__items"><a href="cart.html" class="header__sub--menu__link">Cart Page</a></li>
                                         <li class="header__sub--menu__items"><a href="portfolio.html" class="header__sub--menu__link">Portfolio Page</a></li>
-                                        <li class="header__sub--menu__items"><a href="wishlist.html" class="header__sub--menu__link">Wishlist Page</a></li>
+                                        <li class="header__sub--menu__items"><a href="{{route('wishlist')}}" class="header__sub--menu__link">Wishlist Page</a></li>
                                         <li class="header__sub--menu__items"><a href="login.html" class="header__sub--menu__link">Login Page</a></li>
                                         <li class="header__sub--menu__items"><a href="404.html" class="header__sub--menu__link">Error Page</a></li>
                                     </ul>
@@ -174,15 +132,14 @@
                                     <span class="visually-hidden">Search</span>
                                 </a>
                             </li>
-                            @Auth
                             <li class="header__account--items">
-                                <a class="header__account--btn" href="my-account.html">
+                                <a class="header__account--btn" href="{{route('my.account')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg"  width="26.51" height="23.443" viewBox="0 0 512 512"><path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg> 
                                     <span class="visually-hidden">My Account</span>
                                 </a>
                             </li>
                             <li class="header__account--items d-md-none">
-                                <a class="header__account--btn" href="wishlist.html">
+                                <a class="header__account--btn" href="{{route('wishlist')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24.526" height="21.82" viewBox="0 0 24.526 21.82">
                                         <path  d="M12.263,21.82a1.438,1.438,0,0,1-.948-.356c-.991-.866-1.946-1.681-2.789-2.4l0,0a51.865,51.865,0,0,1-6.089-5.715A9.129,9.129,0,0,1,0,7.371,7.666,7.666,0,0,1,1.946,2.135,6.6,6.6,0,0,1,6.852,0a6.169,6.169,0,0,1,3.854,1.33,7.884,7.884,0,0,1,1.558,1.627A7.885,7.885,0,0,1,13.821,1.33,6.169,6.169,0,0,1,17.675,0,6.6,6.6,0,0,1,22.58,2.135a7.665,7.665,0,0,1,1.945,5.235,9.128,9.128,0,0,1-2.432,5.975,51.86,51.86,0,0,1-6.089,5.715c-.844.719-1.8,1.535-2.794,2.4a1.439,1.439,0,0,1-.948.356ZM6.852,1.437A5.174,5.174,0,0,0,3,3.109,6.236,6.236,0,0,0,1.437,7.371a7.681,7.681,0,0,0,2.1,5.059,51.039,51.039,0,0,0,5.915,5.539l0,0c.846.721,1.8,1.538,2.8,2.411,1-.874,1.965-1.693,2.812-2.415a51.052,51.052,0,0,0,5.914-5.538,7.682,7.682,0,0,0,2.1-5.059,6.236,6.236,0,0,0-1.565-4.262,5.174,5.174,0,0,0-3.85-1.672A4.765,4.765,0,0,0,14.7,2.467a6.971,6.971,0,0,0-1.658,1.918.907.907,0,0,1-1.558,0A6.965,6.965,0,0,0,9.826,2.467a4.765,4.765,0,0,0-2.975-1.03Zm0,0" transform="translate(0 0)" fill="currentColor"/>
                                     </svg>
@@ -191,20 +148,18 @@
                                 </a>
                             </li>
                             <li class="header__account--items">
-                                <a class="header__account--btn minicart__open--btn" href="javascript:void(0)">
+                                <a class="header__account--btn minicart__open--btn" href="{{route('cart')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18.897" height="21.565" viewBox="0 0 18.897 21.565">
                                         <path  d="M16.84,8.082V6.091a4.725,4.725,0,1,0-9.449,0v4.725a.675.675,0,0,0,1.35,0V9.432h5.4V8.082h-5.4V6.091a3.375,3.375,0,0,1,6.75,0v4.691a.675.675,0,1,0,1.35,0V9.433h3.374V21.581H4.017V9.432H6.041V8.082H2.667V21.641a1.289,1.289,0,0,0,1.289,1.29h16.32a1.289,1.289,0,0,0,1.289-1.29V8.082Z" transform="translate(-2.667 -1.366)" fill="currentColor"/>
                                     </svg>
                                     <span class="items__count">02</span> 
                                 </a>
                             </li>
-                            @else
                             <li class="header__account--items">
                                 <a title="Login" class="header__account--btn" href="{{route('login')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                                 </a>
                             </li>
-                            @endAuth
                         </ul>
                     </div>
                 </div>
@@ -257,7 +212,7 @@
                                 <li class="offcanvas__sub_menu_li">
                                     <a href="#" class="offcanvas__sub_menu_item">Column Three</a>
                                     <ul class="offcanvas__sub_menu">
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="my-account.html">My Account</a></li>
+                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="{{route('my.account')}}">My Account</a></li>
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="my-account-2.html">My Account 2</a></li>
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="404.html">404 Page</a></li>
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="login.html">Login Page</a></li>
@@ -269,8 +224,8 @@
                                     <ul class="offcanvas__sub_menu">
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="compare.html">Compare Pages</a></li>
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="cart.html">Cart Page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="checkout.html">Checkout page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="wishlist.html">Wishlist Page</a></li>
+                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="{{route('checkout')}}">Checkout page</a></li>
+                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="{{route('wishlist')}}">Wishlist Page</a></li>
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="404.html">Error Page</a></li>
                                     </ul>
                                 </li>
@@ -292,7 +247,7 @@
                                 <li class="offcanvas__sub_menu_li"><a href="contact.html" class="offcanvas__sub_menu_item">Contact Us</a></li>
                                 <li class="offcanvas__sub_menu_li"><a href="cart.html" class="offcanvas__sub_menu_item">Cart Page</a></li>
                                 <li class="offcanvas__sub_menu_li"><a href="portfolio.html" class="offcanvas__sub_menu_item">Portfolio Page</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="wishlist.html" class="offcanvas__sub_menu_item">Wishlist Page</a></li>
+                                <li class="offcanvas__sub_menu_li"><a href="{{route('wishlist')}}" class="offcanvas__sub_menu_item">Wishlist Page</a></li>
                                 <li class="offcanvas__sub_menu_li"><a href="login.html" class="offcanvas__sub_menu_item">Login Page</a></li>
                                 <li class="offcanvas__sub_menu_li"><a href="404.html" class="offcanvas__sub_menu_item">Error Page</a></li>
                             </ul>
@@ -378,7 +333,7 @@
                     </a>
                 </li>
                 <li class="offcanvas__stikcy--toolbar__list">
-                    <a class="offcanvas__stikcy--toolbar__btn minicart__open--btn" href="javascript:void(0)">
+                    <a class="offcanvas__stikcy--toolbar__btn minicart__open--btn" href="{{route('cart')}}">
                         <span class="offcanvas__stikcy--toolbar__icon"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="18.51" height="15.443" viewBox="0 0 18.51 15.443">
                             <path  d="M79.963,138.379l-13.358,0-.56-1.927a.871.871,0,0,0-.6-.592l-1.961-.529a.91.91,0,0,0-.226-.03.864.864,0,0,0-.226,1.7l1.491.4,3.026,10.919a1.277,1.277,0,1,0,1.844,1.144.358.358,0,0,0,0-.049h6.163c0,.017,0,.034,0,.049a1.277,1.277,0,1,0,1.434-1.267c-1.531-.247-7.783-.55-7.783-.55l-.205-.8h7.8a.9.9,0,0,0,.863-.651l1.688-5.943h.62a.936.936,0,1,0,0-1.872Zm-9.934,6.474H68.568c-.04,0-.1.008-.125-.085-.034-.118-.082-.283-.082-.283l-1.146-4.037a.061.061,0,0,1,.011-.057.064.064,0,0,1,.053-.025h1.777a.064.064,0,0,1,.063.051l.969,4.34,0,.013a.058.058,0,0,1,0,.019A.063.063,0,0,1,70.03,144.853Zm3.731-4.41-.789,4.359a.066.066,0,0,1-.063.051h-1.1a.064.064,0,0,1-.063-.051l-.789-4.357a.064.064,0,0,1,.013-.055.07.07,0,0,1,.051-.025H73.7a.06.06,0,0,1,.051.025A.064.064,0,0,1,73.76,140.443Zm3.737,0L76.26,144.8a.068.068,0,0,1-.063.049H74.684a.063.063,0,0,1-.051-.025.064.064,0,0,1-.013-.055l.973-4.357a.066.066,0,0,1,.063-.051h1.777a.071.071,0,0,1,.053.025A.076.076,0,0,1,77.5,140.448Z" transform="translate(-62.393 -135.3)" fill="currentColor"/>
@@ -389,7 +344,7 @@
                     </a>
                 </li>
                 <li class="offcanvas__stikcy--toolbar__list">
-                    <a class="offcanvas__stikcy--toolbar__btn" href="wishlist.html">
+                    <a class="offcanvas__stikcy--toolbar__btn" href="{{route('wishlist')}}">
                         <span class="offcanvas__stikcy--toolbar__icon"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="18.541" height="15.557" viewBox="0 0 18.541 15.557">
                             <path  d="M71.775,135.51a5.153,5.153,0,0,1,1.267-1.524,4.986,4.986,0,0,1,6.584.358,4.728,4.728,0,0,1,1.174,4.914,10.458,10.458,0,0,1-2.132,3.808,22.591,22.591,0,0,1-5.4,4.558c-.445.282-.9.549-1.356.812a.306.306,0,0,1-.254.013,25.491,25.491,0,0,1-6.279-4.8,11.648,11.648,0,0,1-2.52-4.009,4.957,4.957,0,0,1,.028-3.787,4.629,4.629,0,0,1,3.744-2.863,4.782,4.782,0,0,1,5.086,2.447c.013.019.025.034.057.076Z" transform="translate(-62.498 -132.915)" fill="currentColor"/>
@@ -402,86 +357,6 @@
             </ul>
         </div>
         <!-- End Offcanvas stikcy toolbar -->
-
-        <!-- Start offCanvas minicart -->
-        <div class="offCanvas__minicart" tabindex="-1">
-            <div class="minicart__header ">
-                <div class="minicart__header--top d-flex justify-content-between align-items-center">
-                    <h3 class="minicart__title"> Shopping Cart</h3>
-                    <button class="minicart__close--btn" aria-label="minicart close btn">
-                        <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 512 512"><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
-                    </button>
-                </div>
-                <p class="minicart__header--desc">The organic foods products are limited</p>
-            </div>
-            <div class="minicart__product">
-                <div class="minicart__product--items d-flex">
-                    <div class="minicart__thumbnail">
-                        <a href="product-details.html"><img src="{{url('assets/frontend/img/product/product1.webp')}}" alt="prduct-img"></a>
-                    </div>
-                    <div class="minicart__text">
-                        <h4 class="minicart__subtitle"><a href="product-details.html">The is Garden Vegetable.</a></h4>
-                        <span class="color__variant"><b>Color:</b> Beige</span>
-                        <div class="minicart__price">
-                            <span class="current__price">$125.00</span>
-                            <span class="old__price">$140.00</span>
-                        </div>
-                        <div class="minicart__text--footer d-flex align-items-center">
-                            <div class="quantity__box minicart__quantity">
-                                <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                                <label>
-                                    <input type="number" class="quantity__number" value="1" />
-                                </label>
-                                <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
-                            </div>
-                            <button class="minicart__product--remove" aria-label="minicart remove btn">Remove</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="minicart__product--items d-flex">
-                    <div class="minicart__thumbnail">
-                        <a href="product-details.html"><img src="{{url('assets/frontend/img/product/product2.webp')}}" alt="prduct-img"></a>
-                    </div>
-                    <div class="minicart__text">
-                        <h4 class="minicart__subtitle"><a href="product-details.html">Fresh Tomatoe is organic.</a></h4>
-                        <span class="color__variant"><b>Color:</b> Green</span>
-                        <div class="minicart__price">
-                            <span class="current__price">$115.00</span>
-                            <span class="old__price">$130.00</span>
-                        </div>
-                        <div class="minicart__text--footer d-flex align-items-center">
-                            <div class="quantity__box minicart__quantity">
-                                <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                                <label>
-                                    <input type="number" class="quantity__number" value="1" />
-                                </label>
-                                <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
-                            </div>
-                            <button class="minicart__product--remove" aria-label="minicart remove btn">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="minicart__amount">
-                <div class="minicart__amount_list d-flex justify-content-between">
-                    <span>Sub Total:</span>
-                    <span><b>$240.00</b></span>
-                </div>
-                <div class="minicart__amount_list d-flex justify-content-between">
-                    <span>Total:</span>
-                    <span><b>$240.00</b></span>
-                </div>
-            </div>
-            <div class="minicart__conditions text-center">
-                <input class="minicart__conditions--input" id="accept" type="checkbox">
-                <label class="minicart__conditions--label" for="accept">I agree with the <a class="minicart__conditions--link" href="privacy-policy.html">Privacy And Policy</a></label>
-            </div>
-            <div class="minicart__button d-flex justify-content-center">
-                <a class="primary__btn minicart__button--link" href="cart.html">View cart</a>
-                <a class="primary__btn minicart__button--link" href="checkout.html">Checkout</a>
-            </div>
-        </div>
-        <!-- End offCanvas minicart -->
 
         <!-- Start serch box area -->
         <div class="predictive__search--box " tabindex="-1">
@@ -567,7 +442,7 @@
                             </h2>
                             <ul class="footer__widget--menu footer__widget--inner">
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="about.html">About Us</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="wishlist.html">Wishlist</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('wishlist')}}">Wishlist</a></li>
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="contact.html">Contact Us</a></li>
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="privacy-policy.html">Privacy Policy</a></li>
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="faq.html">Frequently</a></li>
@@ -582,11 +457,11 @@
                                 </svg>
                             </h2>
                             <ul class="footer__widget--menu footer__widget--inner">
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="my-account.html">My Account</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('my.account')}}">My Account</a></li>
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="cart.html">Shopping Cart</a></li>
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="login.html">Login</a></li>
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="login.html">Register</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="checkout.html">Checkout</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('checkout')}}">Checkout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -616,7 +491,7 @@
                 </div>
             </div>
             <div class="footer__bottom d-flex justify-content-between align-items-center">
-                <p class="copyright__content  m-0">Copyright © 2022 <a class="copyright__content--link" href="{{route('home')}}">Furea</a> . All Rights Reserved.Design By Furea</p>
+                <p class="copyright__content  m-0">Copyright © 2022 - {{date('Y')}} <a target="_blank" class="copyright__content--link" href="https://www.instabizmart.com/"> Insta Bizmart</a> . All Rights Reserved.Design By Furea</p>
                 <div class="footer__payment text-right">
                     <img class="footer__payment--visa__card display-block" src="{{url('assets/frontend/img/other/payment-visa-card.webp')}}" alt="visa-card">
                 </div>
@@ -846,7 +721,7 @@
                                         <button class="primary__btn quickview__cart--btn" type="submit">Add To Cart</button>  
                                     </div>
                                     <div class="quickview__variant--list variant__wishlist mb-15">
-                                        <a class="variant__wishlist--icon" href="wishlist.html" title="Add to wishlist">
+                                        <a class="variant__wishlist--icon" href="{{route('wishlist')}}" title="Add to wishlist">
                                             <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
                                             Add to Wishlist
                                         </a>

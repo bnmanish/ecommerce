@@ -264,9 +264,21 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('admin.manage.coin')}}" class="waves-effect">
-                                    <i class="fas fa-coins"></i>
-                                    <span>Coin</span>
+                                <a href="{{route('admin.list.slider')}}" class="waves-effect">
+                                    <i class="fas fa-sliders-h"></i>
+                                    <span>Slider</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.list.category')}}" class="waves-effect">
+                                    <i class="fas fa-square"></i>
+                                    <span>Categories</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.list.testimonial')}}" class="waves-effect">
+                                    <i class="fas fa-sliders-h"></i>
+                                    <span>Testimonial</span>
                                 </a>
                             </li>
                         </ul>

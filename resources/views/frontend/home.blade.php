@@ -2,77 +2,36 @@
 @section('title', 'Home : : Ecommerce')
 @section('content')
 <main class="main__content_wrapper">
+
     <!-- Start slider section -->
-    <section class="hero__slider--section">
-        <div class="hero__slider--inner hero__slider--activation swiper">
-            <div class="hero__slider--wrapper swiper-wrapper">
-                <div class="swiper-slide ">
-                    <div class="hero__slider--items hero__slider--bg slider1">
-                        <div class="container-fluid">
-                            <div class="hero__slider--items__inner">
-                                <div class="row row-cols-1">
-                                    <div class="col">
-                                        <div class="slider__content">
-                                            <p class="slider__content--desc desc1 text-white mb-15">Discover our best furniture collection from home</p> 
-                                            <h2 class="slider__content--maintitle text-white h1">Stylish Furniture <br>
-                                                Bring Beauti</h2>
-                                            <p class="slider__content--desc text-white mb-35 d-sm-2-none">Great furniture can bring beauty at your home, So buy our popular <br>
-                                                and stylish furniture. Now you get up to 100 % discount now.</p>    
-                                            <a class="slider__content--btn primary__btn" href="shop.html">Start to Buying</a>
-                                        </div>
+    <section class="hero__slider--section color-scheme-3">
+        <div class="">
+            <div class="row">
+                <div class="col">
+                    <div class="hero__slider3--inner hero__slider--activation swiper">
+                        <div class="hero__slider3--wrapper swiper-wrapper">
+                            @foreach($slider as $sliderRow)
+                            <div class="swiper-slide ">
+                                <div class="hero__slider3--items hero__slider--bg3 slider2" style="background: url({{url('uploads/slider/'.$sliderRow->image)}});">
+                                    <div class="slider__content3 padding-left text-center">
+                                        <h2 class="slider__content3--maintitle">Make Beautiful Home <br>
+                                            With Moon Sofa</h2> 
+                                        <p class="slider__content3--desc color-black mb-35">Great furniture can bring beauty at your home, <br>
+                                            So buy our popular and stylish furniture. </p>  
+                                        <a class="slider__content3--btn primary__btn btn__style3" href="shop.html" rel="nofollow">Order Now</a>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                    </div>
-                </div>
-                <div class="swiper-slide ">
-                    <div class="hero__slider--items hero__slider--bg slider2">
-                        <div class="container-fluid">
-                            <div class="hero__slider--items__inner">
-                                <div class="row">
-                                    <div class="col-lg-6 offset-lg-6">
-                                        <div class="slider__content text-center">
-                                            <p class="slider__content--desc desc1 right text-white mb-15">Discover our best furniture collection from home</p> 
-                                            <h2 class="slider__content--maintitle text-white h1">Stylish Furniture <br>
-                                                Bring Beauti</h2>
-                                            <p class="slider__content--desc text-white mb-35 d-sm-2-none">Great furniture can bring beauty at your home, So buy our popular <br>
-                                                and stylish furniture. Now you get up to 100 % discount now.</p>    
-                                            <a class="slider__content--btn primary__btn" href="shop.html">Start to Buying</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide ">
-                    <div class="hero__slider--items hero__slider--bg slider3">
-                        <div class="container-fluid">
-                            <div class="hero__slider--items__inner">
-                                <div class="row row-cols-1">
-                                    <div class="col">
-                                        <div class="slider__content">
-                                            <p class="slider__content--desc desc1 text-white mb-15">Discover our best furniture collection from home</p> 
-                                            <h2 class="slider__content--maintitle text-white h1">Stylish Furniture <br>
-                                                Bring Beauti</h2>
-                                            <p class="slider__content--desc text-white mb-35 d-sm-2-none">Great furniture can bring beauty at your home, So buy our popular <br>
-                                                and stylish furniture. Now you get up to 100 % discount now.</p>    
-                                            <a class="slider__content--btn primary__btn" href="shop.html">Start to Buying</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="swiper__nav--btn swiper-button-next"></div>
+                        <div class="swiper__nav--btn swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
-            <div class="swiper__nav--btn swiper-button-next"></div>
-            <div class="swiper__nav--btn swiper-button-prev"></div>
         </div>
     </section>
     <!-- End slider section -->
-
     <!-- Start banner section -->
     <section class="banner__section section--padding">
         <div class="container-fluid">
