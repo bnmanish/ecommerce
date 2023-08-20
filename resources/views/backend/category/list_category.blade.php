@@ -53,7 +53,7 @@
                                 <tr>
                                     <td>{{$key + 1}}</td>
                                     <td>{{$dataRow->title}}</td>
-                                    <td><img width="100" src="{{url('uploads/category/'.$dataRow->banner)}}"></td>
+                                    <td><img width="50" src="{{url('uploads/category/'.$dataRow->banner)}}"></td>
                                     <td>{{$dataRow->status == '1' ? 'Enable' : 'Disable'}}</td>
                                     <td>{{date('d-m-Y',strtotime($dataRow->created_at))}}</td>
                                     <td>

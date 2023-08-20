@@ -64,7 +64,7 @@ class TestimonialController extends Controller
             $fdata[$key][] = $sl;
             $fdata[$key][] = $dataRow->name;
             $fdata[$key][] = $dataRow->profession;
-            $fdata[$key][] = $dataRow->title;
+            // $fdata[$key][] = $dataRow->title;
             $fdata[$key][] = $dataRow->image ? "<img width='100' src='".url('uploads/testimonial/'.$dataRow->image)."'>" : '';
             $fdata[$key][] = ($dataRow->gender === '1') ? 'Male' : (($dataRow->gender === '2') ? 'Female' : 'Other');
             $fdata[$key][] = $dataRow->status == '1' ? 'Enable' : 'Disable';
@@ -89,7 +89,7 @@ class TestimonialController extends Controller
             'name' => 'required|max:255',
             'profession' => 'required|max:255',
             'gender' => 'required|in:0,1,2',
-            'title' => 'required|max:255',
+            // 'title' => 'required|max:255',
             'description' => 'required|max:2000',
             'image' => 'nullable|image',
         ]);
@@ -125,7 +125,7 @@ class TestimonialController extends Controller
             'name' => 'required|max:255',
             'profession' => 'required|max:255',
             'gender' => 'required|in:0,1,2',
-            'title' => 'required|max:255',
+            // 'title' => 'required|max:255',
             'description' => 'required|max:2000',
             'image' => 'nullable|image',
         ]);

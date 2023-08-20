@@ -76,7 +76,7 @@ class CategoryController extends Controller
     public function storeCategory(Request $request){
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255|unique:categories,title',
-            'slug' => 'required|max:255|unique:categories,slug',
+            // 'slug' => 'required|max:255|unique:categories,slug',
             'meta_title' => 'max:255',
             'banner' => 'nullable|image',
         ]);
@@ -85,7 +85,7 @@ class CategoryController extends Controller
         }
         $category = new Category();
         $category->title = $request->title;
-        $category->slug = $request->slug;
+        $category->slug = generateSlug($request->title);
         $category->meta_title = $request->meta_title;
         $category->meta_keywords = $request->meta_keywords;
         $category->meta_description = $request->meta_description;
@@ -112,7 +112,7 @@ class CategoryController extends Controller
         // return $request->all();
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255|unique:categories,title,'.$id,
-            'slug' => 'required|max:255|unique:categories,slug,'.$id,
+            // 'slug' => 'required|max:255|unique:categories,slug,'.$id,
             'meta_title' => 'max:255',
             'banner' => 'nullable|image',
         ]);
@@ -122,7 +122,7 @@ class CategoryController extends Controller
 
         $data = array(
             "title" => $request->title,
-            "slug" => $request->slug,
+            "slug" => generateSlug($request->title),
             "meta_title" => $request->meta_title,
             "meta_keywords" => $request->meta_keywords,
             "meta_description" => $request->meta_description,

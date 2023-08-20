@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('profession');
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
             $table->enum('gender',['0','1','2'])->nullable()->default('0')->comment('0=Other,1=Male,2=Female');

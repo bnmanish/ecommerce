@@ -43,7 +43,7 @@
                                     <th>Sl</th>
                                     <th>Name</th>
                                     <th>Profession</th>
-                                    <th>Title</th>
+                                    <!-- <th>Title</th> -->
                                     <th>Image</th>
                                     <th>Gender</th>
                                     <th>Status</th>
@@ -57,7 +57,7 @@
                                     <td>{{$key + 1}}</td>
                                     <td>{{$dataRow->name}}</td>
                                     <td>{{$dataRow->profession}}</td>
-                                    <td>{{$dataRow->title}}</td>
+                                    <!-- <td>{{$dataRow->title}}</td> -->
                                     <td> @if($dataRow->image) <img width="50" src="{{url('uploads/testimonial/'.$dataRow->image)}}"> @endif</td>
                                     <td>{{($dataRow->gender === '1') ? 'Male' : (($dataRow->gender === '2') ? 'Female' : 'Other')}}</td>
                                     <td>{{$dataRow->status == '1' ? 'Enable' : 'Disable'}}</td>
