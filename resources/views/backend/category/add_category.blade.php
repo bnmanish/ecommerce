@@ -1,5 +1,5 @@
 @extends('backend/layouts/main')
-@section('title', 'Add Category | DEDM')
+@section('title', 'Add Category | Ecommerce')
 @section('content')
 <div class="page-content">
     <div class="container-fluid">

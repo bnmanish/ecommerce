@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\TestimonialController;
+use App\Http\Controllers\backend\ProductController;
 // frontend controllers
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\AboutController;
@@ -80,6 +81,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit-category/{id}', [CategoryController::class, 'editCategory'])->name('admin.edit.category');
         Route::post('/edit-store-category/{id}', [CategoryController::class, 'editStoreCategory'])->name('admin.edit.store.category');
         Route::get('/delete-category/{id}', [CategoryController::class, 'deleteCategory'])->name('admin.delete.category');
+
+        // product
+        Route::get('/add-product', [ProductController::class, 'addProduct'])->name('admin.add.product');
+        Route::post('/store-product', [ProductController::class, 'storeProduct'])->name('admin.store.product');
+        Route::get('/list-product', [ProductController::class, 'listProduct'])->name('admin.list.product');
+        Route::get('/get-list-product', [ProductController::class, 'getlistData'])->name('admin.get.list.product');
+        Route::get('/edit-product/{id}', [ProductController::class, 'editProduct'])->name('admin.edit.product');
+        Route::post('/edit-store-product/{id}', [ProductController::class, 'editStoreProduct'])->name('admin.edit.store.product');
+        Route::get('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('admin.delete.product');
 
         // Testimonial
         Route::get('/add-testimonial', [TestimonialController::class, 'addTestimonial'])->name('admin.add.testimonial');
