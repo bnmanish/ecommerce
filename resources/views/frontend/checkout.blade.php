@@ -1,5 +1,5 @@
 @extends('frontend/layouts/main')
-@section('title', 'Checkout : : Ecommerce')
+@section('title', 'Checkout : : TimyShop')
 @section('content')
 <main class="main__content_wrapper">
 

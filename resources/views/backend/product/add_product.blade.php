@@ -1,5 +1,5 @@
 @extends('backend/layouts/main')
-@section('title', 'Add Product | Ecommerce')
+@section('title', 'Add Product | TimyShop')
 @section('content')
 <div class="page-content">
     <div class="container-fluid">
@@ -46,6 +46,18 @@
                                 <label class="col-md-2 col-form-label">Code <span class="text-danger">*</span></label>
                                 <div class="col-md-10">
                                     <input class="form-control" type="text" name="code" value="{{old('code')}}">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-md-2 col-form-label">Category</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" type="text" name="category">
+                                        <option value="">--select--</option>
+                                        @foreach($category as $cat)
+                                        <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -191,25 +203,6 @@
 @stop
 @push('scripts')
 <script>
-    // js for clone image section
-    var a=1;
-    function addInput() {
-        const inputContainer = document.getElementById('inputContainer');
-        const newInput = document.createElement('div');
-        newInput.classList.add('mb-3');
-        newInput.innerHTML = `<div class="main-clonediv row"><div class="col-6"><div class=""><label class="col-form-label">Image<span class="text-danger">*</span></label><input class="form-control dropify" type="file" name="image[]"></div></div><div class="col-2"><label class="col-form-label">&nbsp</label><div><button type="button" class="btn btn-danger remove-btn">Remove</button></div></div></div>`;
-        inputContainer.appendChild(newInput);
-        // load js for cloned editor
-        0 <  $('.dropify').dropify();
-        // load js for cloned input file dropify
-    }
-    $('#inputContainer').on('click', '.remove-btn', function() {
-        $(this).closest('.main-clonediv').remove();
-    });
-    // js for clone image section
-
-
-
 
     $(document).ready(function() {
         $('#categoryForm').on('submit', function(e) {
@@ -238,5 +231,23 @@
             });
         });
     });
+
+
+    // js for clone image section
+    var a=1;
+    function addInput() {
+        const inputContainer = document.getElementById('inputContainer');
+        const newInput = document.createElement('div');
+        newInput.classList.add('mb-3');
+        newInput.innerHTML = `<div class="main-clonediv row"><div class="col-6"><div class=""><label class="col-form-label">Image<span class="text-danger">*</span></label><input class="form-control dropify" type="file" name="image[]" required></div></div><div class="col-2"><label class="col-form-label">&nbsp</label><div><button type="button" class="btn btn-danger remove-btn">Remove</button></div></div></div>`;
+        inputContainer.appendChild(newInput);
+        // load js for cloned editor
+        0 <  $('.dropify').dropify();
+        // load js for cloned input file dropify
+    }
+    $('#inputContainer').on('click', '.remove-btn', function() {
+        $(this).closest('.main-clonediv').remove();
+    });
+    // js for clone image section
 </script>
 @endpush

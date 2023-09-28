@@ -16,14 +16,15 @@ use Session;
 class ProductController extends Controller
 {
     public function addProduct(){
-        return view('backend/product/add_product');
+        $category = Category::select('id','title')->orderBy('title')->get();
+        return view('backend/product/add_product')->with(['category'=>$category]);
     }
 
     public function listProduct(){
-        $qry = Category::select('id','title','banner','status','created_at')->orderBy('title');
+        $qry = Product::select('id','title','code','price','discount_price','status','created_at')->orderBy('title');
         $data = $qry->limit(10)->get();
         $dataCount = $qry->count();
-        return view('backend/category/list_category')->with(['data'=>$data,'datacount'=>$dataCount]);
+        return view('backend/product/list_product')->with(['data'=>$data,'datacount'=>$dataCount]);
     }
 
     public function storeProduct(Request $request){
@@ -34,17 +35,19 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'discount_price' => 'nullable|numeric',
             'meta_title' => 'max:255',
-            'image.*' => 'required',
+            'image' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(array('status'=>false,'errors' => $validator->errors()));
         }
+
         try {
             DB::beginTransaction();
             $product = new Product();
             $product->title = $request->title;
             $product->slug = generateSlug($request->title);
             $product->code = $request->code;
+            $product->category = $request->category;
             $product->price = $request->price;
             $product->discount_price = $request->discount_price;
             $product->meta_title = $request->meta_title;
@@ -60,8 +63,16 @@ class ProductController extends Controller
             $product->status = $request->status == "on" ? '1' : '0';
             $product->save();
 
-
-
+            if ($request->hasFile('image')) {
+                foreach ($request->file('image') as $key => $image) {
+                    $imgname = $product->id.'_'.$request->code.'_'.$key.'.'.$image->getClientOriginalExtension();
+                    $image = $image->move(public_path('uploads/product/'),$imgname);
+                    $proimage = new ProductImage;
+                    $proimage->product_id = $product->id;
+                    $proimage->image = $imgname;
+                    $proimage->save();
+                }
+            }
 
             DB::commit();
             Session::flash('success','Added successfully!');

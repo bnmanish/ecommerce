@@ -2,10 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Login | DEDM</title>
+        <title>Admin Login | TimyShop</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="DEDM Admin Login Page" name="description" />
-        <meta content="DEDM" name="author" />
+        <meta content="TimyShop Admin Login Page" name="description" />
+        <meta content="TimyShop" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{url('assets/backend/images/favicon.ico')}}">
         <!-- Bootstrap Css -->
@@ -33,7 +33,7 @@
                                     </div>
                                     <!-- end row -->
                                     <h4 class="font-size-18 text-muted mt-2 text-center">Welcome Back !</h4>
-                                    <p class="mb-3 text-center">Sign in to continue DEDM.</p>
+                                    <p class="mb-3 text-center">Sign in to continue TimyShop.</p>
                                     @if($errors->any())
                                         @foreach ($errors->all() as $error)
                                         <div class="alert alert-danger alert-dismissible py-2">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="mt-5 text-center">
                             
-                            <p class="text-white-50">Copyrights © {{date('Y')}} <a target="_blank" href="{{route('home')}}">DEDM</a>. All rights reserved.</p>
+                            <p class="text-white-50">Copyrights © {{date('Y')}} <a target="_blank" href="{{route('home')}}">TimyShop</a>. All rights reserved.</p>
                         </div>
                     </div>
                 </div>

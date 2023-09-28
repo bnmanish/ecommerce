@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->string('code')->unique();
+            $table->integer('category')->nullable();
             $table->decimal('price',10,2);
             $table->decimal('discount_price',10,2)->nullable();
             $table->string('meta_title')->nullable();

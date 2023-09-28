@@ -276,6 +276,12 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{route('admin.list.product')}}" class="waves-effect">
+                                    <i class="fas fa-square"></i>
+                                    <span>Products</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{route('admin.list.testimonial')}}" class="waves-effect">
                                     <i class="fas fa-sliders-h"></i>
                                     <span>Testimonial</span>
@@ -303,7 +309,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 text-center">
-                                © <script>document.write(new Date().getFullYear())</script> DEDM. All Rights Reserved.
+                                © <script>document.write(new Date().getFullYear())</script> TimyShop. All Rights Reserved.
                             </div>
                         </div>
                     </div>

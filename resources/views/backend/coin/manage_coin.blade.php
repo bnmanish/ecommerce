@@ -1,5 +1,5 @@
 @extends('backend/layouts/main')
-@section('title', 'Manage Coin | Crypto')
+@section('title', 'Manage Coin | TimyShop')
 @section('content')
 <!-- plugin css -->
 <div class="page-content">

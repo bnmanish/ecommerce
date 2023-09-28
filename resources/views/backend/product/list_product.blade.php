@@ -1,5 +1,5 @@
 @extends('backend/layouts/main')
-@section('title', 'User List | TimyShop')
+@section('title', 'Product List | TimyShop')
 @section('content')
 
 <div class="page-content">
@@ -9,12 +9,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">User List</h4>
+                    <h4 class="mb-sm-0">Product List</h4>
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">User List</li>
+                            <li class="breadcrumb-item active">Product List</li>
                         </ol>
                     </div>
 
@@ -30,10 +30,10 @@
                         
                         <div class="row mb-4 border-bottom">
                             <div class="col-6">
-                                <h4 class="card-title">Manage User</h4>
+                                <h4 class="card-title">Manage Category</h4>
                             </div>
                             <div class="col-6">
-                                <h4 class="card-title text-end"><a href="{{route('admin.add.user')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a></h4>
+                                <h4 class="card-title text-end"><a href="{{route('admin.add.category')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a></h4>
                             </div>
                         </div>
 
@@ -41,15 +41,12 @@
                             <thead>
                                 <tr>
                                     <th>Sl</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>User Name</th>
-                                    <th>Mobile</th>
-                                    <th>Role</th>
-                                    <th>Email<br>Verified</th>
-                                    <th>Mobile<br>Verified</th>
-                                    <th>Register Date</th>
+                                    <th>Title</th>
+                                    <th>Code</th>
+                                    <th>Price</th>
+                                    <th>Discount Price</th>
                                     <th>Status</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -57,17 +54,14 @@
                                 @foreach($data as $key => $dataRow)
                                 <tr>
                                     <td>{{$key + 1}}</td>
-                                    <td>{{$dataRow->name}}</td>
-                                    <td>{{$dataRow->email}} @if($dataRow->email_verified == '1')<i class="fas fa-check-circle"></i> @endif</td>
-                                    <td>{{$dataRow->user_name}}</td>
-                                    <td>{{$dataRow->mobile}}</td>
-                                    <td>{{$dataRow->role}}</td>
-                                    <td>{{$dataRow->email_verified == '1' ? 'Yes' : 'No'}}</td>
-                                    <td>{{$dataRow->mobile_verified == '1' ? 'Yes' : 'No'}}</td>
+                                    <td>{{$dataRow->title}}</td>
+                                    <td>{{$dataRow->code}}</td>
+                                    <td>{{$dataRow->price}}</td>
+                                    <td>{{$dataRow->discount_price}}</td>
+                                    <td>{{$dataRow->status == '1' ? 'Enable' : 'Disable'}}</td>
                                     <td>{{date('d-m-Y',strtotime($dataRow->created_at))}}</td>
-                                    <td>{{$dataRow->status == '1' ? 'Enable' : 'No'}}</td>
                                     <td>
-                                        <a href="{{route('admin.edit.user',$dataRow->id)}}" class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>&nbsp;<a href="{{route('admin.delete.user',$dataRow->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Really! Do you want to delete?')"><i class='fas fa-trash'></i></a>
+                                        <a href="{{route('admin.edit.product',$dataRow->id)}}" class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>&nbsp;<a href="{{route('admin.delete.product',$dataRow->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Really! Do you want to delete?')"><i class='fas fa-trash'></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -89,11 +83,10 @@
             processing: true,
             serverSide: true,
             pageLength: 10,
-            ajax: '{{route("admin.get.user.data")}}',
+            ajax: '{{route("admin.get.list.category")}}',
             deferLoading: '{{$datacount}}',
         });
     });
 
 </script>
 @endpush
-
