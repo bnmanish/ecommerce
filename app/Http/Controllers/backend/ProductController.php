@@ -28,7 +28,6 @@ class ProductController extends Controller
     }
 
     public function storeProduct(Request $request){
-        // return $request->all();
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255|unique:products,title',
             'code' => 'required|max:255|unique:products,code',
@@ -65,7 +64,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('image')) {
                 foreach ($request->file('image') as $key => $image) {
-                    $imgname = $product->id.'_'.$request->code.'_'.$key.'.'.$image->getClientOriginalExtension();
+                    $imgname = time().'_'.$request->code.'_'.$key.'.'.$image->getClientOriginalExtension();
                     $image = $image->move(public_path('uploads/product/'),$imgname);
                     $proimage = new ProductImage;
                     $proimage->product_id = $product->id;
@@ -97,21 +96,25 @@ class ProductController extends Controller
         $length = $request->length;
 
         $searchkey = $request->search['value'];
-        $total = Category::count();
-        $data = Category::select('id','title','banner','status','created_at');
+        $total = Product::count();
+        $data = Product::select('id','title','code','price','discount_price','status','created_at');
         if($sort){
             if($sortcol == '1'){
                 $data = $data->orderBy('title',$sortdir);
             }else if($sortcol == '2'){
-                $data = $data->orderBy('banner',$sortdir);
+                $data = $data->orderBy('code',$sortdir);
             }else if($sortcol == '3'){
-                $data = $data->orderBy('status',$sortdir);
+                $data = $data->orderBy('price',$sortdir);
             }else if($sortcol == '4'){
+                $data = $data->orderBy('discount_price',$sortdir);
+            }else if($sortcol == '5'){
+                $data = $data->orderBy('status',$sortdir);
+            }else if($sortcol == '6'){
                 $data = $data->orderBy('created_at',$sortdir);
             }
         }
         if($searchkey){
-            $data = $data->orWhere('title','like',$searchkey.'%');
+            $data = $data->orWhere('title','like',$searchkey.'%')->orWhere('code','like',$searchkey.'%')->orWhere('price','like',$searchkey.'%')->orWhere('discount_price','like',$searchkey.'%')->orWhere('status','like',$searchkey.'%');
         }
         $data = $data->skip($start)->take($length)->get();
         $filterdtotal = $searchkey ? count($data) : $total;
@@ -120,10 +123,12 @@ class ProductController extends Controller
         foreach($data as $key => $dataRow){
             $fdata[$key][] = $sl;
             $fdata[$key][] = $dataRow->title;
-            $fdata[$key][] = "<img width='100' src='".url('uploads/category/'.$dataRow->banner)."'>";
+            $fdata[$key][] = $dataRow->code;
+            $fdata[$key][] = $dataRow->price;
+            $fdata[$key][] = $dataRow->discount_price;
             $fdata[$key][] = $dataRow->status == '1' ? 'Enable' : 'Disable';
             $fdata[$key][] = date('d-m-Y',strtotime($dataRow->created_at));
-            $fdata[$key][] = "<a href=".route('admin.edit.category',$dataRow->id)." class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>&nbsp;<a href=".route('admin.delete.category',$dataRow->id)." class='btn btn-danger btn-sm' onclick=return confirm('Really! Do you want to delete?')><i class='fas fa-trash'></i></a>";
+            $fdata[$key][] = "<a href=".route('admin.edit.product',$dataRow->id)." class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>&nbsp;<a href=".route('admin.delete.product',$dataRow->id)." class='btn btn-danger btn-sm' onclick=return confirm('Really! Do you want to delete?')><i class='fas fa-trash'></i></a>";
             $sl = $sl+1;
         }
 
@@ -138,58 +143,90 @@ class ProductController extends Controller
     }
 
     public function editProduct($id){
-        $data = Category::where('id',$id)->first();
-        return view('backend/category/edit_category')->with(['data'=>$data]);
+        $category = Category::select('id','title')->orderBy('title')->get();
+        $data = Product::find($id);
+        return view('backend/product/edit_product')->with(['data'=>$data,'category'=>$category]);
     }
 
     public function editStoreProduct(Request $request,$id){
-        return $request->all();
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255|unique:categories,title,'.$id,
-            // 'slug' => 'required|max:255|unique:categories,slug,'.$id,
+            'title' => 'required|max:255|unique:products,title,'.$id,
+            'code' => 'required|max:255|unique:products,code,'.$id,
+            'price' => 'required|numeric',
+            'discount_price' => 'nullable|numeric',
             'meta_title' => 'max:255',
-            'banner' => 'nullable|image',
+            // 'image' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(array('status'=>false,'errors' => $validator->errors()));
         }
 
-        $data = array(
-            "title" => $request->title,
-            "slug" => generateSlug($request->title),
-            "meta_title" => $request->meta_title,
-            "meta_keywords" => $request->meta_keywords,
-            "meta_description" => $request->meta_description,
-            "short_description" => $request->short_description,
-            "description" => $request->description,
-            "status" => $request->status == 'on' ? '1' : '0',
-        );
-
-        $banner = $request->file('banner');
-        if($banner){
-            $oldimg = Category::find($id);
-            if(is_file(public_path('uploads/category/'.$oldimg->banner))){
-                unlink(public_path('uploads/category/'.$oldimg->banner));
+        try {
+            DB::beginTransaction();
+            $data = array(
+                "title" => $request->title,
+                "slug" => generateSlug($request->title),
+                "code" => $request->code,
+                "category" => $request->category,
+                "price" => $request->price,
+                "discount_price" => $request->discount_price,
+                "meta_title" => $request->meta_title,
+                "meta_keywords" => $request->meta_keywords,
+                "meta_description" => $request->meta_description,
+                "short_description" => $request->short_description,
+                "description" => $request->description,
+                "other_description" => $request->other_description,
+                "popular" => $request->popular == 'on' ? '1' : '0',
+                "new" => $request->new == 'on' ? '1' : '0',
+                "featured" => $request->featured == "on" ? '1' : '0',
+                "sale" => $request->sale == "on" ? '1' : '0',
+                "status" => $request->status == "on" ? '1' : '0',
+            );
+            Product::where('id',$id)->update($data);
+            if ($request->hasFile('image')) {
+                foreach ($request->file('image') as $key => $image) {
+                    $imgname = time().'_'.$request->code.'_'.$key.'.'.$image->getClientOriginalExtension();
+                    $image = $image->move(public_path('uploads/product/'),$imgname);
+                    $proimage = new ProductImage;
+                    $proimage->product_id = $id;
+                    $proimage->image = $imgname;
+                    $proimage->save();
+                }
             }
-            $banner_name = time().'.'.$banner->getClientOriginalExtension();
-            $banner->move(public_path('uploads/category'),$banner_name);
-            $data_img = array('banner' => $banner_name);
-            $data = array_merge($data,$data_img);
+            DB::commit();
+            Session::flash('success','Added successfully!');
+            return response()->json(array('status'=>true,'message'=>'product updated successfully!'));
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error in transaction: ' . $e->getMessage());
+            return response()->json(array('status'=>false,'message'=> $e->getMessage()));
+
         }
-        Category::where('id',$id)->update($data);
-        Session::flash('success','Updated successfully!');
-        return response()->json(array('status'=>true,'message'=>'category updated successfully!'));
 
     }
 
     public function deleteProduct($id){
-        $data = Category::find($id);
-        if(is_file(public_path('uploads/category/'.$data->banner))){
-            unlink(public_path('uploads/category/'.$data->banner));
+        $data = ProductImage::where('product_id',$id)->get();
+        foreach($data as $image){
+            if(is_file(public_path('uploads/product/'.$image->image))){
+                unlink(public_path('uploads/product/'.$image->image));
+            }
+            $image->delete();
         }
-        $data->delete();
-        Session::flash('success','User Deleted successfully.');
+        Product::where('id',$id)->delete();
+        Session::flash('success','Product Deleted successfully.');
         return redirect()->back();
-
     }
+
+    public function deleteProductImage(Request $request){
+        $imageid = $request->imageId;
+        $image = ProductImage::find($imageid);
+        $file = public_path('uploads/product/'.$image->image);
+        if(is_file($file)){
+            unlink($file);
+        }
+        $image->delete();
+        return response()->json(array('status'=>true,'message'=>'Image deleted successfully!'));
+    }
+
 }

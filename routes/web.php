@@ -30,6 +30,7 @@ Route::get('/',[HomeController::class,'home'])->name('home');
 Route::get('/about-us',[AboutController::class,'aboutUs'])->name('about.us');
 Route::get('/contact-us',[ContactController::class,'contactUs'])->name('contact.us');
 Route::get('/products',[HomeController::class,'products'])->name('products');
+Route::get('/products/{slug}',[HomeController::class,'productsDetails'])->name('products.details');
 Route::get('/my-account',[HomeController::class,'myAccount'])->name('my.account');
 Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
 Route::get('/cart',[HomeController::class,'cart'])->name('cart');
@@ -90,6 +91,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit-product/{id}', [ProductController::class, 'editProduct'])->name('admin.edit.product');
         Route::post('/edit-store-product/{id}', [ProductController::class, 'editStoreProduct'])->name('admin.edit.store.product');
         Route::get('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('admin.delete.product');
+        Route::post('/delete-product-image', [ProductController::class, 'deleteProductImage'])->name('admin.delete.product.image');
 
         // Testimonial
         Route::get('/add-testimonial', [TestimonialController::class, 'addTestimonial'])->name('admin.add.testimonial');

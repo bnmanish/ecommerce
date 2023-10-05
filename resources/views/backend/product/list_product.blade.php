@@ -33,11 +33,11 @@
                                 <h4 class="card-title">Manage Category</h4>
                             </div>
                             <div class="col-6">
-                                <h4 class="card-title text-end"><a href="{{route('admin.add.category')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a></h4>
+                                <h4 class="card-title text-end"><a href="{{route('admin.add.product')}}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a></h4>
                             </div>
                         </div>
 
-                        <table id="userlist-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <table id="productlist-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
                                     <th>Sl</th>
@@ -79,11 +79,11 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#userlist-datatable').DataTable({
+        $('#productlist-datatable').DataTable({
             processing: true,
             serverSide: true,
             pageLength: 10,
-            ajax: '{{route("admin.get.list.category")}}',
+            ajax: '{{route("admin.get.list.product")}}',
             deferLoading: '{{$datacount}}',
         });
     });
