@@ -24,25 +24,35 @@
     <!-- Start login section  -->
     <div class="login__section section--padding">
         <div class="container">
-            <form action="#">
-                <div class="login__section--inner">
-                    <div class="row row-cols-md-2 row-cols-1">
-                        <div class="col">
+            <div class="login__section--inner">
+                <div class="row row-cols-md-2 row-cols-1">
+                    <div class="col">
+                        
+                        <form action="{{route('logedin')}}" method="post">
+                            @csrf
                             <div class="account__login">
                                 <div class="account__login--header mb-25">
                                     <h3 class="account__login--header__title mb-10">Login</h3>
                                     <p class="account__login--header__desc">Login if you area a returning customer.</p>
                                 </div>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <p class="text-danger">{{ $error }}</p>
+                                    @endforeach
+                                @endif
+                                @if(Session::has('success'))
+                                    <p class="text-danger">{{Session::get('success')}}</p>
+                                @endif
                                 <div class="account__login--inner">
                                     <label>
-                                        <input class="account__login--input" placeholder="Email Addres" type="email">
+                                        <input class="account__login--input" placeholder="Email Addres" type="email" name="email">
                                     </label>
                                     <label>
-                                        <input class="account__login--input" placeholder="Password" type="password">
+                                        <input class="account__login--input" placeholder="Password" type="password" name="password">
                                     </label>
                                     <div class="account__login--remember__forgot mb-15 d-flex justify-content-between align-items-center">
                                         <div class="account__login--remember position__relative">
-                                            <input class="checkout__checkbox--input" id="check1" type="checkbox">
+                                            <input class="checkout__checkbox--input" id="check1" type="checkbox" name="remembe">
                                             <span class="checkout__checkbox--checkmark"></span>
                                             <label class="checkout__checkbox--label login__remember--label" for="check1">
                                                 Remember me</label>
@@ -50,36 +60,39 @@
                                         <button class="account__login--forgot" type="submit">Forgot Your Password?</button>
                                     </div>
                                     <button class="account__login--btn primary__btn" type="submit">Login</button>
-                                    <div class="account__login--divide">
-                                        <span class="account__login--divide__text">OR</span>
-                                    </div>
-                                    <div class="account__social d-flex justify-content-center mb-15">
-                                        <a class="account__social--link facebook" target="_blank" href="../../../../external.html?link=https://www.facebook.com/">Facebook</a>
-                                        <a class="account__social--link google" target="_blank" href="../../../../external.html?link=https://www.google.com/">Google</a>
-                                        <a class="account__social--link twitter" target="_blank" href="../../../../external.html?link=https://twitter.com/">Twitter</a>
-                                    </div>
-                                    <p class="account__login--signup__text">Don,t Have an Account? <button type="submit">Sign up now</button></p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
+                        </form>
+                    </div>
+                    <div class="col">
+                        
+                        <form method="post" action="{{route('sign.up')}}">
+                            @csrf
                             <div class="account__login register">
                                 <div class="account__login--header mb-25">
                                     <h3 class="account__login--header__title mb-10">Create an Account</h3>
                                     <p class="account__login--header__desc">Register here if you are a new customer</p>
                                 </div>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <p class="text-danger">{{ $error }}</p>
+                                    @endforeach
+                                @endif
+                                @if(Session::has('success'))
+                                    <p class="text-danger">{{Session::get('success')}}</p>
+                                @endif
                                 <div class="account__login--inner">
                                     <label>
-                                        <input class="account__login--input" placeholder="Username" type="text">
+                                        <input class="account__login--input" placeholder="name" type="text" name="name">
                                     </label>
                                     <label>
-                                        <input class="account__login--input" placeholder="Email Addres" type="email">
+                                        <input class="account__login--input" placeholder="mobile" type="text" name="mobile">
+                                    </label>
+                                    <label>
+                                        <input class="account__login--input" placeholder="Email Addres" type="email" name="email">
                                     </label>
                                     <label>
                                         <input class="account__login--input" placeholder="Password" type="password">
-                                    </label>
-                                    <label>
-                                        <input class="account__login--input" placeholder="Confirm Password" type="password">
                                     </label>
                                     <label>
                                         <button class="account__login--btn primary__btn mb-10" type="submit">Submit & Register</button>
@@ -92,10 +105,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>     
     </div>
     <!-- End login section  -->

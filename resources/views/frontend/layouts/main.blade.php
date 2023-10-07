@@ -507,7 +507,7 @@
   <!-- All Script JS Plugins here  -->
   <!-- <script src="{{url('assets/frontend/js/vendor/popper.js')}}" defer="defer"></script> -->
   <!-- <script src="{{url('assets/frontend/js/vendor/bootstrap.min.js')}}" defer="defer"></script> -->
-
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="{{url('assets/frontend/js/plugins/swiper-bundle.min.js')}}" defer="defer"></script>
   <script src="{{url('assets/frontend/js/plugins/glightbox.min.js')}}" defer="defer"></script>
 

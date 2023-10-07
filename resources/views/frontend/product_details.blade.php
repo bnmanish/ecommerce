@@ -61,7 +61,7 @@
                 </div>   
                 <div class="col">
                     <div class="product__details--info">
-                        <form action="#">
+                        
                             <h2 class="product__details--info__title mb-15">{{$product->title}}</h2>
                             <div class="product__details--info__price mb-10">
                                 @if($product->discount_price > 0)
@@ -72,33 +72,41 @@
                                 @endif
                             </div>
 
-                            <div class="product__details--info__desc mb-20 text-justify">{!!$product->short_description!!}</div>
+                            <div class="product__details--info__desc mb-20 text-justify">
+                                {!!$product->short_description!!}
+                            </div>
 
 
                             <div class="product__variant">
-
-                                <div class="product__variant--list quantity d-flex align-items-center mb-20">
-                                    <div class="quantity__box">
-                                        <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                                        <label>
-                                            <input type="number" class="quantity__number quickview__value--number" value="1" />
-                                        </label>
-                                        <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
+                                <form method="post" action="{{route('add.cart')}}">
+                                    <input type="hidden" name="product_id" value="{{$product->id}}"> 
+                                    @csrf
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                            <p class="text-danger">{{ $error }}</p>
+                                        @endforeach
+                                    @endif
+                                    <div class="product__variant--list quantity d-flex align-items-center mb-20">
+                                        <div class="quantity__box">
+                                            <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
+                                            <label>
+                                                <input name="quantity" type="number" class="quantity__number quickview__value--number" value="1" />
+                                            </label>
+                                            <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
+                                        </div>
+                                        <button class="quickview__cart--btn primary__btn" type="submit">Add To Cart</button>  
                                     </div>
-                                    <button class="quickview__cart--btn primary__btn" type="submit">Add To Cart</button>  
-                                </div>
-
+                                </form>
                                 <div class="product__variant--list mb-15">
                                     <div class="product__details--info__meta">
                                         <p class="product__details--info__meta--list"><strong>Product Code : </strong>  <span>{{$product->code}}</span> </p>
                                         <p class="product__details--info__meta--list"><strong>Category : </strong>  <span>{{$product->cat->title}}</span> </p>
 
-                                        {!!$product->other_description!!}</div>
-                                        
+                                        {!!$product->other_description!!}
                                     </div>
+                                        
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>

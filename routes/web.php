@@ -31,16 +31,25 @@ Route::get('/about-us',[AboutController::class,'aboutUs'])->name('about.us');
 Route::get('/contact-us',[ContactController::class,'contactUs'])->name('contact.us');
 Route::get('/products',[HomeController::class,'products'])->name('products');
 Route::get('/products/{slug}',[HomeController::class,'productsDetails'])->name('products.details');
-Route::get('/my-account',[HomeController::class,'myAccount'])->name('my.account');
 Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
-Route::get('/cart',[HomeController::class,'cart'])->name('cart');
-Route::get('/checkout',[HomeController::class,'checkout'])->name('checkout');
+
 
 
 
 Route::get('/login',[HomeController::class,'login'])->name('login');
-Route::get('/register',[HomeController::class,'register'])->name('register');
+Route::post('/logined',[HomeController::class,'logedin'])->name('logedin');
 
+Route::get('/register',[HomeController::class,'register'])->name('register');
+Route::post('/sign-up',[HomeController::class,'signUp'])->name('sign.up');
+
+Route::middleware(['auth'])->group(function (){
+    Route::get('/my-account',[HomeController::class,'myAccount'])->name('my.account');
+    Route::get('/cart',[HomeController::class,'cart'])->name('cart');
+    Route::get('/checkout',[HomeController::class,'checkout'])->name('checkout');
+    Route::post('/add-cart',[HomeController::class,'addCart'])->name('add.cart');
+    Route::get('/clear-cart',[HomeController::class,'clearCart'])->name('clear.cart');
+
+});
 
 
 // Admin login route
