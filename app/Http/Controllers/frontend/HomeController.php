@@ -134,8 +134,31 @@ class HomeController extends Controller
 
     }
 
+    public function updateCart(Request $request){
+        // return $request->all();
+        $ids = $request->cart_details_id;
+        $qtys = $request->quantities;
+
+        for($i=0; $i<count($ids); $i++){
+            CartDetail::where(['id'=>$ids[$i]])->update(['quantity'=>$qtys[$i]]);
+        }
+        return redirect()->back();
+    }
+
+    public function deleteCartProduct(Request $request){
+        $cartDet = CartDetail::find($request->cartDetId);
+        if($cartDet->count() < 2){
+            $cartDet->delete();
+            Cart::where('id',$request->cartId)->delete();
+        }else{
+            $cartDet->delete();
+        }
+        return redirect()->back();
+    }
+
     public function checkout(){
-        return view('frontend/checkout');
+        $cart = Cart::where(['user_id'=>Auth::user()->id])->first();
+        return view('frontend/checkout')->with(['cart'=>$cart]);
     }
 
 }

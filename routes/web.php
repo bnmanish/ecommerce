@@ -48,6 +48,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/checkout',[HomeController::class,'checkout'])->name('checkout');
     Route::post('/add-cart',[HomeController::class,'addCart'])->name('add.cart');
     Route::get('/clear-cart',[HomeController::class,'clearCart'])->name('clear.cart');
+    Route::post('/update-cart',[HomeController::class,'updateCart'])->name('update.cart');
+    Route::get('/delete-cart-product',[HomeController::class,'deleteCartProduct'])->name('delete.cart.product');
 
 });
 

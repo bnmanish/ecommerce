@@ -25,7 +25,8 @@
     <section class="cart__section section--padding">
         <div class="container-fluid">
             <div class="cart__section--inner">
-                <form action="#"> 
+                <form action="{{route('update.cart')}}" method="post"> 
+                    @csrf
                     <h2 class="cart__title mb-40">Cart</h2>
                     <div class="row">
                         @if(@$cart->details)
@@ -49,10 +50,11 @@
                                             $couponDiscount = 0;
                                         @endphp
                                         @foreach($cart->details as $cartItem)
+                                        <input type="hidden" name="cart_details_id[]" value="{{$cartItem->id}}">
                                         <tr class="cart__table--body__items">
                                             <td class="cart__table--body__list">
                                                 <div class="cart__product d-flex align-items-center">
-                                                    <button class="cart__remove--btn" aria-label="search button" type="button"><svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="16px" height="16px"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/></svg></button>
+                                                    <a href="{{route('delete.cart.product',['cartId'=>$cart->id,'cartDetId'=>$cartItem->id])}}" class="cart__remove--btn" aria-label="search button" type="button"><svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="16px" height="16px"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/></svg></a>
                                                     <div class="cart__thumbnail">
                                                         <a href="{{route('products.details',$cartItem->product->slug)}}"><img class="border-radius-5" src="{{url('uploads/product/'.$cartItem->product->images->first()->image)}}" alt="{{$cartItem->product->title}}"></a>
                                                     </div>
@@ -78,7 +80,7 @@
                                                 <div class="quantity__box">
                                                     <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
                                                     <label>
-                                                        <input type="number" class="quantity__number quickview__value--number" value="{{$cartItem->quantity}}" />
+                                                        <input type="number" class="quantity__number quickview__value--number" value="{{$cartItem->quantity}}" name="quantities[]" />
                                                     </label>
                                                     <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
                                                 </div>
@@ -124,18 +126,18 @@
                                                 <td class="cart__summary--total__title text-left">SUBTOTAL</td>
                                                 <td class="cart__summary--amount text-right">$ {{number_format($subTotal,2)}}</td>
                                             </tr>
-                                            <tr class="cart__summary--total__list">
+                                            <!-- <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">TAX</td>
                                                 <td class="cart__summary--amount text-right">$ {{number_format($tax,2)}}</td>
-                                            </tr>
+                                            </tr> -->
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">SHIPPING CHARGE</td>
                                                 <td class="cart__summary--amount text-right">$ {{number_format($shippingCharge,2)}}</td>
                                             </tr>
-                                            <tr class="cart__summary--total__list">
+                                            <!-- <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">COUPON CHARGE</td>
                                                 <td class="cart__summary--amount text-right">$ {{number_format($couponDiscount,2)}}</td>
-                                            </tr>
+                                            </tr> -->
                                             @php 
                                                 $gtotal = $subTotal + $tax + $shippingCharge - $couponDiscount;
                                             @endphp
@@ -149,7 +151,7 @@
                                 <div class="cart__summary--footer">
                                     <p class="cart__summary--footer__desc">Shipping & taxes calculated at checkout</p>
                                     <ul class="d-flex justify-content-between">
-                                        <!-- <li><button class="cart__summary--footer__btn primary__btn cart" type="submit">Update Cart</button></li> -->
+                                        <li><button class="cart__summary--footer__btn primary__btn cart" type="submit">Update Cart</button></li>
                                         <li><a class="cart__summary--footer__btn primary__btn checkout" href="{{route('checkout')}}">Check Out</a></li>
                                     </ul>
                                 </div>
@@ -182,16 +184,13 @@
         if(!con){
             return false;
         }
-
         $.ajax({
             url: "{{route('clear.cart')}}",
             type: "GET",
             success: function(response) {
-                $('#response').text(response.message);
+                location. reload();
             },
         });
-
-
     }
 </script>
 @endpush
