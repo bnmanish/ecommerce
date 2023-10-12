@@ -149,7 +149,6 @@
                                     </table>
                                 </div>
                                 <div class="cart__summary--footer">
-                                    <p class="cart__summary--footer__desc">Shipping & taxes calculated at checkout</p>
                                     <ul class="d-flex justify-content-between">
                                         <li><button class="cart__summary--footer__btn primary__btn cart" type="submit">Update Cart</button></li>
                                         <li><a class="cart__summary--footer__btn primary__btn checkout" href="{{route('checkout')}}">Check Out</a></li>

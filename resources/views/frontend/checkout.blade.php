@@ -24,173 +24,187 @@
     <!-- Start checkout page area -->
     <div class="checkout__page--area section--padding">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-6">
-                    <div class="main checkout__mian">
-                        <form action="#">
-                            <div class="checkout__content--step section__shipping--address">
-                                <div class="section__header mb-25">
-                                    <h2 class="section__header--title h3">Billing Details</h2>
+            <form action="{{route('make.order')}}" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-7 col-md-6">
+
+                        @if($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-success alert-dismissible mb-2">
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                  {{ $error }}
                                 </div>
-                                <div class="section__shipping--address__content">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 mb-20">
-                                            <div class="checkout__input--list ">
-                                                <label class="checkout__input--label mb-5" for="name">Name <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="name" id="name"  type="text" name="name">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="email">Email <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="email" id="email"  type="text">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="address">Address <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="Address1" id="address" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="address1">Address2 <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="Address2" id="address1" type="text">
-                                            </div>
-                                        </div>
+                            @endforeach
+                        @endif
 
-                                        <div class="col-12 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="city">Town/City <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="City" id="city" type="text">
-                                            </div>
-                                        </div>
 
-                                        <div class="col-12 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="state">State <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="State" id="state" type="text">
+                        <div class="main checkout__mian">
+                                <div class="checkout__content--step section__shipping--address pt-0">
+                                    <div class="section__header mb-25">
+                                        <h2 class="section__header--title h3">Billing Address</h2>
+                                    </div>
+                                    <div class="section__shipping--address__content">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 mb-20">
+                                                <div class="checkout__input--list ">
+                                                    <label class="checkout__input--label mb-5" for="name">Name <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="name" id="name"  type="text" name="name" value="{{old('name')}}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="col-lg-6 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="country">Country  <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="Country " id="country" type="text" name="country">
+                                            <div class="col-lg-6 col-md-6 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="email">Email <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="email" id="email" type="email" name="email" value="{{old('email')}}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 mb-20">
-                                            <div class="checkout__input--list">
-                                                <label class="checkout__input--label mb-5" for="pincode">Pin Code <span class="checkout__input--label__star">*</span></label>
-                                                <input class="checkout__input--field border-radius-5" placeholder="Pin code" id="pincode" type="text" name="pincode">
+                                            
+                                            <div class="col-12 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="address">Address1 <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Address1" id="address" type="text" name="address1" value="{{old('address1')}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="address2">Address2 <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Address2" id="address2" type="text" name="address2" value="{{old('address2')}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="city">Town/City <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="City" id="city" type="text" name="city" value="{{old('city')}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="state">State <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="State" id="state" type="text" name="state" value="{{old('state')}}">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-6 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="country">Country  <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Country " id="country" type="text" name="country" value="{{old('country')}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mb-20">
+                                                <div class="checkout__input--list">
+                                                    <label class="checkout__input--label mb-5" for="pincode">Pin Code <span class="checkout__input--label__star">*</span></label>
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Pin code" id="pincode" type="text" name="pincode" value="{{old('pincode')}}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
+                                <div class="checkout__content--step__footer d-flex align-items-center">
+                                    <a class="continue__shipping--btn primary__btn border-radius-5" href="{{route('products')}}">Continue Shopping</a>
+                                    <a class="previous__link--content" href="{{route('cart')}}">Return to cart</a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                        <aside class="checkout__sidebar sidebar border-radius-10">
+                            <h2 class="checkout__order--summary__title text-center mb-15">Your Order Summary</h2>
+                            <div class="cart__table checkout__product--table">
+                                <table class="cart__table--inner">
+                                    <tbody class="cart__table--body">
+                                        @php
+                                            $gtotal = 0;
+                                            $subTotal = 0;
+                                            $tax = 0;
+                                            $shippingCharge = 0;
+                                            $couponDiscount = 0;
+                                        @endphp
+                                        @foreach($cart->details as $cartItem)
+                                        @php
+                                            $price = 0;
+                                            if($cartItem->product->discount_price > 0 ){
+                                                $price = $cartItem->product->discount_price;
+                                            }else{
+                                                $price = $cartItem->product->price;
+                                            }
+
+                                            $productTotal = $price * $cartItem->quantity; 
+                                            $subTotal += $productTotal;
+
+                                        @endphp
+                                        <tr class="cart__table--body__items">
+                                            <td class="cart__table--body__list">
+                                                <div class="product__image two  d-flex align-items-center">
+                                                    <div class="product__thumbnail border-radius-5">
+                                                        <a class="display-block" href="{{route('products.details',$cartItem->product->slug)}}"><img class="display-block border-radius-5" src="{{url('uploads/product/'.$cartItem->product->images->first()->image)}}" alt="{{$cartItem->product->title}}"></a>
+                                                        <span class="product__thumbnail--quantity">{{$cartItem->quantity}}</span>
+                                                    </div>
+                                                    <div class="product__description">
+                                                        <h4 class="product__description--name"><a href="{{route('products.details',$cartItem->product->slug)}}">{{$cartItem->product->title}}</a></h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="cart__table--body__list">
+                                                <span class="cart__price">$ {{number_format($productTotal,2)}}</span>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table> 
                             </div>
-                            <div class="checkout__content--step__footer d-flex align-items-center">
-                                <a class="continue__shipping--btn primary__btn border-radius-5" href="{{route('products')}}">Continue Shopping</a>
-                                <a class="previous__link--content" href="{{route('cart')}}">Return to cart</a>
+                            <div class="checkout__total">
+                                <table class="checkout__total--table">
+                                    <tbody class="checkout__total--body">
+                                        <tr class="checkout__total--items">
+                                            <td class="checkout__total--title text-left">SUB TOTAL </td>
+                                            <td class="checkout__total--amount text-right">$ {{number_format($subTotal,2)}}</td>
+                                        </tr>
+                                        <tr class="checkout__total--items">
+                                            <td class="checkout__total--title text-left">TAX </td>
+                                            <td class="checkout__total--amount text-right">$ {{number_format($tax,2)}}</td>
+                                        </tr>
+                                        <tr class="checkout__total--items">
+                                            <td class="checkout__total--title text-left">SHIPPING CHARGE</td>
+                                            <td class="checkout__total--amount text-right">$ {{number_format($shippingCharge,2)}}</td>
+
+                                        </tr>
+                                        <tr class="checkout__total--items">
+                                            <td class="checkout__total--title text-left">COUPON CHARGE </td>
+                                            <td class="checkout__total--amount text-right">$ {{number_format($couponDiscount,2)}}</td>
+                                        </tr>
+                                    </tbody>
+                                    @php 
+                                        $gtotal = $subTotal + $tax + $shippingCharge - $couponDiscount;
+                                    @endphp
+                                    <tfoot class="checkout__total--footer">
+                                        <tr class="checkout__total--footer__items">
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left">TOTAL </td>
+                                            <td class="checkout__total--footer__amount checkout__total--footer__list text-right">$ {{number_format($gtotal,2)}}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                        </form>
+                            <div class="payment__history mb-30">
+                                <h3 class="payment__history--title mb-20">Payment</h3>
+                                <ul class="payment__history--inner d-flex">
+                                    <li class="payment__history--list">
+                                        <button class="payment__history--link primary__btn" type="button"><label for="cod">COD</label></button>
+                                        <input type="radio" name="mode" value="COD" id="cod">
+                                    </li>
+                                    <li class="payment__history--list">
+                                        <button class="payment__history--link primary__btn" type="button" form="PayU"><label for="PayU">PayUmoney</label></button>
+                                        <input type="radio" name="mode" value="PayUMoney" id="PayU">
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="checkout__now--btn primary__btn" type="submit">Make Order</button>
+                        </aside>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-6">
-                    <aside class="checkout__sidebar sidebar border-radius-10">
-                        <h2 class="checkout__order--summary__title text-center mb-15">Your Order Summary</h2>
-                        <div class="cart__table checkout__product--table">
-                            <table class="cart__table--inner">
-                                <tbody class="cart__table--body">
-                                    @php
-                                        $gtotal = 0;
-                                        $subTotal = 0;
-                                        $tax = 0;
-                                        $shippingCharge = 0;
-                                        $couponDiscount = 0;
-                                    @endphp
-                                    @foreach($cart->details as $cartItem)
-                                    @php
-                                        $price = 0;
-                                        if($cartItem->product->discount_price > 0 ){
-                                            $price = $cartItem->product->discount_price;
-                                        }else{
-                                            $price = $cartItem->product->price;
-                                        }
-
-                                        $productTotal = $price * $cartItem->quantity; 
-                                        $subTotal += $productTotal;
-
-                                    @endphp
-                                    <tr class="cart__table--body__items">
-                                        <td class="cart__table--body__list">
-                                            <div class="product__image two  d-flex align-items-center">
-                                                <div class="product__thumbnail border-radius-5">
-                                                    <a class="display-block" href="{{route('products.details',$cartItem->product->slug)}}"><img class="display-block border-radius-5" src="{{url('uploads/product/'.$cartItem->product->images->first()->image)}}" alt="{{$cartItem->product->title}}"></a>
-                                                    <span class="product__thumbnail--quantity">{{$cartItem->quantity}}</span>
-                                                </div>
-                                                <div class="product__description">
-                                                    <h4 class="product__description--name"><a href="{{route('products.details',$cartItem->product->slug)}}">{{$cartItem->product->title}}</a></h4>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="cart__table--body__list">
-                                            <span class="cart__price">$ {{number_format($productTotal,2)}}</span>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table> 
-                        </div>
-                        <div class="checkout__total">
-                            <table class="checkout__total--table">
-                                <tbody class="checkout__total--body">
-                                    <tr class="checkout__total--items">
-                                        <td class="checkout__total--title text-left">SUB TOTAL </td>
-                                        <td class="checkout__total--amount text-right">$ {{number_format($subTotal,2)}}</td>
-                                    </tr>
-                                    <tr class="checkout__total--items">
-                                        <td class="checkout__total--title text-left">TAX </td>
-                                        <td class="checkout__total--amount text-right">$ {{number_format($tax,2)}}</td>
-                                    </tr>
-                                    <tr class="checkout__total--items">
-                                        <td class="checkout__total--title text-left">SHIPPING CHARGE</td>
-                                        <td class="checkout__total--amount text-right">$ {{number_format($shippingCharge,2)}}</td>
-
-                                    </tr>
-                                    <tr class="checkout__total--items">
-                                        <td class="checkout__total--title text-left">COUPON CHARGE </td>
-                                        <td class="checkout__total--amount text-right">$ {{number_format($couponDiscount,2)}}</td>
-                                    </tr>
-                                </tbody>
-                                @php 
-                                    $gtotal = $subTotal + $tax + $shippingCharge - $couponDiscount;
-                                @endphp
-                                <tfoot class="checkout__total--footer">
-                                    <tr class="checkout__total--footer__items">
-                                        <td class="checkout__total--footer__title checkout__total--footer__list text-left">TOTAL </td>
-                                        <td class="checkout__total--footer__amount checkout__total--footer__list text-right">$ {{number_format($gtotal,2)}}</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <div class="payment__history mb-30">
-                            <h3 class="payment__history--title mb-20">Payment</h3>
-                            <ul class="payment__history--inner d-flex">
-                                <li class="payment__history--list">
-                                    <button class="payment__history--link primary__btn" type="submit">COD</button>
-                                </li>
-                                <li class="payment__history--list">
-                                    <button class="payment__history--link primary__btn" type="submit">PayUmoney</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <button class="checkout__now--btn primary__btn" type="submit">Checkout Now</button>
-                    </aside>
-                </div>
-                
-            </div>
+            </form>
         </div>
     </div>
     <!-- End checkout page area -->

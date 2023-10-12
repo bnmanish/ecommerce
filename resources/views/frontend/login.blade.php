@@ -44,10 +44,10 @@
                                     <p class="text-danger">{{Session::get('success')}}</p>
                                 @endif
                                 <div class="account__login--inner">
-                                    <label>
+                                    <label class="w-100">
                                         <input class="account__login--input" placeholder="Email Addres" type="email" name="email">
                                     </label>
-                                    <label>
+                                    <label class="w-100">
                                         <input class="account__login--input" placeholder="Password" type="password" name="password">
                                     </label>
                                     <div class="account__login--remember__forgot mb-15 d-flex justify-content-between align-items-center">
@@ -94,15 +94,17 @@
                                     <label>
                                         <input class="account__login--input" placeholder="Password" type="password">
                                     </label>
-                                    <label>
-                                        <button class="account__login--btn primary__btn mb-10" type="submit">Submit & Register</button>
-                                    </label>
-                                    <div class="account__login--remember position__relative">
+                                    
+                                    <div class="account__login--remember position__relative mb-3">
                                         <input class="checkout__checkbox--input" id="check2" type="checkbox">
                                         <span class="checkout__checkbox--checkmark"></span>
                                         <label class="checkout__checkbox--label login__remember--label" for="check2">
                                             I have read and agree to the terms & conditions</label>
                                     </div>
+
+                                    <label>
+                                        <button class="account__login--btn primary__btn mb-10" type="submit">Submit & Register</button>
+                                    </label>
                                 </div>
                             </div>
                         </form>

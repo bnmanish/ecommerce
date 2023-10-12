@@ -41,6 +41,7 @@ Route::post('/logined',[HomeController::class,'logedin'])->name('logedin');
 
 Route::get('/register',[HomeController::class,'register'])->name('register');
 Route::post('/sign-up',[HomeController::class,'signUp'])->name('sign.up');
+Route::get('/logout',[HomeController::class,'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function (){
     Route::get('/my-account',[HomeController::class,'myAccount'])->name('my.account');
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/clear-cart',[HomeController::class,'clearCart'])->name('clear.cart');
     Route::post('/update-cart',[HomeController::class,'updateCart'])->name('update.cart');
     Route::get('/delete-cart-product',[HomeController::class,'deleteCartProduct'])->name('delete.cart.product');
+    Route::post('/make-order',[HomeController::class,'makeOrder'])->name('make.order');
 
 });
 

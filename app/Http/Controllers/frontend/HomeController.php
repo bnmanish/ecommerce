@@ -10,8 +10,12 @@ use App\Models\Testimonial;
 use App\Models\Product;
 use App\Models\CartDetail;
 use App\Models\Cart;
+use App\Models\BillingAddress;
+use App\Models\OrderDetail;
+use App\Models\Order;
 use Session;
 use Auth;
+use DB;
 
 
 class HomeController extends Controller
@@ -76,7 +80,8 @@ class HomeController extends Controller
     }
 
     public function myAccount(){
-        return view('frontend/my_account');
+        $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->limit(10)->get();
+        return view('frontend/my_account')->with(['orders'=>$orders]);
     }
 
     public function wishlist(){
@@ -159,6 +164,94 @@ class HomeController extends Controller
     public function checkout(){
         $cart = Cart::where(['user_id'=>Auth::user()->id])->first();
         return view('frontend/checkout')->with(['cart'=>$cart]);
+    }
+
+    public function makeOrder(Request $request){
+        $this->validate($request,[
+            'name' => 'required|max:100',
+            'email' => 'required|email|max:100',
+            'address1' => 'required|max:255',
+            'address2' => 'required|max:255',
+            'city' => 'required|max:255',
+            'state' => 'required|max:255',
+            'country' => 'required|max:255',
+            'pincode' => 'required|max:255',
+            'mode' => 'required|in:COD,PayUMoney',
+        ]);
+
+        DB::beginTransaction();
+        try{
+            //saving address details
+            $address = new BillingAddress;
+            $address->name =  $request->name;
+            $address->email =  $request->email;
+            $address->address1 =  $request->address1;
+            $address->address2 =  $request->address2;
+            $address->city =  $request->city;
+            $address->state =  $request->state;
+            $address->country =  $request->country;
+            $address->pincode =  $request->pincode;
+            // $address->save();
+
+            $cart = Cart::where('user_id',Auth::user()->id)->first();
+            $subTotal = 0;
+            $grandTotal = 0;
+            $orderNo = time();
+            foreach($cart->details as $key => $ordersItem){
+                if($key == 0){
+                    // saving orders 
+                    $order = new Order;
+                    $order->order_no = $orderNo;
+                    $order->user_id = Auth::user()->id;
+                    $order->coupon_code = $cart->coupon_code;
+                    $order->discount = $cart->discount;
+                    $order->shipping_charges = $cart->shipping_charges;
+                    $order->taxes = $cart->taxes;
+                    $order->sub_total = 0.00;
+                    $order->grand_total = 0.00;
+                    $order->payment_ref_no = NULL;
+                    $order->mode = $request->mode === 'PayUMoney' ? '2' : '1';  // mode comming in request from checkout page
+                    $order->status = '1';
+                    $order->save();
+                }
+                
+                $orderDetail = new OrderDetail;
+                $orderDetail->order_id = $order->id;
+                $orderDetail->product_id = $ordersItem->product_id;
+                $orderDetail->quantity = $ordersItem->quantity;
+
+                // calculate single product price
+                $unitPrice = $ordersItem->product->discount_price > 0 ? $ordersItem->product->discount_price : $ordersItem->product->price;
+                // calculate total price by no of product
+                $totalPrice = $unitPrice * $ordersItem->quantity;
+                $subTotal += $totalPrice; // sum of price for product only
+
+                $orderDetail->unit_price = $unitPrice;
+                $orderDetail->total_price = $totalPrice;
+                $orderDetail->save();        
+            }
+            // sum of total price including taxes , charges and discounts
+            $grandTotal = $subTotal + $cart->shipping_charges + $cart->taxes - $cart->discount;
+
+            Order::where('id',$order->id)->update(['sub_total'=>$subTotal,'grand_total'=>$grandTotal]);
+
+            
+            DB::commit();
+            CartDetail::where('cart_id',$cart->id)->delete();
+            Cart::where('id',$cart->id)->delete();
+
+            Session::flash('success','Thank you for order with Us, Your order tracking no is : #'.$orderNo);
+            return redirect()->route('my.account');
+        }catch(\Exception $e){
+            DB::rollback();
+            Session::flash('success',$e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 
 }

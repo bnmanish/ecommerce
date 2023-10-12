@@ -13,7 +13,7 @@
   <link href="../../../../fonts.googleapis.com/css2de9a.css')}}?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
 
   <!-- Plugin css -->
-  <!-- <link rel="stylesheet" href="{{url('assets/frontend/css/vendor/bootstrap.min.css')}}"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   
   <!-- Custom Style CSS -->
   <link rel="stylesheet" href="{{url('assets/frontend/css/style.css')}}">
@@ -152,11 +152,12 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18.897" height="21.565" viewBox="0 0 18.897 21.565">
                                         <path  d="M16.84,8.082V6.091a4.725,4.725,0,1,0-9.449,0v4.725a.675.675,0,0,0,1.35,0V9.432h5.4V8.082h-5.4V6.091a3.375,3.375,0,0,1,6.75,0v4.691a.675.675,0,1,0,1.35,0V9.433h3.374V21.581H4.017V9.432H6.041V8.082H2.667V21.641a1.289,1.289,0,0,0,1.289,1.29h16.32a1.289,1.289,0,0,0,1.289-1.29V8.082Z" transform="translate(-2.667 -1.366)" fill="currentColor"/>
                                     </svg>
-                                    <span class="items__count">02</span> 
+                                    <span class="items__count">{{cartCount()}}</span> 
                                 </a>
                             </li>
+                            @php if(Auth::user()){ $login=route('logout'); } else { $login=route('login'); } @endphp
                             <li class="header__account--items">
-                                <a title="Login" class="header__account--btn" href="{{route('login')}}">
+                                <a title="Login" class="header__account--btn" href="{{$login}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                                 </a>
                             </li>
@@ -231,7 +232,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="offcanvas__menu_li">
+                        <!-- <li class="offcanvas__menu_li">
                             <a class="offcanvas__menu_item" href="#">Blog</a>
                             <ul class="offcanvas__sub_menu">
                                 <li class="offcanvas__sub_menu_li"><a href="blog.html" class="offcanvas__sub_menu_item">Blog Grid</a></li>
@@ -251,7 +252,7 @@
                                 <li class="offcanvas__sub_menu_li"><a href="login.html" class="offcanvas__sub_menu_item">Login Page</a></li>
                                 <li class="offcanvas__sub_menu_li"><a href="404.html" class="offcanvas__sub_menu_item">Error Page</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="about.html">About</a></li>
                         <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a></li>
                     </ul>
@@ -340,7 +341,7 @@
                             </svg> 
                         </span>
                         <span class="offcanvas__stikcy--toolbar__label">Cart</span>
-                        <span class="items__count">3</span> 
+                        <span class="items__count">{{cartCount()}}</span> 
                     </a>
                 </li>
                 <li class="offcanvas__stikcy--toolbar__list">
@@ -505,14 +506,13 @@
     <button aria-label="scroll top btn" id="scroll__top"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292"/></svg></button>
     
   <!-- All Script JS Plugins here  -->
-  <!-- <script src="{{url('assets/frontend/js/vendor/popper.js')}}" defer="defer"></script> -->
-  <!-- <script src="{{url('assets/frontend/js/vendor/bootstrap.min.js')}}" defer="defer"></script> -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="{{url('assets/frontend/js/plugins/swiper-bundle.min.js')}}" defer="defer"></script>
   <script src="{{url('assets/frontend/js/plugins/glightbox.min.js')}}" defer="defer"></script>
 
   <!-- Customscript js -->
   <script src="{{url('assets/frontend/js/script.js')}}" defer="defer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   @stack('scripts')
 </body>
 </html>
