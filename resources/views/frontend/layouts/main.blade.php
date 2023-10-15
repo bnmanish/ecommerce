@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>@yield('title')</title>
-  <meta name="description" content="Morden Bootstrap HTML5 Template">
+  <meta name="description" content="Tymishop">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/frontend/img/favicon.ico')}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{url('uploads/setting/'.@settings()->site_logo)}}">
     
    <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{url('assets/frontend/css/plugins/swiper-bundle.min.css')}}">
@@ -17,6 +17,7 @@
   
   <!-- Custom Style CSS -->
   <link rel="stylesheet" href="{{url('assets/frontend/css/style.css')}}">
+  {!!@settings()->head_content!!}
 </head>
 
 <body>
@@ -83,7 +84,7 @@
                         </a>
                     </div>
                     <div class="main__logo">
-                        <h1 class="main__logo--title"><a class="main__logo--link" href="{{route('home')}}"><img class="main__logo--img" src="{{url('assets/frontend/img/logo/nav-log.webp')}}" alt="logo-img"></a></h1>
+                        <h1 class="main__logo--title"><a class="main__logo--link" href="{{route('home')}}"><img class="main__logo--img" src="{{url('uploads/setting/'.@settings()->site_logo)}}" alt="TimyShop"></a></h1>
                     </div>
                     <div class="header__menu d-none d-lg-block">
                         <nav class="header__menu--navigation">
@@ -96,27 +97,6 @@
                                 </li>
                                 <li class="header__menu--items">
                                     <a class="header__menu--link" href="{{route('products')}}">Shop</a>
-                                </li>
-                                <li class="header__menu--items">
-                                    <a class="header__menu--link" href="blog.html">Blog <span class="menu__plus--icon">+</span> </a>
-                                    <ul class="header__sub--menu">
-                                        <li class="header__sub--menu__items"><a href="blog.html" class="header__sub--menu__link">Blog Grid</a></li>
-                                        <li class="header__sub--menu__items"><a href="blog-details.html" class="header__sub--menu__link">Blog Details</a></li>
-                                        <li class="header__sub--menu__items"><a href="blog-left-sidebar.html" class="header__sub--menu__link">Blog Left Sidebar</a></li>
-                                        <li class="header__sub--menu__items"><a href="blog-right-sidebar.html" class="header__sub--menu__link">Blog Right Sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li class="header__menu--items">
-                                    <a class="header__menu--link " href="#">Pages <span class="menu__plus--icon">+</span></a>
-                                    <ul class="header__sub--menu">
-                                        <li class="header__sub--menu__items"><a href="about.html" class="header__sub--menu__link">About Us</a></li>
-                                        <li class="header__sub--menu__items"><a href="contact.html" class="header__sub--menu__link">Contact Us</a></li>
-                                        <li class="header__sub--menu__items"><a href="cart.html" class="header__sub--menu__link">Cart Page</a></li>
-                                        <li class="header__sub--menu__items"><a href="portfolio.html" class="header__sub--menu__link">Portfolio Page</a></li>
-                                        <li class="header__sub--menu__items"><a href="{{route('wishlist')}}" class="header__sub--menu__link">Wishlist Page</a></li>
-                                        <li class="header__sub--menu__items"><a href="login.html" class="header__sub--menu__link">Login Page</a></li>
-                                        <li class="header__sub--menu__items"><a href="404.html" class="header__sub--menu__link">Error Page</a></li>
-                                    </ul>
                                 </li>
                                 <li class="header__menu--items">
                                     <a class="header__menu--link" href="{{route('contact.us')}}">Contact </a>  
@@ -179,91 +159,11 @@
                 </div>
                 <nav class="offcanvas__menu">
                     <ul class="offcanvas__menu_ul">
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="{{route('home')}}">Home</a>
-                            <ul class="offcanvas__sub_menu">
-                                <li class="offcanvas__sub_menu_li"><a href="{{route('home')}}" class="offcanvas__sub_menu_item">Home One</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="index-2.html" class="offcanvas__sub_menu_item">Home Two</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="index-3.html" class="offcanvas__sub_menu_item">Home Three</a></li>
-                            </ul>
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="#">Shop</a>
-                            <ul class="offcanvas__sub_menu">
-                                <li class="offcanvas__sub_menu_li">
-                                    <a href="#" class="offcanvas__sub_menu_item">Column One</a>
-                                    <ul class="offcanvas__sub_menu">
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="shop.html">Shop Left Sidebar</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="shop-grid.html">Shop Grid</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="shop-grid-list.html">Shop Grid List</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="shop-list.html">Shop List</a></li>
-                                    </ul>
-                                </li>
-                                <li class="offcanvas__sub_menu_li">
-                                    <a href="#" class="offcanvas__sub_menu_item">Column Two</a>
-                                    <ul class="offcanvas__sub_menu">
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="product-details.html">Standard Product</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="product-variable.html">Video Product</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="product-variable.html">Variable Product</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="product-left-sidebar.html">Product Left Sidebar</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="product-gallery.html">Product Gallery</a></li>
-                                    </ul>
-                                </li>
-                                <li class="offcanvas__sub_menu_li">
-                                    <a href="#" class="offcanvas__sub_menu_item">Column Three</a>
-                                    <ul class="offcanvas__sub_menu">
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="{{route('my.account')}}">My Account</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="my-account-2.html">My Account 2</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="404.html">404 Page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="login.html">Login Page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="faq.html">Faq Page</a></li>
-                                    </ul>
-                                </li>
-                                <li class="offcanvas__sub_menu_li">
-                                    <a href="#" class="offcanvas__sub_menu_item">Column Four</a>
-                                    <ul class="offcanvas__sub_menu">
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="compare.html">Compare Pages</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="cart.html">Cart Page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="{{route('checkout')}}">Checkout page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="{{route('wishlist')}}">Wishlist Page</a></li>
-                                        <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item" href="404.html">Error Page</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="#">Blog</a>
-                            <ul class="offcanvas__sub_menu">
-                                <li class="offcanvas__sub_menu_li"><a href="blog.html" class="offcanvas__sub_menu_item">Blog Grid</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="blog-details.html" class="offcanvas__sub_menu_item">Blog Details</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="blog-left-sidebar.html" class="offcanvas__sub_menu_item">Blog Left Sidebar</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="blog-right-sidebar.html" class="offcanvas__sub_menu_item">Blog Right Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="#">Pages</a>
-                            <ul class="offcanvas__sub_menu">
-                                <li class="offcanvas__sub_menu_li"><a href="about.html" class="offcanvas__sub_menu_item">About Us</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="contact.html" class="offcanvas__sub_menu_item">Contact Us</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="cart.html" class="offcanvas__sub_menu_item">Cart Page</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="portfolio.html" class="offcanvas__sub_menu_item">Portfolio Page</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="{{route('wishlist')}}" class="offcanvas__sub_menu_item">Wishlist Page</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="login.html" class="offcanvas__sub_menu_item">Login Page</a></li>
-                                <li class="offcanvas__sub_menu_li"><a href="404.html" class="offcanvas__sub_menu_item">Error Page</a></li>
-                            </ul>
-                        </li> -->
-                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="about.html">About</a></li>
-                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a></li>
+                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{route('home')}}">Home</a></li>
+                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{route('about.us')}}">About Us</a></li>
+                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{route('products')}}">Shop</a></li>
+                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{route('contact.us')}}">Contact Us</a></li>
                     </ul>
-                    <div class="offcanvas__account--items">
-                        <a class="offcanvas__account--items__btn d-flex align-items-center" href="login.html">
-                        <span class="offcanvas__account--items__icon"> 
-                            <svg xmlns="http://www.w3.org/2000/svg"  width="20.51" height="19.443" viewBox="0 0 512 512"><path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg> 
-                            </span>
-                        <span class="offcanvas__account--items__label">Login / Register</span>
-                        </a>
-                    </div>
                     <div class="language__currency">
                         <ul class="d-flex align-items-center">
                             <li class="language__currency--list">
@@ -307,6 +207,7 @@
         <!-- End Offcanvas header menu -->
 
         <!-- Start Offcanvas stikcy toolbar -->
+        {{--
         <div class="offcanvas__stikcy--toolbar" tabindex="-1">
             <ul class="d-flex justify-content-between">
                 <li class="offcanvas__stikcy--toolbar__list">
@@ -357,6 +258,7 @@
                 </li>
             </ul>
         </div>
+        --}}
         <!-- End Offcanvas stikcy toolbar -->
 
         <!-- Start serch box area -->
@@ -393,42 +295,60 @@
                                 </svg>
                             </h2>
                             <div class="footer__widget--inner">
-                                <a class="footer__logo" href="{{route('home')}}"><img src="{{url('assets/frontend/img/logo/nav-log.webp')}}" alt="footer-logo"></a>
+                                <a class="footer__logo" href="{{route('home')}}"><img src="{{url('uploads/setting/'.@settings()->site_logo2)}}" alt="TimyShop"></a>
                                 <p class="footer__widget--desc">Ut enim ad minim veniam, quis <br> nostrud exercitation ullamco laboris <br> nisi ut aliquip ex ea commodo.</p>
                                 <div class="footer__social">
                                     <ul class="social__shear d-flex">
+                                        @if(@settings()->facebook)
                                         <li class="social__shear--list">
-                                            <a class="social__shear--list__icon" target="_blank" href="../../../../external.html?link=https://www.facebook.com/">
+                                            <a class="social__shear--list__icon" target="_blank" href="{{@settings()->facebook}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11.239" height="20.984" viewBox="0 0 11.239 20.984">
                                                     <path id="Icon_awesome-facebook-f" data-name="Icon awesome-facebook-f" d="M11.575,11.8l.583-3.8H8.514V5.542A1.9,1.9,0,0,1,10.655,3.49h1.657V.257A20.2,20.2,0,0,0,9.371,0c-3,0-4.962,1.819-4.962,5.112V8.006H1.073v3.8H4.409v9.181H8.514V11.8Z" transform="translate(-1.073)" fill="currentColor"/>
                                                 </svg>
                                                 <span class="visually-hidden">Facebook</span>
                                             </a>
                                         </li>
+                                        @endif
+                                        @if(@settings()->twitter)
                                         <li class="social__shear--list">
-                                            <a class="social__shear--list__icon" target="_blank" href="../../../../external.html?link=https://twitter.com/">
+                                            <a class="social__shear--list__icon" target="_blank" href="{{@settings()->twitter}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19.492" viewBox="0 0 24 19.492">
                                                     <path id="Icon_awesome-twitter" data-name="Icon awesome-twitter" d="M21.533,7.112c.015.213.015.426.015.64A13.9,13.9,0,0,1,7.553,21.746,13.9,13.9,0,0,1,0,19.538a10.176,10.176,0,0,0,1.188.061,9.851,9.851,0,0,0,6.107-2.1,4.927,4.927,0,0,1-4.6-3.411,6.2,6.2,0,0,0,.929.076,5.2,5.2,0,0,0,1.294-.167A4.919,4.919,0,0,1,.975,9.168V9.107A4.954,4.954,0,0,0,3.2,9.731,4.926,4.926,0,0,1,1.675,3.152,13.981,13.981,0,0,0,11.817,8.3,5.553,5.553,0,0,1,11.7,7.173a4.923,4.923,0,0,1,8.513-3.365A9.684,9.684,0,0,0,23.33,2.619,4.906,4.906,0,0,1,21.167,5.33,9.861,9.861,0,0,0,24,4.569a10.573,10.573,0,0,1-2.467,2.543Z" transform="translate(0 -2.254)" fill="currentColor"/>
                                                 </svg>
                                                 <span class="visually-hidden">Twitter</span>
                                             </a>
                                         </li>
+                                        @endif
+                                        @if(@settings()->instagram)
                                         <li class="social__shear--list">
-                                            <a class="social__shear--list__icon" target="_blank" href="../../../../external.html?link=https://www.instagram.com/">
+                                            <a class="social__shear--list__icon" target="_blank" href="{{@settings()->instagram}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="19.497" height="19.492" viewBox="0 0 19.497 19.492">
                                                     <path id="Icon_awesome-instagram" data-name="Icon awesome-instagram" d="M9.747,6.24a5,5,0,1,0,5,5A4.99,4.99,0,0,0,9.747,6.24Zm0,8.247A3.249,3.249,0,1,1,13,11.238a3.255,3.255,0,0,1-3.249,3.249Zm6.368-8.451A1.166,1.166,0,1,1,14.949,4.87,1.163,1.163,0,0,1,16.115,6.036Zm3.31,1.183A5.769,5.769,0,0,0,17.85,3.135,5.807,5.807,0,0,0,13.766,1.56c-1.609-.091-6.433-.091-8.042,0A5.8,5.8,0,0,0,1.64,3.13,5.788,5.788,0,0,0,.065,7.215c-.091,1.609-.091,6.433,0,8.042A5.769,5.769,0,0,0,1.64,19.341a5.814,5.814,0,0,0,4.084,1.575c1.609.091,6.433.091,8.042,0a5.769,5.769,0,0,0,4.084-1.575,5.807,5.807,0,0,0,1.575-4.084c.091-1.609.091-6.429,0-8.038Zm-2.079,9.765a3.289,3.289,0,0,1-1.853,1.853c-1.283.509-4.328.391-5.746.391S5.28,19.341,4,18.837a3.289,3.289,0,0,1-1.853-1.853c-.509-1.283-.391-4.328-.391-5.746s-.113-4.467.391-5.746A3.289,3.289,0,0,1,4,3.639c1.283-.509,4.328-.391,5.746-.391s4.467-.113,5.746.391a3.289,3.289,0,0,1,1.853,1.853c.509,1.283.391,4.328.391,5.746S17.855,15.705,17.346,16.984Z" transform="translate(0.004 -1.492)" fill="currentColor"/>
                                                 </svg>
                                                 <span class="visually-hidden">Instagram</span>
                                             </a>
                                         </li>
+                                        @endif
+                                        @if(@settings()->linkedin)
                                         <li class="social__shear--list">
-                                            <a class="social__shear--list__icon" target="_blank" href="../../../../external.html?link=https://www.linkedin.com/">
+                                            <a class="social__shear--list__icon" target="_blank" href="{{@settings()->linkedin}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="19.419" height="19.419" viewBox="0 0 19.419 19.419">
                                                     <path id="Icon_awesome-linkedin-in" data-name="Icon awesome-linkedin-in" d="M4.347,19.419H.321V6.454H4.347ZM2.332,4.686A2.343,2.343,0,1,1,4.663,2.332,2.351,2.351,0,0,1,2.332,4.686ZM19.415,19.419H15.4V13.108c0-1.5-.03-3.433-2.093-3.433-2.093,0-2.414,1.634-2.414,3.325v6.42H6.869V6.454H10.73V8.223h.056A4.23,4.23,0,0,1,14.6,6.129c4.075,0,4.824,2.683,4.824,6.168v7.122Z" fill="currentColor"/>
                                                 </svg>
                                                 <span class="visually-hidden">Linkedin</span>
                                             </a>
                                         </li>
+                                        @endif
+                                        @if(@settings()->youtube)
+                                        <li class="social__shear--list">
+                                            <a class="social__shear--list__icon" target="_blank" href="{{@settings()->youtube}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
+                                                    <style>svg{fill:#f51c1c}</style><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
+                                                </svg>
+                                                <span class="visually-hidden">Youtube</span>
+                                            </a>
+                                        </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -491,11 +411,8 @@
                     </div>
                 </div>
             </div>
-            <div class="footer__bottom d-flex justify-content-between align-items-center">
-                <p class="copyright__content  m-0">Copyright © 2022 - {{date('Y')}} <a target="_blank" class="copyright__content--link" href="https://www.instabizmart.com/"> Insta Bizmart</a> . All Rights Reserved.Design By Furea</p>
-                <div class="footer__payment text-right">
-                    <img class="footer__payment--visa__card display-block" src="{{url('assets/frontend/img/other/payment-visa-card.webp')}}" alt="visa-card">
-                </div>
+            <div class="footer__bottom justify-content-between align-items-center text-center">
+                <p class="copyright__content  m-0">{!!@settings()->copyrights!!}</p>
             </div>
         </div>
     </footer>

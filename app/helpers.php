@@ -2,7 +2,9 @@
 
 use App\Models\Coin;
 use App\Models\Cart;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Setting;
+
 
 function coinIcon(){
 	$logo = Coin::select('logo')->first()->logo;
@@ -26,4 +28,8 @@ function cartCount()
 		}
 	}
     return $count;
+}
+
+function settings(){
+	return Setting::first();
 }

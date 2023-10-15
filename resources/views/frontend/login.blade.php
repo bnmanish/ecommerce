@@ -82,16 +82,16 @@
                                     <p class="text-danger">{{Session::get('success')}}</p>
                                 @endif
                                 <div class="account__login--inner">
-                                    <label>
+                                    <label class="w-100">
                                         <input class="account__login--input" placeholder="name" type="text" name="name">
                                     </label>
-                                    <label>
+                                    <label class="w-100">
                                         <input class="account__login--input" placeholder="mobile" type="text" name="mobile">
                                     </label>
-                                    <label>
+                                    <label class="w-100">
                                         <input class="account__login--input" placeholder="Email Addres" type="email" name="email">
                                     </label>
-                                    <label>
+                                    <label class="w-100">
                                         <input class="account__login--input" placeholder="Password" type="password">
                                     </label>
                                     
@@ -102,7 +102,7 @@
                                             I have read and agree to the terms & conditions</label>
                                     </div>
 
-                                    <label>
+                                    <label class="w-100">
                                         <button class="account__login--btn primary__btn mb-10" type="submit">Submit & Register</button>
                                     </label>
                                 </div>

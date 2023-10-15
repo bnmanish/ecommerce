@@ -86,7 +86,7 @@
                         </div>
                         <div class="mt-5 text-center">
                             
-                            <p class="text-white-50">Copyrights © {{date('Y')}} <a target="_blank" href="{{route('home')}}">TimyShop</a>. All rights reserved.</p>
+                            <p class="text-white-50">{!!@settings()->copyrights!!}</p>
                         </div>
                     </div>
                 </div>

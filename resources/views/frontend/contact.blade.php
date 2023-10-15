@@ -41,7 +41,7 @@
                                         </svg>
                                     </div>
                                     <div class="contact__info--content">
-                                        <p class="contact__info--content__desc text-white">Change the design through a range <br> <a href="tel:+01234-567890">+01234-567890</a> <a href="tel:++01234-5688765">+01234-5688765</a>   </p>
+                                        <p class="contact__info--content__desc text-white">Change the design through a range <br> <a href="tel:{{@settings()->primary_contact}}">{{@settings()->primary_contact}}</a> <a href="tel:{{@settings()->secondary_contact}}">{{@settings()->secondary_contact}}</a>   </p>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                         </svg>  
                                     </div>
                                     <div class="contact__info--content">
-                                        <p class="contact__info--content__desc text-white"> <a href="mailto:info@example.com">info@example.com</a> <br> <a href="mailto:info@example.com">info@example.com</a></p> 
+                                        <p class="contact__info--content__desc text-white"> <a href="mailto:{{@settings()->primary_email}}">{{@settings()->primary_email}}</a> <br> <a href="mailto:{{@settings()->secondary_email}}">{{@settings()->secondary_email}}</a></p> 
                                     </div>
                                 </div>
                             </div>
@@ -67,13 +67,12 @@
                                         </svg> 
                                     </div>
                                     <div class="contact__info--content">
-                                        <p class="contact__info--content__desc text-white">  123 Stree New York City ,
-                                            United States Of America
-                                            NY 750065.</p> 
+                                        <p class="contact__info--content__desc text-white">{{@settings()->primary_address}}</p> 
+                                        <p class="contact__info--content__desc text-white">{{@settings()->secondary_address}}</p> 
                                     </div>
                                 </div>
                             </div>
-                            <div class="contact__info--items">
+                            <!-- <div class="contact__info--items">
                                 <h3 class="contact__info--content__title text-white mb-15">Follow Us</h3>
                                 <ul class="contact__info--social d-flex">
                                     <li class="contact__info--social__list">
@@ -109,7 +108,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-lg-7">

@@ -10,6 +10,8 @@ use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\TestimonialController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\backend\OrderController;
+use App\Http\Controllers\backend\SettingController;
 // frontend controllers
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\AboutController;
@@ -115,6 +117,14 @@ Route::prefix('admin')->group(function () {
         Route::post('/edit-store-testimonial/{id}', [TestimonialController::class, 'editStoreTestimonial'])->name('admin.edit.store.testimonial');
         Route::get('/delete-testimonial/{id}', [TestimonialController::class, 'deleteTestimonial'])->name('admin.delete.testimonial');
 
+        // Manage Orders
+        Route::get('/list-order', [OrderController::class, 'listOrder'])->name('admin.list.order');
+        Route::get('/get-list-order', [OrderController::class, 'getlistOrder'])->name('admin.get.list.order');
+
+
+        // Manage Setting
+        Route::get('/manage-setting', [SettingController::class, 'manageSetting'])->name('admin.manage.setting');
+        Route::post('/update-setting', [SettingController::class, 'updateSetting'])->name('admin.update.setting');
 
 
         

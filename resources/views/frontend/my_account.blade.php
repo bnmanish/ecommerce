@@ -40,7 +40,7 @@
                         <li class="account__menu--list active"><a href="{{route('my.account')}}">My Orders</a></li>
                         <li class="account__menu--list"><a href="my-account-2.html">Addresses</a></li>
                         <li class="account__menu--list"><a href="wishlist.html">Wishlist</a></li>
-                        <li class="account__menu--list"><a href="login.html">Log Out</a></li>
+                        <li class="account__menu--list"><a href="{{route('logout')}}">Log Out</a></li>
                     </ul>
                 </div>
                 <div class="account__wrapper">
