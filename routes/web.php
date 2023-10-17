@@ -34,6 +34,7 @@ Route::get('/contact-us',[ContactController::class,'contactUs'])->name('contact.
 Route::get('/products',[HomeController::class,'products'])->name('products');
 Route::get('/products/{slug}',[HomeController::class,'productsDetails'])->name('products.details');
 Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
+Route::post('/contact-enquiry',[HomeController::class,'contactEnquiry'])->name('contact.enquiry');
 
 
 

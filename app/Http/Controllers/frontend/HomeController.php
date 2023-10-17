@@ -13,7 +13,9 @@ use App\Models\Cart;
 use App\Models\BillingAddress;
 use App\Models\OrderDetail;
 use App\Models\Order;
+use App\Mail\ContactEnquiry;
 use Session;
+use Mail;
 use Auth;
 use DB;
 
@@ -247,6 +249,23 @@ class HomeController extends Controller
             Session::flash('success',$e->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function contactEnquiry(Request $request){
+        // return $request->all();
+        $emailData = array(
+            "name" => $request->name,
+            "mobile" => $request->mobile,
+            "email" => $request->email,
+            "city" => $request->city,
+            "message" => $request->message,
+        );
+
+        Mail::to(env('CONTACT_ENQUIRY_TO_EMAIL'))->send(new ContactEnquiry($emailData));
+        Session::flash('success','Thank you so mutch for your interest in us.');
+        return redirect()->back();
+
+
     }
 
     public function logout(){
