@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
+    public function details()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id');
+    }
+
+
+    public function address()
+    {
+        return $this->hasOne(BillingAddress::class, 'order_id');
+    }
+
 }

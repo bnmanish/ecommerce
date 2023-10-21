@@ -36,7 +36,7 @@
         <link rel="stylesheet" type="text/css" href="{{url('assets/backend/css/custom_style.css')}}" />
         <!-- select2 dropdown -->
         <link href="{{url('assets/backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css">
-
+        @stack('css')
     </head>
 
     <body data-sidebar="dark">

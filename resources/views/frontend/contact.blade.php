@@ -67,8 +67,8 @@
                                         </svg> 
                                     </div>
                                     <div class="contact__info--content">
-                                        <p class="contact__info--content__desc text-white">{{@settings()->primary_address}}</p> 
-                                        <p class="contact__info--content__desc text-white">{{@settings()->secondary_address}}</p> 
+                                        <p class="contact__info--content__desc text-white">{!!@settings()->primary_address!!}</p> 
+                                        <p class="contact__info--content__desc text-white">{!!@settings()->secondary_address!!}</p> 
                                     </div>
                                 </div>
                             </div>

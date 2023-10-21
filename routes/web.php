@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/update-cart',[HomeController::class,'updateCart'])->name('update.cart');
     Route::get('/delete-cart-product',[HomeController::class,'deleteCartProduct'])->name('delete.cart.product');
     Route::post('/make-order',[HomeController::class,'makeOrder'])->name('make.order');
+    Route::get('/order-invoice/{orderNo}',[HomeController::class,'orderInvoice'])->name('order.invoice');
 
 });
 

@@ -1,7 +1,6 @@
 @extends('backend/layouts/main')
 @section('title', 'Product List | TimyShop')
 @section('content')
-
 <div class="page-content">
     <div class="container-fluid">
 
@@ -85,7 +84,21 @@
             pageLength: 10,
             ajax: '{{route("admin.get.list.product")}}',
             deferLoading: '{{$datacount}}',
+            columnDefs : [
+                {
+                    "width": "30%",
+                    "targets": 2
+                }
+            ]
         });
+    });
+    // Add CSS to wrap text inside the second column
+    $('#productlist-datatable').on('draw.dt', function () {
+        var secondColumnWidth = $('#productlist-datatable tbody tr:eq(0) td:eq(2)').width();
+        var maxColumnWidth = 0.3 * secondColumnWidth; // 30% of the width
+
+        $('#productlist-datatable tbody td:eq(2)').css('max-width', maxColumnWidth);
+        $('#productlist-datatable tbody td:eq(2)').css('white-space', 'pre-wrap');
     });
 
 </script>

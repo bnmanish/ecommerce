@@ -193,7 +193,7 @@ class HomeController extends Controller
             $address->state =  $request->state;
             $address->country =  $request->country;
             $address->pincode =  $request->pincode;
-            // $address->save();
+            $address->save();
 
             $cart = Cart::where('user_id',Auth::user()->id)->first();
             $subTotal = 0;
@@ -266,6 +266,11 @@ class HomeController extends Controller
         return redirect()->back();
 
 
+    }
+
+    public function orderInvoice($orderNo){
+        $order = Order::where(['user_id'=>Auth::user()->id,'order_no'=>$orderNo])->first();
+        return view('frontend/invoice/order_invoice')->with(['order'=>$order]);
     }
 
     public function logout(){
