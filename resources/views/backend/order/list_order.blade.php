@@ -42,11 +42,12 @@
                                 <tr>
                                     <th>Sl</th>
                                     <th>Order No</th>
+                                    <th>User</th>
                                     <th>Grand Total</th>
                                     <th>Mode</th>
                                     <th>Status</th>
                                     <th>Date</th>
-                                    <!-- <th>Action</th> -->
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,13 +55,12 @@
                                 <tr>
                                     <td>{{$key + 1}}</td>
                                     <td>#{{$dataRow->order_no}}</td>
+                                    <td>{{$dataRow->user->name}}-({{$dataRow->user->id}})</td>
                                     <td>{{$dataRow->grand_total}}</td>
                                     <td>{{$dataRow->mode == '2' ? 'PayUMoney' : 'COD'}}</td>
                                     <td>{{$dataRow->status == '2' ? 'Paid' : 'Unpaid'}}</td>
                                     <td>{{date('d-m-Y',strtotime($dataRow->created_at))}}</td>
-                                    {{--<td>
-                                        <a href="{{route('admin.edit.product',$dataRow->id)}}" class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>&nbsp;<a href="{{route('admin.delete.product',$dataRow->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Really! Do you want to delete?')"><i class='fas fa-trash'></i></a>
-                                    </td>--}}
+                                    <td><a target='_blank' href="{{route('admin.order.invoice',$dataRow->order_no)}}"><i class="fas fa-file-invoice"></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -81,7 +81,7 @@
             processing: true,
             serverSide: true,
             pageLength: 10,
-            ajax: '{{route("admin.get.list.product")}}',
+            ajax: '{{route("admin.get.list.order")}}',
             deferLoading: '{{$datacount}}',
         });
     });

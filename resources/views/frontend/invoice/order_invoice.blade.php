@@ -51,11 +51,11 @@
                     <div class="download-inner" id="download_section">
                         <!--============================== Header Area ==============================-->
                         <header class="th-header header-layout1">
-                            <div class="logo-shape">
+                            <!-- <div class="logo-shape">
                                 <svg width="365" height="128" viewBox="0 0 365 128" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M365 128H0L104.831 0H365V128Z" fill="#EE1C25" />
                                 </svg>
-                            </div>
+                            </div> -->
                             <div class="right-shape">
                                 <svg width="482" height="100" viewBox="0 0 482 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M77.7084 0L0 100H482V0H77.7084Z" fill="url(#paint0_linear_307_1954)" />

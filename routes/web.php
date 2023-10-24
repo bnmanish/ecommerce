@@ -122,6 +122,7 @@ Route::prefix('admin')->group(function () {
         // Manage Orders
         Route::get('/list-order', [OrderController::class, 'listOrder'])->name('admin.list.order');
         Route::get('/get-list-order', [OrderController::class, 'getlistOrder'])->name('admin.get.list.order');
+        Route::get('/order-invoice/{orderNo}', [OrderController::class, 'orderInvoice'])->name('admin.order.invoice');
 
 
         // Manage Setting

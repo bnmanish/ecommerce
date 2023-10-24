@@ -38,6 +38,13 @@
                             @endforeach
                         @endif
 
+                        @if(Session::has('success'))
+                            <div class="alert alert-danger alert-dismissible mb-2">
+                              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                              {{ Session::get('success') }}
+                            </div>
+                        @endif
+
 
                         <div class="main checkout__mian">
                                 <div class="checkout__content--step section__shipping--address pt-0">

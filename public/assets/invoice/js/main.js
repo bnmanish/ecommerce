@@ -50,7 +50,7 @@
             canvasImageHeight
           );
         }
-        var pdfUrl = 'th-invoice.pdf';
+        var pdfUrl = 'timyshop-order-invoice.pdf';
         pdf.save(pdfUrl);
       });
     });
@@ -72,10 +72,10 @@
     }
 
     // /*----------- 00. Right Click Disable ----------*/
-    //   window.addEventListener('contextmenu', function (e) {
-    //     // do something here...
-    //     e.preventDefault();
-    //   }, false);
+      // window.addEventListener('contextmenu', function (e) {
+      //   // alert('right click disabled!');
+      //   e.preventDefault();
+      // }, false);
 
     // /*----------- 00. Inspect Element Disable ----------*/
     //   document.onkeydown = function (e) {

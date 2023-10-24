@@ -82,23 +82,17 @@
             processing: true,
             serverSide: true,
             pageLength: 10,
-            ajax: '{{route("admin.get.list.product")}}',
-            deferLoading: '{{$datacount}}',
+            autoWidth: false, // Disable auto-sizing
             columnDefs : [
                 {
-                    "width": "30%",
-                    "targets": 2
+                    "width": "40%",
+                    "targets": 1
                 }
-            ]
+            ],
+            ajax: '{{route("admin.get.list.product")}}',
+            deferLoading: '{{$datacount}}',
+            
         });
-    });
-    // Add CSS to wrap text inside the second column
-    $('#productlist-datatable').on('draw.dt', function () {
-        var secondColumnWidth = $('#productlist-datatable tbody tr:eq(0) td:eq(2)').width();
-        var maxColumnWidth = 0.3 * secondColumnWidth; // 30% of the width
-
-        $('#productlist-datatable tbody td:eq(2)').css('max-width', maxColumnWidth);
-        $('#productlist-datatable tbody td:eq(2)').css('white-space', 'pre-wrap');
     });
 
 </script>

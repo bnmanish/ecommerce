@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Category;
@@ -18,7 +19,6 @@ use Session;
 use Mail;
 use Auth;
 use DB;
-
 
 class HomeController extends Controller
 {
@@ -183,18 +183,7 @@ class HomeController extends Controller
 
         DB::beginTransaction();
         try{
-            //saving address details
-            $address = new BillingAddress;
-            $address->name =  $request->name;
-            $address->email =  $request->email;
-            $address->address1 =  $request->address1;
-            $address->address2 =  $request->address2;
-            $address->city =  $request->city;
-            $address->state =  $request->state;
-            $address->country =  $request->country;
-            $address->pincode =  $request->pincode;
-            $address->save();
-
+            
             $cart = Cart::where('user_id',Auth::user()->id)->first();
             $subTotal = 0;
             $grandTotal = 0;
@@ -237,6 +226,18 @@ class HomeController extends Controller
 
             Order::where('id',$order->id)->update(['sub_total'=>$subTotal,'grand_total'=>$grandTotal]);
 
+            //saving address details
+            $address = new BillingAddress;
+            $address->order_id =  $order->id;
+            $address->name =  $request->name;
+            $address->email =  $request->email;
+            $address->address1 =  $request->address1;
+            $address->address2 =  $request->address2;
+            $address->city =  $request->city;
+            $address->state =  $request->state;
+            $address->country =  $request->country;
+            $address->pincode =  $request->pincode;
+            $address->save();
             
             DB::commit();
             CartDetail::where('cart_id',$cart->id)->delete();
@@ -246,8 +247,10 @@ class HomeController extends Controller
             return redirect()->route('my.account');
         }catch(\Exception $e){
             DB::rollback();
-            Session::flash('success',$e->getMessage());
-            return redirect()->back();
+            $error = $e->getMessage();
+            Log::error($error);
+            Session::flash('success',$error);
+            return redirect()->back()->withInput();
         }
     }
 
