@@ -92,7 +92,7 @@
                                         <input class="account__login--input" placeholder="Email Addres" type="email" name="email">
                                     </label>
                                     <label class="w-100">
-                                        <input class="account__login--input" placeholder="Password" type="password">
+                                        <input class="account__login--input" placeholder="Password" type="password" name="password">
                                     </label>
                                     
                                     <div class="account__login--remember position__relative mb-3">
