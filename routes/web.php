@@ -12,6 +12,8 @@ use App\Http\Controllers\backend\TestimonialController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\SettingController;
+use App\Http\Controllers\backend\AdditionalPageController;
+use App\Http\Controllers\backend\PageController;
 // frontend controllers
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\AboutController;
@@ -59,6 +61,10 @@ Route::middleware(['auth'])->group(function (){
 
 });
 
+Route::get('/paypal/callback', 'HomeController@paypalCallback')->name('paypal.callback');
+
+
+Route::get('/{url}',[HomeController::class,'additionalPages'])->name('additional.page');
 
 // Admin login route
 
@@ -129,6 +135,22 @@ Route::prefix('admin')->group(function () {
         Route::get('/manage-setting', [SettingController::class, 'manageSetting'])->name('admin.manage.setting');
         Route::post('/update-setting', [SettingController::class, 'updateSetting'])->name('admin.update.setting');
 
+        // Manage Page
+        Route::get('/add-page', [PageController::class, 'addPage'])->name('admin.add.page');
+        Route::post('/store-page', [PageController::class, 'stroePage'])->name('admin.store.page');
+        Route::get('/list-page', [PageController::class, 'listPage'])->name('admin.list.page');
+        Route::get('/edit-page/{id}', [PageController::class, 'editPage'])->name('admin.edit.page');
+        Route::post('/edit-store-page/{id}', [PageController::class, 'editStorePage'])->name('admin.edit.store.page');
+        Route::get('/delete-page/{id}', [PageController::class, 'deletePage'])->name('admin.delete.page');
+
+
+        // Manage Additional
+        Route::get('/add-additional-page', [AdditionalPageController::class, 'addPage'])->name('admin.add.additional.page');
+        Route::post('/store-additional-page', [AdditionalPageController::class, 'stroePage'])->name('admin.store.additional.page');
+        Route::get('/list-additional-page', [AdditionalPageController::class, 'listPage'])->name('admin.list.additional.page');
+        Route::get('/edit-additional-page/{id}', [AdditionalPageController::class, 'editPage'])->name('admin.edit.additional.page');
+        Route::post('/edit-store-additional-page/{id}', [AdditionalPageController::class, 'editStorePage'])->name('admin.edit.store.additional.page');
+        Route::get('/delete-additional-page/{id}', [AdditionalPageController::class, 'deletePage'])->name('admin.delete.additional.page');
 
         
         // Admin logout

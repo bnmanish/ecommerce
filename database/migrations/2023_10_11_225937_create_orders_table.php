@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('sub_total',10,2)->default(0);
             $table->decimal('grand_total',10,2)->default(0);
             $table->string('payment_ref_no')->default(0);
-            $table->enum('mode',['1','2'])->default('1')->comment('1=COD,2=PayUMoney');
+            $table->enum('mode',['1','2','3'])->default('1')->comment('1=COD,2=PayUMoney,3=paypal');
             $table->enum('status',['1','2'])->default('1')->comment('1=Unpaid,2=Paid');
             $table->timestamps();
         });

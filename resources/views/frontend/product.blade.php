@@ -1,7 +1,8 @@
 @extends('frontend/layouts/main')
-@section('title', 'Home : : TimyShop')
+@section('title', $page->meta_title)
+@section('keywords', $page->meta_keywords)
+@section('description', $page->meta_description)
 @section('content')
-
 <main class="main__content_wrapper">
     
     <!-- Start breadcrumb section -->
@@ -10,10 +11,10 @@
             <div class="row row-cols-1">
                 <div class="col">
                     <div class="breadcrumb__content">
-                        <h1 class="breadcrumb__content--title text-white mb-10">Products</h1>
+                        <h1 class="breadcrumb__content--title text-white mb-10">{{$page->title}}</h1>
                         <ul class="breadcrumb__content--menu d-flex">
                             <li class="breadcrumb__content--menu__items"><a class="text-white" href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb__content--menu__items"><span class="text-white">Products</span></li>
+                            <li class="breadcrumb__content--menu__items"><span class="text-white">{{$page->title}}</span></li>
                         </ul>
                     </div>
                 </div>

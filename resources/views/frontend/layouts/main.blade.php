@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>@yield('title')</title>
-  <meta name="description" content="Tymishop">
+  <meta name="keywords" content="@yield('keywords')">
+  <meta name="description" content="@yield('description')">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="{{url('uploads/setting/'.@settings()->site_logo)}}">
-    
    <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{url('assets/frontend/css/plugins/swiper-bundle.min.css')}}">
   <link rel="stylesheet" href="{{url('assets/frontend/css/plugins/glightbox.min.css')}}">
   <link href="../../../../fonts.googleapis.com/css2de9a.css')}}?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
-
   <!-- Plugin css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   
@@ -362,11 +362,11 @@
                                 </svg>
                             </h2>
                             <ul class="footer__widget--menu footer__widget--inner">
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="about.html">About Us</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('wishlist')}}">Wishlist</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="contact.html">Contact Us</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="privacy-policy.html">Privacy Policy</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="faq.html">Frequently</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('home')}}">Home</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('about.us')}}">About Us</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('contact.us')}}">Contact Us</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('products')}}">Shop</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('cart')}}">Cart</a></li>
                             </ul>
                         </div>
                     </div>
@@ -379,10 +379,10 @@
                             </h2>
                             <ul class="footer__widget--menu footer__widget--inner">
                                 <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('my.account')}}">My Account</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="cart.html">Shopping Cart</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="login.html">Login</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="login.html">Register</a></li>
-                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('checkout')}}">Checkout</a></li>
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('login')}}">Login</a></li>
+                                @foreach(additionalPages() as $apage)
+                                <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{route('additional.page',$apage->slug)}}">{{$apage->title}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

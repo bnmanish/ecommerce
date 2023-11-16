@@ -1,5 +1,7 @@
 @extends('frontend/layouts/main')
-@section('title', 'Home : : TimyShop')
+@section('title', $page->meta_title)
+@section('keywords', $page->meta_keywords)
+@section('description', $page->meta_description)
 @section('content')
 <main class="main__content_wrapper">
 

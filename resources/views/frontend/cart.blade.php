@@ -1,5 +1,7 @@
 @extends('frontend/layouts/main')
-@section('title', 'Cart : : TimyShop')
+@section('title', $page->meta_title)
+@section('keywords', $page->meta_keywords)
+@section('description', $page->meta_description)
 @section('content')
 <main class="main__content_wrapper">
     
@@ -9,10 +11,10 @@
             <div class="row row-cols-1">
                 <div class="col">
                     <div class="breadcrumb__content">
-                        <h1 class="breadcrumb__content--title text-white mb-10">Cart</h1>
+                        <h1 class="breadcrumb__content--title text-white mb-10">{{$page->title}}</h1>
                         <ul class="breadcrumb__content--menu d-flex">
                             <li class="breadcrumb__content--menu__items"><a class="text-white" href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb__content--menu__items"><span class="text-white">Cart</span></li>
+                            <li class="breadcrumb__content--menu__items"><span class="text-white">{{$page->title}}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
                                                     }
 
                                                 @endphp
-                                                <span class="cart__price">$ {{number_format($price,2)}}</span>
+                                                <span class="cart__price">{{currency('inr')}} {{number_format($price,2)}}</span>
                                             </td>
                                             <td class="cart__table--body__list">
                                                 <div class="quantity__box">
@@ -90,7 +92,7 @@
                                                     $productTotal = $price * $cartItem->quantity; 
                                                     $subTotal += $productTotal;
                                                 @endphp
-                                                <span class="cart__price end">$ {{number_format($productTotal,2)}}</span>
+                                                <span class="cart__price end">{{currency('inr')}} {{number_format($productTotal,2)}}</span>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -124,7 +126,7 @@
                                         <tbody>
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">SUBTOTAL</td>
-                                                <td class="cart__summary--amount text-right">$ {{number_format($subTotal,2)}}</td>
+                                                <td class="cart__summary--amount text-right">{{currency('inr')}} {{number_format($subTotal,2)}}</td>
                                             </tr>
                                             <!-- <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">TAX</td>
@@ -132,7 +134,7 @@
                                             </tr> -->
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">SHIPPING CHARGE</td>
-                                                <td class="cart__summary--amount text-right">$ {{number_format($shippingCharge,2)}}</td>
+                                                <td class="cart__summary--amount text-right">{{currency('inr')}} {{number_format($shippingCharge,2)}}</td>
                                             </tr>
                                             <!-- <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">COUPON CHARGE</td>
@@ -143,7 +145,7 @@
                                             @endphp
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">GRAND TOTAL</td>
-                                                <td class="cart__summary--amount text-right">$ {{number_format($gtotal,2)}}</td>
+                                                <td class="cart__summary--amount text-right">{{currency('inr')}} {{number_format($gtotal,2)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

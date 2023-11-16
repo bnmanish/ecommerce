@@ -4,6 +4,7 @@ use App\Models\Coin;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Setting;
+use App\Models\AdditionalPage;
 
 
 function coinIcon(){
@@ -32,4 +33,22 @@ function cartCount()
 
 function settings(){
 	return Setting::first();
+}
+
+function additionalPages(){
+	$page = AdditionalPage::select('id','title','slug')->where(['status'=>'1'])->orderBy('title')->get();
+	return $page;
+}
+
+function currency($currency){
+	switch ($currency) {
+        case 'inr':
+            return "₹";
+        case 'dollar':
+            return "$";
+        case 'eur':
+            return "€";
+        default:
+            return "₹";
+    }
 }

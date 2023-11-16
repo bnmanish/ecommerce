@@ -287,6 +287,21 @@
                                     <span>Orders</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="{{route('admin.list.page')}}" class="waves-effect">
+                                    <i class="fas fa-regular fa-file"></i>
+                                    <span>Pages</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('admin.list.additional.page')}}" class="waves-effect">
+                                    <i class="fas fa-regular fa-file"></i>
+                                    <span>Additional Pages</span>
+                                </a>
+                            </li>
+                            
                             <li>
                                 <a href="{{route('admin.list.testimonial')}}" class="waves-effect">
                                     <i class="fas fa-sliders-h"></i>

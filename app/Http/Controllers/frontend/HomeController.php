@@ -21,20 +21,24 @@ use Hash;
 use Mail;
 use Auth;
 use DB;
+use App\Models\Page;
+use App\Models\AdditionalPage;
 
 class HomeController extends Controller
 {
     public function home(){
+        $page = Page::where('id',1)->first();
         $slider = Slider::select('id','title','description','image')->where('status','1')->orderBy('sorting_order','asc')->get();
         $testimonial = Testimonial::select('id','name','profession','description','image','gender')->where('status','1')->get();
         $category = Category::select('id','title','slug','banner')->where('status','1')->get();
         $popularProduct = Product::where(['status'=>'1','popular'=>'1'])->orderBy('created_at','desc')->limit(15)->get();
         $newProduct = Product::where(['status'=>'1','new'=>'1'])->orderBy('created_at','desc')->limit(15)->get();
-        return view('frontend/home')->with(['slider'=>$slider,'testimonial'=>$testimonial,'category'=>$category,'popularProduct'=>$popularProduct,'newProduct'=>$newProduct]);
+        return view('frontend/home')->with(['slider'=>$slider,'testimonial'=>$testimonial,'category'=>$category,'popularProduct'=>$popularProduct,'newProduct'=>$newProduct,'page'=>$page]);
     }
 
     public function login(){
-        return view('frontend/login');
+        $page = Page::where('id',6)->first();
+        return view('frontend/login')->with(['page'=>$page]);
     }
 
     public function signUp(Request $request){
@@ -74,8 +78,9 @@ class HomeController extends Controller
     }
 
     public function products(){
+        $page = Page::where('id',3)->first();
         $products = Product::where(['status'=>'1','new'=>'1'])->orderBy('created_at','desc')->get();
-        return view('frontend/product')->with(['products'=>$products]);
+        return view('frontend/product')->with(['products'=>$products,'page'=>$page]);
     }
 
     public function productsDetails($slug){
@@ -84,8 +89,9 @@ class HomeController extends Controller
     }
 
     public function myAccount(){
+        $page = Page::where('id',5)->first();
         $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->limit(10)->get();
-        return view('frontend/my_account')->with(['orders'=>$orders]);
+        return view('frontend/my_account')->with(['orders'=>$orders,'page'=>$page]);
     }
 
     public function wishlist(){
@@ -93,8 +99,9 @@ class HomeController extends Controller
     }
 
     public function cart(){
+        $page = Page::where('id',7)->first();
         $cart = Cart::where(['user_id'=>Auth::user()->id])->first();
-        return view('frontend/cart')->with(['cart'=>$cart]);
+        return view('frontend/cart')->with(['cart'=>$cart,'page'=>$page]);
     }
 
     public function addCart(Request $request){
@@ -166,8 +173,9 @@ class HomeController extends Controller
     }
 
     public function checkout(){
+        $page = Page::where('id',8)->first();
         $cart = Cart::where(['user_id'=>Auth::user()->id])->first();
-        return view('frontend/checkout')->with(['cart'=>$cart]);
+        return view('frontend/checkout')->with(['cart'=>$cart,'page'=>$page]);
     }
 
     public function makeOrder(Request $request){
@@ -180,7 +188,7 @@ class HomeController extends Controller
             'state' => 'required|max:255',
             'country' => 'required|max:255',
             'pincode' => 'required|max:255',
-            'mode' => 'required|in:COD,PayUMoney',
+            'mode' => 'required|in:COD,PayUMoney,paypal',
         ]);
 
         DB::beginTransaction();
@@ -203,7 +211,7 @@ class HomeController extends Controller
                     $order->sub_total = 0.00;
                     $order->grand_total = 0.00;
                     $order->payment_ref_no = NULL;
-                    $order->mode = $request->mode === 'PayUMoney' ? '2' : '1';  // mode comming in request from checkout page
+                    $order->mode = $request->mode === 'paypal' ? '3' : ($request->mode === 'PayUMoney' ? '2' : '1');  // mode comming in request from checkout page
                     $order->status = '1';
                     $order->save();
                 }
@@ -281,6 +289,11 @@ class HomeController extends Controller
     public function logout(){
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function additionalPages($url){
+        $page = AdditionalPage::where(['slug'=>$url])->first();
+        return view('frontend/additional_page')->with(['page'=>$page]);
     }
 
 }
