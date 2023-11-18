@@ -76,7 +76,7 @@
                                                     }
 
                                                 @endphp
-                                                <span class="cart__price">{{currency('inr')}} {{number_format($price,2)}}</span>
+                                                <span class="cart__price">{{currency('dollar')}} {{number_format($price,2)}}</span>
                                             </td>
                                             <td class="cart__table--body__list">
                                                 <div class="quantity__box">
@@ -92,7 +92,7 @@
                                                     $productTotal = $price * $cartItem->quantity; 
                                                     $subTotal += $productTotal;
                                                 @endphp
-                                                <span class="cart__price end">{{currency('inr')}} {{number_format($productTotal,2)}}</span>
+                                                <span class="cart__price end">{{currency('dollar')}} {{number_format($productTotal,2)}}</span>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -126,7 +126,7 @@
                                         <tbody>
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">SUBTOTAL</td>
-                                                <td class="cart__summary--amount text-right">{{currency('inr')}} {{number_format($subTotal,2)}}</td>
+                                                <td class="cart__summary--amount text-right">{{currency('dollar')}} {{number_format($subTotal,2)}}</td>
                                             </tr>
                                             <!-- <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">TAX</td>
@@ -134,7 +134,7 @@
                                             </tr> -->
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">SHIPPING CHARGE</td>
-                                                <td class="cart__summary--amount text-right">{{currency('inr')}} {{number_format($shippingCharge,2)}}</td>
+                                                <td class="cart__summary--amount text-right">{{currency('dollar')}} {{number_format($shippingCharge,2)}}</td>
                                             </tr>
                                             <!-- <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">COUPON CHARGE</td>
@@ -145,7 +145,7 @@
                                             @endphp
                                             <tr class="cart__summary--total__list">
                                                 <td class="cart__summary--total__title text-left">GRAND TOTAL</td>
-                                                <td class="cart__summary--amount text-right">{{currency('inr')}} {{number_format($gtotal,2)}}</td>
+                                                <td class="cart__summary--amount text-right">{{currency('dollar')}} {{number_format($gtotal,2)}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

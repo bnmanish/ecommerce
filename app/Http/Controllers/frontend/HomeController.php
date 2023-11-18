@@ -24,8 +24,35 @@ use DB;
 use App\Models\Page;
 use App\Models\AdditionalPage;
 
+use Validator;
+use URL;
+use Redirect;
+use Input;
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
+
 class HomeController extends Controller
 {
+    private $_api_context;
+    
+    public function __construct()
+    {
+            
+        $paypal_configuration = \Config::get('paypal');
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
+        $this->_api_context->setConfig($paypal_configuration['settings']);
+    }
+
     public function home(){
         $page = Page::where('id',1)->first();
         $slider = Slider::select('id','title','description','image')->where('status','1')->orderBy('sorting_order','asc')->get();
@@ -248,17 +275,69 @@ class HomeController extends Controller
             $address->country =  $request->country;
             $address->pincode =  $request->pincode;
             $address->save();
-            
+
             DB::commit();
             CartDetail::where('cart_id',$cart->id)->delete();
             Cart::where('id',$cart->id)->delete();
 
-            Session::flash('success','Thank you for order with Us, Your order tracking no is : #'.$orderNo);
+            if ($request->mode === 'paypal') {
+                $payer = new Payer();
+                $payer->setPaymentMethod('paypal');
+
+                $amount = new Amount();
+                $amount->setCurrency('USD')
+                       ->setTotal($grandTotal);
+
+                $transaction = new Transaction();
+                $transaction->setAmount($amount)
+                            ->setDescription('Enter Your transaction description');
+
+                $redirectUrls = new RedirectUrls();
+                $redirectUrls->setReturnUrl(URL::route('paypal.return'))
+                             ->setCancelUrl(URL::route('paypal.cancel'));
+
+                $payment = new Payment();
+                $payment->setIntent('Sale')
+                        ->setPayer($payer)
+                        ->setRedirectUrls($redirectUrls)
+                        ->setTransactions([$transaction]);
+
+                try {
+                    $payment->create($this->_api_context);
+                } catch (\PayPal\Exception\PPConnectionException $ex) {
+                    if (\Config::get('app.debug')) {
+                        Session::flash('error', 'Connection timeout');
+                        return Redirect::route('my.account');
+                    } else {
+                        Session::flash('error', 'Some error occurred, sorry for the inconvenience');
+                        return Redirect::route('my.account');
+                    }
+                }
+
+                foreach ($payment->getLinks() as $link) {
+                    if ($link->getRel() == 'approval_url') {
+                        $redirectUrl = $link->getHref();
+                        break;
+                    }
+                }
+                $paypalPaymentId = $payment->getId();
+                Session::put('paypal_payment_id', $paypalPaymentId);
+                Order::where('id',$order->id)->update(['payment_ref_no'=>$paypalPaymentId]);
+                if (isset($redirectUrl)) {
+                    return Redirect::away($redirectUrl);
+                }
+
+                Session::flash('error', 'Unknown error occurred');
+                return Redirect::route('my.account');
+
+            }
+
+            Session::flash('success','Thank you for order with Us, Your order No is : #'.$orderNo);
             return redirect()->route('my.account');
         }catch(\Exception $e){
             DB::rollback();
             $error = $e->getMessage();
-            Log::error($error);
+            Log::error(date('d-m-Y H:i:s ').$error);
             Session::flash('success',$error);
             return redirect()->back()->withInput();
         }
@@ -294,6 +373,33 @@ class HomeController extends Controller
     public function additionalPages($url){
         $page = AdditionalPage::where(['slug'=>$url])->first();
         return view('frontend/additional_page')->with(['page'=>$page]);
+    }
+
+    public function paypalReturn(Request $request){
+        $payment_id = Session::get('paypal_payment_id');
+        Session::forget('paypal_payment_id');
+        if (empty($request->input('PayerID')) || empty($request->input('token'))) {
+            Session::flash('error','Payment failed');
+            return Redirect::route('my.account');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);        
+        $execution = new PaymentExecution();
+        $execution->setPayerId($request->input('PayerID'));        
+        $result = $payment->execute($execution, $this->_api_context);
+        if ($result->getState() == 'approved') {   
+            $orderData = Order::where('payment_ref_no',$result->id);
+            $orderData->update(['status'=>'2']);
+            Session::flash('success','Thank you for order with Us, Your order No is #: '.$orderData->first()->order_no);
+            return Redirect::route('my.account');
+        }
+
+        Session::flash('error','Payment failed !!');
+        return Redirect::route('my.account');
+    }
+
+    public function paypalCancel(Request $request){
+        echo "paypal cancel";
+        return $request->all();
     }
 
 }

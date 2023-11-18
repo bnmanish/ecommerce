@@ -85,7 +85,7 @@
                                         <h1 class="big-title">Invoice</h1>
                                     </div>
                                     <div class="col-auto">
-                                        <p class="invoice-number"><b>Invoice No: </b>#{{$order->order_no}}</p>
+                                        <p class="invoice-number"><b>Order No : </b>#{{$order->order_no}}</p>
                                         <p class="invoice-date"><b>Date: </b>{{date('d M Y',strtotime($order->created_at))}}</p>
                                         <p class="invoice-date"><b>Order Status: </b>{{$order->status == 2 ? 'Paid' : 'Unpaid'}}</p>
                                     </div>
@@ -145,9 +145,9 @@
                                 <tr>
                                     <td>{{$key + 1}}</td>
                                     <td>{{$orderItem->product->title}}</td>
-                                    <td>{{currency('inr')}} {{number_format($orderItem->unit_price,2)}}</td>
+                                    <td>{{currency('dollar')}} {{number_format($orderItem->unit_price,2)}}</td>
                                     <td>{{$orderItem->quantity}}</td>
-                                    <td>{{currency('inr')}} {{number_format($orderItem->total_price,2)}}</td>
+                                    <td>{{currency('dollar')}} {{number_format($orderItem->total_price,2)}}</td>
                                     @php $subTotal += $orderItem->total_price; @endphp
                                 </tr>
                                 @endforeach
@@ -167,15 +167,15 @@
                                 <table class="total-table">
                                     <tr>
                                         <th>Sub Total :</th>
-                                        <td>{{currency('inr')}} {{number_format($subTotal,2)}}</td>
+                                        <td>{{currency('dollar')}} {{number_format($subTotal,2)}}</td>
                                     </tr>
                                     <tr>
                                         <th>Taxes :</th>
-                                        <td>{{currency('inr')}} {{$order->taxes}}</td>
+                                        <td>{{currency('dollar')}} {{$order->taxes}}</td>
                                     </tr>
                                     <tr>
                                         <th>Shipping Charges :</th>
-                                        <td>{{currency('inr')}} {{$order->shipping_charges}}</td>
+                                        <td>{{currency('dollar')}} {{$order->shipping_charges}}</td>
                                     </tr>
                                     <!-- <tr>
                                         <th>Discount :</th>
@@ -183,7 +183,7 @@
                                     </tr> -->
                                     <tr>
                                         <th>Total :</th>
-                                        <td>{{currency('inr')}} {{number_format(($subTotal +$order->taxes + $order->shipping_charges - $order->discount),2)}}</td>
+                                        <td>{{currency('dollar')}} {{number_format(($subTotal +$order->taxes + $order->shipping_charges - $order->discount),2)}}</td>
                                     </tr>
                                 </table>
                             </div>

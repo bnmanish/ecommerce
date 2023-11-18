@@ -47,6 +47,8 @@ Route::post('/logined',[HomeController::class,'logedin'])->name('logedin');
 Route::get('/register',[HomeController::class,'register'])->name('register');
 Route::post('/sign-up',[HomeController::class,'signUp'])->name('sign.up');
 Route::get('/logout',[HomeController::class,'logout'])->name('logout');
+Route::get('/paypal-return',[HomeController::class,'paypalReturn'])->name('paypal.return');
+Route::get('/paypal-cancel',[HomeController::class,'paypalCancel'])->name('paypal.cancel');
 
 Route::middleware(['auth'])->group(function (){
     Route::get('/my-account',[HomeController::class,'myAccount'])->name('my.account');

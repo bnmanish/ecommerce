@@ -157,7 +157,7 @@
                                                 </div>
                                             </td>
                                             <td class="cart__table--body__list">
-                                                <span class="cart__price">{{currency('inr')}} {{number_format($productTotal,2)}}</span>
+                                                <span class="cart__price">{{currency('dollar')}} {{number_format($productTotal,2)}}</span>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -169,20 +169,20 @@
                                     <tbody class="checkout__total--body">
                                         <tr class="checkout__total--items">
                                             <td class="checkout__total--title text-left">SUB TOTAL </td>
-                                            <td class="checkout__total--amount text-right">{{currency('inr')}} {{number_format($subTotal,2)}}</td>
+                                            <td class="checkout__total--amount text-right">{{currency('dollar')}} {{number_format($subTotal,2)}}</td>
                                         </tr>
                                         <tr class="checkout__total--items">
                                             <td class="checkout__total--title text-left">TAX </td>
-                                            <td class="checkout__total--amount text-right">{{currency('inr')}} {{number_format($tax,2)}}</td>
+                                            <td class="checkout__total--amount text-right">{{currency('dollar')}} {{number_format($tax,2)}}</td>
                                         </tr>
                                         <tr class="checkout__total--items">
                                             <td class="checkout__total--title text-left">SHIPPING CHARGE</td>
-                                            <td class="checkout__total--amount text-right">{{currency('inr')}} {{number_format($shippingCharge,2)}}</td>
+                                            <td class="checkout__total--amount text-right">{{currency('dollar')}} {{number_format($shippingCharge,2)}}</td>
 
                                         </tr>
                                         <tr class="checkout__total--items">
                                             <td class="checkout__total--title text-left">COUPON CHARGE </td>
-                                            <td class="checkout__total--amount text-right">{{currency('inr')}} {{number_format($couponDiscount,2)}}</td>
+                                            <td class="checkout__total--amount text-right">{{currency('dollar')}} {{number_format($couponDiscount,2)}}</td>
                                         </tr>
                                     </tbody>
                                     @php 
@@ -191,7 +191,7 @@
                                     <tfoot class="checkout__total--footer">
                                         <tr class="checkout__total--footer__items">
                                             <td class="checkout__total--footer__title checkout__total--footer__list text-left">TOTAL </td>
-                                            <td class="checkout__total--footer__amount checkout__total--footer__list text-right">{{currency('inr')}} {{number_format($gtotal,2)}}</td>
+                                            <td class="checkout__total--footer__amount checkout__total--footer__list text-right">{{currency('dollar')}} {{number_format($gtotal,2)}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -203,10 +203,10 @@
                                         <button class="payment__history--link primary__btn" type="button"><label for="cod">COD</label></button>
                                         <input type="radio" name="mode" value="COD" id="cod">
                                     </li>
-                                    <li class="payment__history--list">
+                                    <!-- <li class="payment__history--list">
                                         <button class="payment__history--link primary__btn" type="button"><label for="PayU">PayUmoney</label></button>
                                         <input type="radio" name="mode" value="PayUMoney" id="PayU">
-                                    </li>
+                                    </li> -->
                                     <li class="payment__history--list">
                                         <button class="payment__history--link primary__btn" type="button"><label for="paypal">Paypal</label></button>
                                         <input type="radio" name="mode" value="paypal" id="paypal">
