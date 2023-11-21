@@ -58,54 +58,54 @@
                                             <div class="col-lg-6 col-md-6 mb-20">
                                                 <div class="checkout__input--list ">
                                                     <label class="checkout__input--label mb-5" for="name">Name <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="name" id="name"  type="text" name="name" value="{{old('name')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="name" id="name"  type="text" name="name" value="{{old('name') ?? ($order->address->name ?? '')}}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="email">Email <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="email" id="email" type="email" name="email" value="{{old('email')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="email" id="email" type="email" name="email" value="{{old('email') ?? ($order->address->email ?? '')}}">
                                                 </div>
                                             </div>
                                             
                                             <div class="col-12 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="address">Address1 <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="Address1" id="address" type="text" name="address1" value="{{old('address1')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Address1" id="address" type="text" name="address1" value="{{old('address1') ?? ($order->address->address1 ?? '')}}">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="address2">Address2 <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="Address2" id="address2" type="text" name="address2" value="{{old('address2')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Address2" id="address2" type="text" name="address2" value="{{old('address2') ?? ($order->address->address2 ?? '')}}">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="city">Town/City <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="City" id="city" type="text" name="city" value="{{old('city')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="City" id="city" type="text" name="city" value="{{old('city') ?? ($order->address->city ?? '')}}">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="state">State <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="State" id="state" type="text" name="state" value="{{old('state')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="State" id="state" type="text" name="state" value="{{old('state') ?? ($order->address->state ?? '')}}">
                                                 </div>
                                             </div>
                                             
                                             <div class="col-lg-6 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="country">Country  <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="Country " id="country" type="text" name="country" value="{{old('country')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Country " id="country" type="text" name="country" value="{{old('country') ?? ($order->address->country ?? '')}}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-20">
                                                 <div class="checkout__input--list">
                                                     <label class="checkout__input--label mb-5" for="pincode">Pin Code <span class="checkout__input--label__star">*</span></label>
-                                                    <input class="checkout__input--field border-radius-5" placeholder="Pin code" id="pincode" type="text" name="pincode" value="{{old('pincode')}}">
+                                                    <input class="checkout__input--field border-radius-5" placeholder="Pin code" id="pincode" type="text" name="pincode" value="{{old('pincode') ?? ($order->address->pincode ?? '')}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -203,10 +203,10 @@
                                         <button class="payment__history--link primary__btn" type="button"><label for="cod">COD</label></button>
                                         <input type="radio" name="mode" value="COD" id="cod">
                                     </li>
-                                    <!-- <li class="payment__history--list">
+                                    <li class="payment__history--list">
                                         <button class="payment__history--link primary__btn" type="button"><label for="PayU">PayUmoney</label></button>
                                         <input type="radio" name="mode" value="PayUMoney" id="PayU">
-                                    </li> -->
+                                    </li>
                                     <li class="payment__history--list">
                                         <button class="payment__history--link primary__btn" type="button"><label for="paypal">Paypal</label></button>
                                         <input type="radio" name="mode" value="paypal" id="paypal">

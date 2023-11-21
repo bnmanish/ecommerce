@@ -200,9 +200,10 @@ class HomeController extends Controller
     }
 
     public function checkout(){
+        $order = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
         $page = Page::where('id',8)->first();
         $cart = Cart::where(['user_id'=>Auth::user()->id])->first();
-        return view('frontend/checkout')->with(['cart'=>$cart,'page'=>$page]);
+        return view('frontend/checkout')->with(['cart'=>$cart,'page'=>$page,'order'=>$order]);
     }
 
     public function makeOrder(Request $request){
@@ -330,6 +331,8 @@ class HomeController extends Controller
                 Session::flash('error', 'Unknown error occurred');
                 return Redirect::route('my.account');
 
+            }else if($request->mode === 'PayUMoney'){
+                return "PayuMoney";
             }
 
             Session::flash('success','Thank you for order with Us, Your order No is : #'.$orderNo);
