@@ -14,6 +14,7 @@ use App\Models\CartDetail;
 use App\Models\Cart;
 use App\Models\BillingAddress;
 use App\Models\OrderDetail;
+use App\Models\Subscriber;
 use App\Models\Order;
 use App\Mail\ContactEnquiry;
 use Session;
@@ -40,6 +41,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+use Jenssegers\Agent\Agent;
 
 class HomeController extends Controller
 {
@@ -218,7 +220,6 @@ class HomeController extends Controller
             'pincode' => 'required|max:255',
             'mode' => 'required|in:COD,PayUMoney,paypal',
         ]);
-
         DB::beginTransaction();
         try{
             
@@ -291,7 +292,7 @@ class HomeController extends Controller
 
                 $transaction = new Transaction();
                 $transaction->setAmount($amount)
-                            ->setDescription('Enter Your transaction description');
+                            ->setDescription('paymnet for orderNo: '.$orderNo);
 
                 $redirectUrls = new RedirectUrls();
                 $redirectUrls->setReturnUrl(URL::route('paypal.return'))
@@ -332,7 +333,75 @@ class HomeController extends Controller
                 return Redirect::route('my.account');
 
             }else if($request->mode === 'PayUMoney'){
-                return "PayuMoney";
+                $MERCHANT_KEY = env('PAYU_MERCHANT_KEY');
+                $SALT = env('PAYU_MERCHANT_SALT');
+                $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
+                // Merchant Key and Salt as provided by Payu.
+                $PAYU_BASE_URL = env('PAYU_BASE_URL');
+                $action = '';
+                $posted = array(
+                  'key' =>  $MERCHANT_KEY,
+                  'txnid' =>  $txnid,
+                  'amount'  =>  $grandTotal,
+                  'firstname' =>  $request->name,
+                  'email' =>  $request->email,
+                  'phone' =>  Auth::user()->mobile,   //mobile no
+                  'productinfo' => 'paymnet for orderNo: '.$orderNo,
+                  'surl'  =>  'http://localhost/payumoney/success.php',
+                  'furl'  =>  'http://localhost/payumoney/failure.php',
+                  'service_provider'  =>  env('SERVICE_PROVIDER'),
+                );
+
+                if(!empty($_POST)) {
+                    //print_r($_POST);
+                  foreach($_POST as $key => $value) {
+                    $posted[$key] = $value;
+                  }
+                }
+
+                $formError = 0;
+
+                if(empty($posted['txnid'])) {
+                  // Generate random transaction id
+                  $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
+                } else {
+                  $txnid = $posted['txnid'];
+                }
+                $hash = '';
+                // Hash Sequence
+                $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
+                if(empty($posted['hash']) && sizeof($posted) > 0) {
+                  if(
+                          empty($posted['key'])
+                          || empty($posted['txnid'])
+                          || empty($posted['amount'])
+                          || empty($posted['firstname'])
+                          || empty($posted['email'])
+                          || empty($posted['phone'])
+                          || empty($posted['productinfo'])
+                          || empty($posted['surl'])
+                          || empty($posted['furl'])
+                          || empty($posted['service_provider'])
+                  ) {
+                    $formError = 1;
+                  } else {
+                    $hashVarsSeq = explode('|', $hashSequence);
+                    $hash_string = '';  
+                    foreach($hashVarsSeq as $hash_var) {
+                      $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
+                      $hash_string .= '|';
+                    }
+                    $hash_string .= $SALT;
+                    $hash = strtolower(hash('sha512', $hash_string));
+                    $action = $PAYU_BASE_URL . '/_payment';
+                  }
+                } elseif(!empty($posted['hash'])) {
+                  $hash = $posted['hash'];
+                  $action = $PAYU_BASE_URL . '/_payment';
+                }
+                $data = compact('hash','MERCHANT_KEY','action','txnid','formError','posted');
+                return view('frontend/payu_form',$data);
+
             }
 
             Session::flash('success','Thank you for order with Us, Your order No is : #'.$orderNo);
@@ -340,6 +409,8 @@ class HomeController extends Controller
         }catch(\Exception $e){
             DB::rollback();
             $error = $e->getMessage();
+            echo $error;
+            exit();
             Log::error(date('d-m-Y H:i:s ').$error);
             Session::flash('success',$error);
             return redirect()->back()->withInput();
@@ -403,6 +474,71 @@ class HomeController extends Controller
     public function paypalCancel(Request $request){
         echo "paypal cancel";
         return $request->all();
+    }
+
+    public function subscribeNewsLetter(Request $request){
+        $rule = array(
+            'email.required' => "Please enter the email!",
+            'email.unique' => "You have already subscribed!",
+        );
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255|unique:subscribers,email',
+        ],$rule);
+        if ($validator->fails()) {
+            return response()->json(array('status'=>false,'message' => $validator->errors()));
+        }
+        $ipAddress = $request->ip();
+        $userAgent = $request->header('User-Agent');
+        $agent = new Agent();
+        $browser = $agent->browser();
+        $device = $agent->device();
+        $platform = $agent->platform();
+
+        $subscriber = new Subscriber;
+        $subscriber->email = $request->email;
+        $subscriber->ip_address = $ipAddress;
+        $subscriber->user_details = $browser .'-'. $device .'-'. $platform;
+        $subscriber->status = '1';
+        if($subscriber->save()){
+            return response()->json(array('status'=>true,'message'=>'Thank you for subscribing!'));
+        }else{
+            return response()->json(array('status'=>false,'message'=>'Somthing wrong!'));
+        }
+    }
+
+    public function category($slug){
+        $category = Category::where('slug',$slug)->first();
+        return view('frontend/category_product')->with(['category'=>$category]);
+    }
+
+    public function updateAccount(){
+        $page = Page::where('id',9)->first();
+        return view('frontend/update_account')->with(['page'=>$page]);
+    }
+
+    public function updateAccountSave(Request $request){
+        $id = Auth::user()->id;
+        $this->validate($request, [
+            'name'      => 'required|max:255',
+            'mobile'    => 'nullable|unique:users,mobile,' . $id,
+            'email'     => 'required|unique:users,email,' . $id,
+            'user_name' => 'nullable|unique:users,user_name,' . $id,
+        ]);
+
+        $data = array(
+            'name'  => $request->name,
+            'email'  => $request->email,
+            'user_name'  => $request->user_name,
+            'mobile'  => $request->mobile,
+        );
+
+        if($request->password){
+            $data['password'] = Hash::make($request->password);
+        }
+
+        User::where('id',Auth::user()->id)->update($data);
+        Session::flash('success','Account updated successfully!');
+        return redirect()->back();
     }
 
 }

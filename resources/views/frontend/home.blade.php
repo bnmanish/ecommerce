@@ -45,7 +45,7 @@
                     @foreach($category as $categoryRow)
                     <div class="col mb-30">
                         <div class="categories__product--items border border-radius-5 text-center">
-                            <a class="categories__product--items__link" href="#">
+                            <a class="categories__product--items__link" href="{{route('product.category',$categoryRow->slug)}}">
                                 <img class="categories__product--thumbnail__img display-block" src="{{url('uploads/category/'.$categoryRow->banner)}}" alt="{{$categoryRow->title}}">
                                 <h3 class="categories__product--title h4">{{$categoryRow->title}}</h3>
                             </a>

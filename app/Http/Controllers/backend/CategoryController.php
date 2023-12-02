@@ -85,7 +85,8 @@ class CategoryController extends Controller
         }
         $category = new Category();
         $category->title = $request->title;
-        $category->slug = generateSlug($request->title);
+        // $category->slug = generateSlug($request->title);
+        $category->slug = $request->slug;
         $category->meta_title = $request->meta_title;
         $category->meta_keywords = $request->meta_keywords;
         $category->meta_description = $request->meta_description;
@@ -122,7 +123,8 @@ class CategoryController extends Controller
 
         $data = array(
             "title" => $request->title,
-            "slug" => generateSlug($request->title),
+            // "slug" => generateSlug($request->title),
+            "slug" => $request->slug,
             "meta_title" => $request->meta_title,
             "meta_keywords" => $request->meta_keywords,
             "meta_description" => $request->meta_description,

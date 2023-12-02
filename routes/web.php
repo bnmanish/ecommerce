@@ -60,11 +60,12 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/delete-cart-product',[HomeController::class,'deleteCartProduct'])->name('delete.cart.product');
     Route::post('/make-order',[HomeController::class,'makeOrder'])->name('make.order');
     Route::get('/order-invoice/{orderNo}',[HomeController::class,'orderInvoice'])->name('order.invoice');
-
+    Route::get('/update-account',[HomeController::class,'updateAccount'])->name('update.account');
+    Route::post('/update-account/save',[HomeController::class,'updateAccountSave'])->name('update.account.save');
 });
-
-Route::get('/paypal/callback', 'HomeController@paypalCallback')->name('paypal.callback');
-
+Route::get('/paypal/callback',[HomeController::class,'paypalCallback'])->name('paypal.callback');
+Route::post('/subscribe-news-letter',[HomeController::class,'subscribeNewsLetter'])->name('subscribe.news.letter');
+Route::get('/category/{slug}',[HomeController::class,'category'])->name('product.category');
 
 Route::get('/{url}',[HomeController::class,'additionalPages'])->name('additional.page');
 

@@ -46,41 +46,68 @@
                 <div class="account__left--sidebar">
                     <h3 class="account__content--title mb-20">My Profile</h3>
                     <ul class="account__menu">
-                        <li class="account__menu--list active"><a href="{{route('my.account')}}">My Orders</a></li>
-                        <li class="account__menu--list"><a href="{{route('update.account')}}">Update Account</a></li>
+                        <li class="account__menu--list"><a href="{{route('my.account')}}">My Orders</a></li>
+                        <li class="account__menu--list active"><a href="{{route('update.account')}}">Update Account</a></li>
                         <li class="account__menu--list"><a href="{{route('logout')}}">Log Out</a></li>
                     </ul>
                 </div>
                 <div class="account__wrapper">
                     <div class="account__content">
-                        <h3 class="account__content--title mb-20">Orders History</h3>
+                        <h3 class="account__content--title mb-20">Update Account</h3>
                         <div class="account__table--area">
-                            <table class="account__table">
-                                <thead class="account__table--header">
-                                    <tr class="account__table--header__child">
-                                        <th class="account__table--header__child--items">Order</th>
-                                        <th class="account__table--header__child--items">Date</th>
-                                        <th class="account__table--header__child--items">Payment Status</th>
-                                        <th class="account__table--header__child--items">Payment Ref No</th>
-                                        <th class="account__table--header__child--items">Total</th>	 	 	 	
-                                        <th class="account__table--header__child--items">Action</th>             
-                                    </tr>
-                                </thead>
-                                <tbody class="account__table--body mobile__none">
-                                    @foreach($orders as $order)
-                                    <tr class="account__table--body__child">
-                                        <td class="account__table--body__child--items">#{{$order->order_no}}</td>
-                                        <td class="account__table--body__child--items">{{date('d-M-Y',strtotime($order->created_at))}}</td>
-                                        <td class="account__table--body__child--items">{{$order->status === '2' ? 'Paid' : 'Unpaid'}}</td>
-                                        <td class="account__table--body__child--items">{{$order->payment_ref_no ?? 'Not Available'}}</td>
-                                        <td class="account__table--body__child--items">{{currency('dollar')}} {{$order->grand_total}}</td>
-                                        <td class="account__table--body__child--items">
-                                            <a target="_blank" href="{{route('order.invoice',$order->order_no)}}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm16 96H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm0 32v64H288V256H96zM240 416h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></a>
-                                        </td>
-                                    </tr>
+                            <div class="contact__form">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <p class="text-danger">{{ $error }}</p>
                                     @endforeach
-                                </tbody>
-                            </table>
+                                @endif
+                                @if(Session::has('success'))
+                                    <p class="text-danger">{{Session::get('success')}}</p>
+                                @endif
+                                <form class="contact__form--inner" method="post"  action="{{route('update.account.save')}}">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="contact__form--list mb-20">
+                                                <label class="contact__form--label" for="name">Name <span class="contact__form--label__star">*</span></label>
+                                                <input class="contact__form--input" name="name" id="name" placeholder="Name" type="text" value="{{Auth::user()->name}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="contact__form--list mb-20">
+                                                <label class="contact__form--label" for="email">Email <span class="contact__form--label__star">*</span></label>
+                                                <input class="contact__form--input" name="email" id="email" placeholder="Email" type="text" value="{{Auth::user()->email}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="contact__form--list mb-20">
+                                                <label class="contact__form--label" for="user_name">User Name</label>
+                                                <input class="contact__form--input" name="user_name" id="user_name" placeholder="User Name" type="text" value="{{Auth::user()->user_name}}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="contact__form--list mb-20">
+                                                <label class="contact__form--label" for="mobile">Mobile <span class="contact__form--label__star">*</span></label>
+                                                <input class="contact__form--input" name="mobile" id="mobile" placeholder="Mobile" type="text" value="{{Auth::user()->mobile}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="contact__form--list mb-20">
+                                                <label class="contact__form--label" for="password">Password </label>
+                                                <input class="contact__form--input" name="password" id="password" placeholder="Password" type="text">
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                    <button class="contact__form--btn primary__btn" type="submit">Update</button>  
+                                    <p class="form-messege"></p>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

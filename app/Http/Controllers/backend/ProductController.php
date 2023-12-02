@@ -44,7 +44,8 @@ class ProductController extends Controller
             DB::beginTransaction();
             $product = new Product();
             $product->title = $request->title;
-            $product->slug = generateSlug($request->title);
+            // $product->slug = generateSlug($request->title);
+            $product->slug = $request->slug;
             $product->code = $request->code;
             $product->category = $request->category;
             $product->price = $request->price;
@@ -165,7 +166,8 @@ class ProductController extends Controller
             DB::beginTransaction();
             $data = array(
                 "title" => $request->title,
-                "slug" => generateSlug($request->title),
+                // "slug" => generateSlug($request->title),
+                "slug" => $request->slug,
                 "code" => $request->code,
                 "category" => $request->category,
                 "price" => $request->price,
