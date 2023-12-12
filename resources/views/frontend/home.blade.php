@@ -15,13 +15,7 @@
                             @foreach($slider as $sliderRow)
                             <div class="swiper-slide ">
                                 <div class="hero__slider3--items hero__slider--bg3 slider2" style="background: url({{url('uploads/slider/'.$sliderRow->image)}});">
-                                    <div class="slider__content3 padding-left text-center">
-                                        <h2 class="slider__content3--maintitle">Make Beautiful Home <br>
-                                            With Moon Sofa</h2> 
-                                        <p class="slider__content3--desc color-black mb-35">Great furniture can bring beauty at your home, <br>
-                                            So buy our popular and stylish furniture. </p>  
-                                        <a class="slider__content3--btn primary__btn btn__style3" href="shop.html" rel="nofollow">Order Now</a>
-                                    </div>
+                                    {!! $sliderRow->description !!}
                                 </div>
                             </div>
                             @endforeach
@@ -63,48 +57,48 @@
             <div class="row mb--n28">
                 <div class="col-lg-6 col-md-6 col-sm-6 mb-28">
                     <div class="banner__items">
-                        <a class="banner__items--thumbnail position__relative" href="shop.html"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner1.webp')}}" alt="banner-img">
+                        <a class="banner__items--thumbnail position__relative" href="{{url('/')}}"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner1.jpg')}}" alt="banner-img">
                             <div class="banner__items--content one">
-                                <h2 class="banner__items--content__title">White Minimalist <br>
-                                    Combo Sofa </h2>
+                                <<!-- h2 class="banner__items--content__title">White Minimalist <br>
+                                    Combo Sofa </h2> -->
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 mb-28">
                     <div class="banner__items">
-                        <a class="banner__items--thumbnail position__relative" href="shop.html"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner2.webp')}}" alt="banner-img">
+                        <a class="banner__items--thumbnail position__relative" href="{{url('/')}}"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner2.jpg')}}" alt="banner-img">
                             <div class="banner__items--content two">
-                                <h2 class="banner__items--content__title">Modern Stylish <br>
-                                    Single Sofa</h2>
+                                <!-- <h2 class="banner__items--content__title">Modern Stylish <br>
+                                    Single Sofa</h2> -->
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 mb-28">
                     <div class="banner__items">
-                        <a class="banner__items--thumbnail position__relative" href="shop.html"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner3.webp')}}" alt="banner-img">
+                        <a class="banner__items--thumbnail position__relative" href="{{url('/')}}"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner3.jpg')}}" alt="banner-img">
                             <div class="banner__items--content three">
-                                <h2 class="banner__items--content__title">Larger Minimal <br>
-                                    Wooden Chair </h2>
+                                <<!-- h2 class="banner__items--content__title">Larger Minimal <br>
+                                    Wooden Chair </h2> -->
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 mb-28">
                     <div class="banner__items mb-25">
-                        <a class="banner__items--thumbnail position__relative" href="shop.html"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner4.webp')}}" alt="banner-img">
+                        <a class="banner__items--thumbnail position__relative" href="{{url('/')}}"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner4.jpg')}}" alt="banner-img">
                             <div class="banner__items--content four">
-                                <h2 class="banner__items--content__title four">Family Package <br>
-                                    Sofa Set</h2>
+                               <!--  <h2 class="banner__items--content__title four">Family Package <br>
+                                    Sofa Set</h2> -->
                             </div>
                         </a>
                     </div>
                     <div class="banner__items">
-                        <a class="banner__items--thumbnail position__relative" href="shop.html"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner5.webp')}}" alt="banner-img">
+                        <a class="banner__items--thumbnail position__relative" href="{{url('/')}}"><img class="banner__items--thumbnail__img" src="{{url('assets/frontend/img/banner/banner5.jpg')}}" alt="banner-img">
                             <div class="banner__items--content five">
-                                <h2 class="banner__items--content__title">White Minimalist <br>
-                                    Combo Sofa</h2>
+                                <!-- <h2 class="banner__items--content__title">White Minimalist <br>
+                                    Combo Sofa</h2> -->
                             </div>
                         </a>
                     </div>

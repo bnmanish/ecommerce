@@ -72,7 +72,7 @@
                                     <path d="M0 0V100H304.237L387 0H0Z" fill="#EE1C25" />
                                 </svg>
                             </div>
-                            <div class="row justify-content-end">
+                            <div class="row justify-content-end logo-row">
                                 <div class="col-auto">
                                     <div class="header-logo">
                                         <a href="{{route('home')}}"><img src="{{url('uploads/setting/'.@settings()->site_logo)}}" alt="TimyShop"></a>

@@ -14,6 +14,8 @@ use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\backend\AdditionalPageController;
 use App\Http\Controllers\backend\PageController;
+use App\Http\Controllers\backend\SubscriberController;
+use App\Http\Controllers\backend\EnquiryController;
 // frontend controllers
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\AboutController;
@@ -155,6 +157,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/edit-store-additional-page/{id}', [AdditionalPageController::class, 'editStorePage'])->name('admin.edit.store.additional.page');
         Route::get('/delete-additional-page/{id}', [AdditionalPageController::class, 'deletePage'])->name('admin.delete.additional.page');
 
+        // Subscriber
+        Route::get('/list-subscriber', [SubscriberController::class, 'listSubscriber'])->name('admin.list.subscriber');
+        Route::get('/get-subscriber-data', [SubscriberController::class, 'getSubscriberData'])->name('admin.get.subscriber.data');
+        Route::get('/delete-subscriber/{id}', [SubscriberController::class, 'deleteSubscriber'])->name('admin.delete.subscriber');
+
+        // Contact Enquiry
+        Route::get('/list-enquiry', [EnquiryController::class, 'listSubscriber'])->name('admin.list.enquiry');
+        Route::get('/get-enquiry-data', [EnquiryController::class, 'getSubscriberData'])->name('admin.get.enquiry.data');
+        Route::get('/delete-enquiry/{id}', [EnquiryController::class, 'deleteSubscriber'])->name('admin.delete.enquiry');
         
         // Admin logout
         Route::get('admin/logout', [LoginController::class, 'adminLogout'])->name('admin.logout');

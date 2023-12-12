@@ -310,6 +310,20 @@
                             </li>
 
                             <li>
+                                <a href="{{route('admin.list.subscriber')}}" class="waves-effect">
+                                    <i class="fas fa-sliders-h"></i>
+                                    <span>Subscriber</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('admin.list.enquiry')}}" class="waves-effect">
+                                    <i class="fas fa-sliders-h"></i>
+                                    <span>Contact Enquiry</span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="{{route('admin.manage.setting')}}" class="waves-effect">
                                     <i class="fas fa-sliders-h"></i>
                                     <span>Setting</span>

@@ -42,6 +42,7 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 use Jenssegers\Agent\Agent;
+use App\Models\ContactEnquiry as ContactEnq;
 
 class HomeController extends Controller
 {
@@ -108,7 +109,7 @@ class HomeController extends Controller
 
     public function products(){
         $page = Page::where('id',3)->first();
-        $products = Product::where(['status'=>'1','new'=>'1'])->orderBy('created_at','desc')->get();
+        $products = Product::where(['status'=>'1'])->orderBy('created_at','desc')->get();
         return view('frontend/product')->with(['products'=>$products,'page'=>$page]);
     }
 
@@ -418,18 +419,26 @@ class HomeController extends Controller
     }
 
     public function contactEnquiry(Request $request){
-        // return $request->all();
-        $emailData = array(
-            "name" => $request->name,
-            "mobile" => $request->mobile,
-            "email" => $request->email,
-            "city" => $request->city,
-            "message" => $request->message,
-        );
+        try{
+            $emailData = array(
+                "name" => $request->name,
+                "mobile" => $request->mobile,
+                "email" => $request->email,
+                "city" => $request->city,
+                "message" => $request->message,
+            );
 
-        Mail::to(env('CONTACT_ENQUIRY_TO_EMAIL'))->send(new ContactEnquiry($emailData));
-        Session::flash('success','Thank you so mutch for your interest in us.');
-        return redirect()->back();
+            $contactEnquiry = new ContactEnq($emailData);
+            $contactEnquiry->save();
+
+            Mail::to(env('CONTACT_ENQUIRY_TO_EMAIL'))->send(new ContactEnquiry($emailData));
+            Session::flash('success','Thank you so mutch for your interest in us.');
+            return redirect()->back();
+        }catch(Exception $e){
+            Session::flash('success','Somthing went wrong.');
+            return redirect()->back();
+        }
+        
 
 
     }

@@ -7,7 +7,7 @@
   <meta name="description" content="@yield('description')">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="{{url('uploads/setting/'.@settings()->site_logo)}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{url('uploads/setting/'.@settings()->favicon)}}">
    <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{url('assets/frontend/css/plugins/swiper-bundle.min.css')}}">
   <link rel="stylesheet" href="{{url('assets/frontend/css/plugins/glightbox.min.css')}}">
