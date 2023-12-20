@@ -307,9 +307,9 @@
                             <div class="footer__newsletter footer__widget--inner">
                                 <p class="footer__newsletter--desc">Get updates by subscribe our
                                     weekly newsletter</p>
-                                <form id="newsletterForm" class="newsletter__subscribe--form__style position__relative">
+                                <form id="newsletterForm" class="newsletter__subscribe--form__style position__relative newsletterForm1">
                                     <label>
-                                        <input id="new-letter-email" class="footer__newsletter--input newsletter__subscribe--input" placeholder="Enter your email address" type="email">
+                                        <input id="new-letter-email" class="footer__newsletter--input newsletter__subscribe--input new-letter-email1" placeholder="Enter your email address" type="email">
                                     </label>
                                     <button class="footer__newsletter--button newsletter__subscribe--button primary__btn" type="submit">Subscribe
                                         <svg class="newsletter__subscribe--button__icon" xmlns="http://www.w3.org/2000/svg" width="9.159" height="7.85" viewBox="0 0 9.159 7.85">
@@ -342,29 +342,10 @@
   <script src="{{url('assets/frontend/js/script.js')}}" defer="defer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-        function subscribeNewLetter() {
-            var email = $('#new-letter-email').val();
-
-            $.ajax({
-                url: 'your_backend_endpoint_url',
-                type: 'POST',
-                data: {_token: '{{csrf_token()}}', email: email },
-                success: function(response) {
-                    // Handle success
-                    console.log(response);
-                },
-                error: function(error) {
-                    // Handle error
-                    console.log(error);
-                }
-            });
-        }
-    </script>
-    <script>
         $(document).ready(function() {
-            $('#newsletterForm').submit(function(event) {
+            $('.newsletterForm').submit(function(event) {
                 event.preventDefault();
-                var email = $('#new-letter-email').val();
+                var email = $('.new-letter-email').val();
                 $.ajax({
                     url: "{{route('subscribe.news.letter')}}",
                     type: 'POST',
@@ -377,7 +358,29 @@
                         if(response.status == false){
                             alert(response.message.email);
                         }
-                        $('#new-letter-email').val('');
+                        $('.new-letter-email').val('');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('.newsletterForm1').submit(function(event) {
+                event.preventDefault();
+                var email = $('.new-letter-email1').val();
+                $.ajax({
+                    url: "{{route('subscribe.news.letter')}}",
+                    type: 'POST',
+                    data: {_token: '{{csrf_token()}}', email: email },
+                    success: function(response) {
+                        console.log(response);
+                        if(response.status == true){
+                            alert(response.message);
+                        }
+                        if(response.status == false){
+                            alert(response.message.email);
+                        }
+                        $('.new-letter-email').val('');
                     }
                 });
             });

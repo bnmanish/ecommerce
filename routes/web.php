@@ -40,9 +40,6 @@ Route::get('/products/{slug}',[HomeController::class,'productsDetails'])->name('
 Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
 Route::post('/contact-enquiry',[HomeController::class,'contactEnquiry'])->name('contact.enquiry');
 
-
-
-
 Route::get('/login',[HomeController::class,'login'])->name('login');
 Route::post('/logined',[HomeController::class,'logedin'])->name('logedin');
 
@@ -93,7 +90,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/edit-store-user/{id}', [UserController::class, 'editStoreUser'])->name('admin.edit.store.user');
         Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('admin.delete.user');
 
-
         // Manage Slider
         Route::get('/add-slider', [SliderController::class, 'addSlider'])->name('admin.add.slider');
         Route::post('/store-slider', [SliderController::class, 'stroeSlider'])->name('admin.store.slider');
@@ -135,7 +131,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/get-list-order', [OrderController::class, 'getlistOrder'])->name('admin.get.list.order');
         Route::get('/order-invoice/{orderNo}', [OrderController::class, 'orderInvoice'])->name('admin.order.invoice');
 
-
         // Manage Setting
         Route::get('/manage-setting', [SettingController::class, 'manageSetting'])->name('admin.manage.setting');
         Route::post('/update-setting', [SettingController::class, 'updateSetting'])->name('admin.update.setting');
@@ -147,7 +142,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit-page/{id}', [PageController::class, 'editPage'])->name('admin.edit.page');
         Route::post('/edit-store-page/{id}', [PageController::class, 'editStorePage'])->name('admin.edit.store.page');
         Route::get('/delete-page/{id}', [PageController::class, 'deletePage'])->name('admin.delete.page');
-
 
         // Manage Additional
         Route::get('/add-additional-page', [AdditionalPageController::class, 'addPage'])->name('admin.add.additional.page');
@@ -166,7 +160,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/list-enquiry', [EnquiryController::class, 'listSubscriber'])->name('admin.list.enquiry');
         Route::get('/get-enquiry-data', [EnquiryController::class, 'getSubscriberData'])->name('admin.get.enquiry.data');
         Route::get('/delete-enquiry/{id}', [EnquiryController::class, 'deleteSubscriber'])->name('admin.delete.enquiry');
-        
+
         // Admin logout
         Route::get('admin/logout', [LoginController::class, 'adminLogout'])->name('admin.logout');
     });

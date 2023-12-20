@@ -450,9 +450,9 @@
                     <h5 class="newsletter__content--subtitle text-white">Want to offer regularly ?</h5>
                     <h2 class="newsletter__content--title text-white h3 mb-25">Subscribe Our Newsletter <br>
                         for Get Daily Update</h2>
-                    <form class="newsletter__subscribe--form position__relative" action="#">
+                    <form class="newsletter__subscribe--form position__relative newsletterForm" action="#">
                         <label>
-                            <input class="newsletter__subscribe--input" placeholder="Enter your email address" type="email">
+                            <input class="newsletter__subscribe--input new-letter-email" placeholder="Enter your email address" type="email">
                         </label>
                         <button class="newsletter__subscribe--button primary__btn" type="submit">Subscribe
                             <svg class="newsletter__subscribe--button__icon" xmlns="http://www.w3.org/2000/svg" width="9.159" height="7.85" viewBox="0 0 9.159 7.85">
