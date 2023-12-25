@@ -17,6 +17,7 @@ use App\Models\OrderDetail;
 use App\Models\Subscriber;
 use App\Models\Order;
 use App\Mail\ContactEnquiry;
+use App\Mail\OrderReceipt;
 use Session;
 use Hash;
 use Mail;
@@ -405,15 +406,14 @@ class HomeController extends Controller
 
             }
 
+            // called function to send receipt on mail
             $this->sendOrderReceipt($orderNo);
 
             Session::flash('success','Thank you for order with Us, Your order No is : #'.$orderNo);
             return redirect()->route('my.account');
         }catch(\Exception $e){
             DB::rollback();
-            $error = $e->getMessage();
-            echo $error;
-            exit();
+            $error = $e->getMessage().'line no'.$e->getLine();
             Log::error(date('d-m-Y H:i:s ').$error);
             Session::flash('success',$error);
             return redirect()->back()->withInput();
@@ -554,8 +554,18 @@ class HomeController extends Controller
     }
 
     public function sendOrderReceipt($orderNo){
-        $order = Order::where(['user_id'=>Auth::user()->id,'order_no'=>$orderNo])->first();
-        Mail::to($order->address->email)->send(new OrderReceipt($order));
+
+        try {
+            $order = Order::where(['user_id'=>Auth::user()->id,'order_no'=>$orderNo])->first();
+            Mail::to($order->address->email)->send(new OrderReceipt($order));
+        } catch (\Exception $e) {
+            \Log::error('Error in sendOrderReceipt function: ' . $e->getMessage());
+            $error = "OrderNo : " .$orderNo. " Error in sendOrderReceipt function : ".$e->getMessage()." - ".$e->getLine();
+            Log::error(date('d-m-Y H:i:s ').$error);
+            Session::flash('success',$error);
+            return redirect()->back()->withInput();
+        }
+        
     }
 
 }

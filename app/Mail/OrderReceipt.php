@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use PDF;
 
 class OrderReceipt extends Mailable
 {
@@ -17,7 +18,7 @@ class OrderReceipt extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($order)
     {
         $this->order = $order;
     }
@@ -55,7 +56,7 @@ class OrderReceipt extends Mailable
     public function build()
     {
 
-        $pdf = PDF::loadView('frontend.invoice.order_invoice', ['order' => $this->order]);
+        $pdf = PDF::loadView('frontend.invoice.order_invoice', ['order' => $this->order])->setOptions(['defaultFont' => 'sans-serif']);
         return $this->view('mail_template.order_receipt',['order' => $this->order])
             ->attachData($pdf->output(), 'order_receipt.pdf', [
                 'mime' => 'application/pdf'
