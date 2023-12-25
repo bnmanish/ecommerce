@@ -405,6 +405,8 @@ class HomeController extends Controller
 
             }
 
+            $this->sendOrderReceipt($orderNo);
+
             Session::flash('success','Thank you for order with Us, Your order No is : #'.$orderNo);
             return redirect()->route('my.account');
         }catch(\Exception $e){
@@ -428,6 +430,7 @@ class HomeController extends Controller
                 "message" => $request->message,
             );
 
+            // use App\Models\ContactEnquiry as ContactEnq;  send enquiry on mail
             $contactEnquiry = new ContactEnq($emailData);
             $contactEnquiry->save();
 
@@ -548,6 +551,11 @@ class HomeController extends Controller
         User::where('id',Auth::user()->id)->update($data);
         Session::flash('success','Account updated successfully!');
         return redirect()->back();
+    }
+
+    public function sendOrderReceipt($orderNo){
+        $order = Order::where(['user_id'=>Auth::user()->id,'order_no'=>$orderNo])->first();
+        Mail::to($order->address->email)->send(new OrderReceipt($order));
     }
 
 }
