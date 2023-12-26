@@ -206,7 +206,7 @@
                                 </svg>
                             </h2>
                             <div class="footer__widget--inner">
-                                <a class="footer__logo" href="{{route('home')}}"><img src="{{url('uploads/setting/'.@settings()->site_logo2)}}" alt="TimyShop"></a>
+                                <a class="footer__logo" href="{{route('home')}}"><img src="{{url('uploads/setting/'.@settings()->site_logo2)}}" alt="KarimaWilliams"></a>
                                 <p class="footer__widget--desc">Ut enim ad minim veniam, quis <br> nostrud exercitation ullamco laboris <br> nisi ut aliquip ex ea commodo.</p>
                                 <div class="footer__social">
                                     <ul class="social__shear d-flex">

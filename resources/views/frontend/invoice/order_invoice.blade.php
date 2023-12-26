@@ -75,7 +75,7 @@
                             <div class="row justify-content-end logo-row">
                                 <div class="col-auto">
                                     <div class="header-logo">
-                                        <a href="{{route('home')}}"><img src="{{url('uploads/setting/'.@settings()->site_logo)}}" alt="TimyShop"></a>
+                                        <a href="{{route('home')}}"><img src="{{url('uploads/setting/'.@settings()->site_logo)}}" alt="KarimaWilliams"></a>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                 <div class="invoice-right">
                                     <b>Seller Address : </b>
                                     <address>
-                                        TimyShop (timyshop.com) ,<br>
+                                        KarimaWilliams (KarimaWilliams.com) ,<br>
                                         @if(@settings()->primary_address)
                                             {!!settings()->primary_address!!}
                                         @else

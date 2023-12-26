@@ -2,10 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Login | TimyShop</title>
+        <title>Admin Login | KarimaWilliams</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="TimyShop Admin Login Page" name="description" />
-        <meta content="TimyShop" name="author" />
+        <meta content="KarimaWilliams Admin Login Page" name="description" />
+        <meta content="KarimaWilliams" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{url('assets/backend/images/favicon.ico')}}">
         <!-- Bootstrap Css -->
@@ -33,7 +33,7 @@
                                     </div>
                                     <!-- end row -->
                                     <h4 class="font-size-18 text-muted mt-2 text-center">Welcome Back !</h4>
-                                    <p class="mb-3 text-center">Sign in to continue TimyShop.</p>
+                                    <p class="mb-3 text-center">Sign in to continue KarimaWilliams.</p>
                                     @if($errors->any())
                                         @foreach ($errors->all() as $error)
                                         <div class="alert alert-danger alert-dismissible py-2">

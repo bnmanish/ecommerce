@@ -1,5 +1,5 @@
 @extends('frontend/layouts/main')
-@section('title', 'Home : : TimyShop')
+@section('title', 'Home : : KarimaWilliams')
 @section('content')
 <main class="main__content_wrapper">
     

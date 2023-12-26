@@ -28,7 +28,7 @@ class ContactEnquiry extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'TimyShop : Contact Enquiry',
+            subject: 'KarimaWilliams : Contact Enquiry',
         );
     }
 

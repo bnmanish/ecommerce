@@ -1,5 +1,5 @@
 @extends('backend/layouts/main')
-@section('title', 'Order List | TimyShop')
+@section('title', 'Order List | KarimaWilliams')
 @section('content')
 
 <div class="page-content">

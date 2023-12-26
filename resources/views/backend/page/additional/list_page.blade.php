@@ -1,5 +1,5 @@
 @extends('backend/layouts/main')
-@section('title', 'Edit Page | TimyShop')
+@section('title', 'Edit Page | KarimaWilliams')
 @section('content')
 <div class="page-content">
     <div class="container-fluid">
