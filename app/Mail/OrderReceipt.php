@@ -39,7 +39,7 @@ class OrderReceipt extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'frontend.invoice.order_invoice',
+            view: 'mail_template/order_receipt',
         );
     }
 
@@ -56,8 +56,8 @@ class OrderReceipt extends Mailable
     public function build()
     {
 
-        $pdf = PDF::loadView('frontend.invoice.order_invoice', ['order' => $this->order])->setOptions(['defaultFont' => 'sans-serif']);
-        return $this->view('mail_template.order_receipt',['order' => $this->order])
+        $pdf = PDF::loadView('frontend/invoice/order_invoice', ['order' => $this->order])->setOptions(['defaultFont' => 'sans-serif']);
+        return $this->view('mail_template/order_receipt',['order' => $this->order])
             ->attachData($pdf->output(), 'order_receipt.pdf', [
                 'mime' => 'application/pdf'
             ]);

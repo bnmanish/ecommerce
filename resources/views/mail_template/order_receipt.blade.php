@@ -9,9 +9,7 @@
 <p>Hello {{$order->address->name}}</p>
 
 <p>Thanks for order with us!</p>
-
-
-
+<p>Please find the attached order receipt.</p>
 
 <p>Best regards,</p>
 <p>Team <a href="{{route('home')}}">KarimaWilliams</a></p>
