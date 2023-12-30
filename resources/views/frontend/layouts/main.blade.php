@@ -17,6 +17,9 @@
   
   <!-- Custom Style CSS -->
   <link rel="stylesheet" href="{{url('assets/frontend/css/style.css')}}">
+  <!-- recaptcha cdn -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- recaptcha cdn -->
   {!!@settings()->head_content!!}
 </head>
 

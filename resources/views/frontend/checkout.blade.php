@@ -26,7 +26,7 @@
     <!-- Start checkout page area -->
     <div class="checkout__page--area section--padding">
         <div class="container">
-            <form action="{{route('make.order')}}" method="post">
+            <form id="make-order" action="{{route('make.order')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-lg-7 col-md-6">
@@ -213,7 +213,11 @@
                                     </li> -->
                                 </ul>
                             </div>
-                            <button class="checkout__now--btn primary__btn" type="submit">Make Order</button>
+                            <!-- <button class="checkout__now--btn primary__btn" type="submit">Make Order</button> -->
+                            <div onclick="return submitForm()">
+                                <img class="w-100" src="{{url('assets/paypal_btn.png')}}" type="submit">
+                            </div>
+                            <!-- <button class="checkout__now--btn primary__btn" type="submit">Make Order</button> -->
                         </aside>
                     </div>
                 </div>
@@ -250,6 +254,8 @@
 @stop
 @push('scripts')
 <script>
-// alert('Hello');
+    function submitForm(){
+        $("#make-order").submit();
+    }
 </script>
 @endpush

@@ -120,6 +120,12 @@
                                             <textarea class="contact__form--textarea" name="message" id="message" placeholder="Write Your Message">{{old('message')}}</textarea>
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="g-recaptcha" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
+                                        <div class="error-recaptcha text-danger"></div>
+                                    </div>
+
                                 </div>
                                 <button class="contact__form--btn primary__btn" type="submit">Submit Now</button>  
                                 <p class="form-messege"></p>

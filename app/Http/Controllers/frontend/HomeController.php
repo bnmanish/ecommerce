@@ -430,6 +430,17 @@ class HomeController extends Controller
                 "message" => $request->message,
             );
 
+            // token sent by form when recaptcha checked
+            $recaptcha = $_POST['g-recaptcha-response'];
+            $SECRET_KEY=env('RECAPTCHA_SECRET_KEY');
+            $url = "https://www.google.com/recaptcha/api/siteverify?secret=".$SECRET_KEY."&response=".$recaptcha;
+            $response = json_decode(file_get_contents($url),true);
+            if($response['success']==false){
+                Session::flash('success','Recaptcha verification failed!');
+                return redirect()->back()->withInput();
+            }
+            // token sent by form when recaptcha checked
+            
             // use App\Models\ContactEnquiry as ContactEnq;  send enquiry on mail
             $contactEnquiry = new ContactEnq($emailData);
             $contactEnquiry->save();
