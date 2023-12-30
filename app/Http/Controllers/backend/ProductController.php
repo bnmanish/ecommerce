@@ -60,6 +60,7 @@ class ProductController extends Controller
             $product->new = $request->new == 'on' ? '1' : '0';
             $product->featured = $request->featured == "on" ? '1' : '0';
             $product->sale = $request->sale == "on" ? '1' : '0';
+            $product->in_stock = $request->in_stock == "on" ? '1' : '0';
             $product->status = $request->status == "on" ? '1' : '0';
             $product->save();
 
@@ -182,6 +183,7 @@ class ProductController extends Controller
                 "new" => $request->new == 'on' ? '1' : '0',
                 "featured" => $request->featured == "on" ? '1' : '0',
                 "sale" => $request->sale == "on" ? '1' : '0',
+                "in_stock" => $request->in_stock == "on" ? '1' : '0',
                 "status" => $request->status == "on" ? '1' : '0',
             );
             Product::where('id',$id)->update($data);

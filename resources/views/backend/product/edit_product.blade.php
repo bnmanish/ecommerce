@@ -157,6 +157,14 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <label class="col-md-2 col-form-label">In Stock </label>
+                                <div class="col-md-10">
+                                    <input class="form-check form-switch" type="checkbox" id="in_stock" switch="bool" name="in_stock" @if($data->in_stock == '1') checked @endif>
+                                    <label class="form-label" for="in_stock" data-on-label="Yes" data-off-label="No"></label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label class="col-md-2 col-form-label">Status </label>
                                 <div class="col-md-10">
                                     <input class="form-check form-switch" type="checkbox" id="status" switch="bool" name="status" @if($data->status == '1') checked @endif>

@@ -220,7 +220,7 @@ class HomeController extends Controller
             'state' => 'required|max:255',
             'country' => 'required|max:255',
             'pincode' => 'required|max:255',
-            'mode' => 'required|in:COD,PayUMoney,paypal',
+            // 'mode' => 'required|in:COD,PayUMoney,paypal',
         ]);
         DB::beginTransaction();
         try{
@@ -284,7 +284,7 @@ class HomeController extends Controller
             CartDetail::where('cart_id',$cart->id)->delete();
             Cart::where('id',$cart->id)->delete();
 
-            if ($request->mode === 'paypal') {
+            // if ($request->mode === 'paypal') {
                 $payer = new Payer();
                 $payer->setPaymentMethod('paypal');
 
@@ -334,77 +334,77 @@ class HomeController extends Controller
                 Session::flash('error', 'Unknown error occurred');
                 return Redirect::route('my.account');
 
-            }else if($request->mode === 'PayUMoney'){
-                $MERCHANT_KEY = env('PAYU_MERCHANT_KEY');
-                $SALT = env('PAYU_MERCHANT_SALT');
-                $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
-                // Merchant Key and Salt as provided by Payu.
-                $PAYU_BASE_URL = env('PAYU_BASE_URL');
-                $action = '';
-                $posted = array(
-                  'key' =>  $MERCHANT_KEY,
-                  'txnid' =>  $txnid,
-                  'amount'  =>  $grandTotal,
-                  'firstname' =>  $request->name,
-                  'email' =>  $request->email,
-                  'phone' =>  Auth::user()->mobile,   //mobile no
-                  'productinfo' => 'paymnet for orderNo: '.$orderNo,
-                  'surl'  =>  'http://localhost/payumoney/success.php',
-                  'furl'  =>  'http://localhost/payumoney/failure.php',
-                  'service_provider'  =>  env('SERVICE_PROVIDER'),
-                );
+            // }else if($request->mode === 'PayUMoney'){
+            //     $MERCHANT_KEY = env('PAYU_MERCHANT_KEY');
+            //     $SALT = env('PAYU_MERCHANT_SALT');
+            //     $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
+            //     // Merchant Key and Salt as provided by Payu.
+            //     $PAYU_BASE_URL = env('PAYU_BASE_URL');
+            //     $action = '';
+            //     $posted = array(
+            //       'key' =>  $MERCHANT_KEY,
+            //       'txnid' =>  $txnid,
+            //       'amount'  =>  $grandTotal,
+            //       'firstname' =>  $request->name,
+            //       'email' =>  $request->email,
+            //       'phone' =>  Auth::user()->mobile,   //mobile no
+            //       'productinfo' => 'paymnet for orderNo: '.$orderNo,
+            //       'surl'  =>  'http://localhost/payumoney/success.php',
+            //       'furl'  =>  'http://localhost/payumoney/failure.php',
+            //       'service_provider'  =>  env('SERVICE_PROVIDER'),
+            //     );
 
-                if(!empty($_POST)) {
-                    //print_r($_POST);
-                  foreach($_POST as $key => $value) {
-                    $posted[$key] = $value;
-                  }
-                }
+            //     if(!empty($_POST)) {
+            //         //print_r($_POST);
+            //       foreach($_POST as $key => $value) {
+            //         $posted[$key] = $value;
+            //       }
+            //     }
 
-                $formError = 0;
+            //     $formError = 0;
 
-                if(empty($posted['txnid'])) {
-                  // Generate random transaction id
-                  $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
-                } else {
-                  $txnid = $posted['txnid'];
-                }
-                $hash = '';
-                // Hash Sequence
-                $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
-                if(empty($posted['hash']) && sizeof($posted) > 0) {
-                  if(
-                          empty($posted['key'])
-                          || empty($posted['txnid'])
-                          || empty($posted['amount'])
-                          || empty($posted['firstname'])
-                          || empty($posted['email'])
-                          || empty($posted['phone'])
-                          || empty($posted['productinfo'])
-                          || empty($posted['surl'])
-                          || empty($posted['furl'])
-                          || empty($posted['service_provider'])
-                  ) {
-                    $formError = 1;
-                  } else {
-                    $hashVarsSeq = explode('|', $hashSequence);
-                    $hash_string = '';  
-                    foreach($hashVarsSeq as $hash_var) {
-                      $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
-                      $hash_string .= '|';
-                    }
-                    $hash_string .= $SALT;
-                    $hash = strtolower(hash('sha512', $hash_string));
-                    $action = $PAYU_BASE_URL . '/_payment';
-                  }
-                } elseif(!empty($posted['hash'])) {
-                  $hash = $posted['hash'];
-                  $action = $PAYU_BASE_URL . '/_payment';
-                }
-                $data = compact('hash','MERCHANT_KEY','action','txnid','formError','posted');
-                return view('frontend/payu_form',$data);
+            //     if(empty($posted['txnid'])) {
+            //       // Generate random transaction id
+            //       $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
+            //     } else {
+            //       $txnid = $posted['txnid'];
+            //     }
+            //     $hash = '';
+            //     // Hash Sequence
+            //     $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
+            //     if(empty($posted['hash']) && sizeof($posted) > 0) {
+            //       if(
+            //               empty($posted['key'])
+            //               || empty($posted['txnid'])
+            //               || empty($posted['amount'])
+            //               || empty($posted['firstname'])
+            //               || empty($posted['email'])
+            //               || empty($posted['phone'])
+            //               || empty($posted['productinfo'])
+            //               || empty($posted['surl'])
+            //               || empty($posted['furl'])
+            //               || empty($posted['service_provider'])
+            //       ) {
+            //         $formError = 1;
+            //       } else {
+            //         $hashVarsSeq = explode('|', $hashSequence);
+            //         $hash_string = '';  
+            //         foreach($hashVarsSeq as $hash_var) {
+            //           $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
+            //           $hash_string .= '|';
+            //         }
+            //         $hash_string .= $SALT;
+            //         $hash = strtolower(hash('sha512', $hash_string));
+            //         $action = $PAYU_BASE_URL . '/_payment';
+            //       }
+            //     } elseif(!empty($posted['hash'])) {
+            //       $hash = $posted['hash'];
+            //       $action = $PAYU_BASE_URL . '/_payment';
+            //     }
+            //     $data = compact('hash','MERCHANT_KEY','action','txnid','formError','posted');
+            //     return view('frontend/payu_form',$data);
 
-            }
+            // }
 
             // called function to send receipt on mail
             $this->sendOrderReceipt($orderNo);
@@ -476,6 +476,8 @@ class HomeController extends Controller
             $orderData = Order::where('payment_ref_no',$result->id);
             $orderData->update(['status'=>'2']);
             Session::flash('success','Thank you for order with Us, Your order No is #: '.$orderData->first()->order_no);
+            // send order receipt to mail
+            $this->sendOrderReceipt($orderData->first()->order_no);
             return Redirect::route('my.account');
         }
 
@@ -554,7 +556,6 @@ class HomeController extends Controller
     }
 
     public function sendOrderReceipt($orderNo){
-
         try {
             $order = Order::where(['user_id'=>Auth::user()->id,'order_no'=>$orderNo])->first();
             Mail::to($order->address->email)->send(new OrderReceipt($order));

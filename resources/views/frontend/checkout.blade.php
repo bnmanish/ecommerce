@@ -199,7 +199,7 @@
                             <div class="payment__history mb-30">
                                 <h3 class="payment__history--title mb-20">Payment</h3>
                                 <ul class="payment__history--inner d-flex">
-                                    <li class="payment__history--list">
+                                    <!-- <li class="payment__history--list">
                                         <button class="payment__history--link primary__btn" type="button"><label for="cod">COD</label></button>
                                         <input type="radio" name="mode" value="COD" id="cod">
                                     </li>
@@ -210,7 +210,7 @@
                                     <li class="payment__history--list">
                                         <button class="payment__history--link primary__btn" type="button"><label for="paypal">Paypal</label></button>
                                         <input type="radio" name="mode" value="paypal" id="paypal">
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <button class="checkout__now--btn primary__btn" type="submit">Make Order</button>

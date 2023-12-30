@@ -96,11 +96,16 @@
                                             </label>
                                             <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
                                         </div>
-                                        <button class="quickview__cart--btn primary__btn" type="submit">Add To Cart</button>  
+                                        <button class="quickview__cart--btn primary__btn" type="submit" @if($product->in_stock != '1') disabled @endif>Add To Cart</button>  
                                     </div>
                                 </form>
                                 <div class="product__variant--list mb-15">
                                     <div class="product__details--info__meta">
+                                        @if($product->in_stock == '1')
+                                        <span class="border px-2 border-success text-success"><strong>In Stock</strong></span>
+                                        @else
+                                        <span class="border px-2 border-danger text-danger"><strong>Out Of Stock</strong></span>
+                                        @endif
                                         <p class="product__details--info__meta--list"><strong>Product Code : </strong>  <span>{{$product->code}}</span> </p>
                                         <p class="product__details--info__meta--list"><strong>Category : </strong>  <span>{{$product->cat->title}}</span> </p>
 

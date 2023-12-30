@@ -7,7 +7,7 @@
         <meta content="KarimaWilliams Admin Login Page" name="description" />
         <meta content="KarimaWilliams" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{url('assets/backend/images/favicon.ico')}}">
+        <link rel="shortcut icon" href="{{url('uploads/setting/'.@settings()->favicon)}}">
         <!-- Bootstrap Css -->
         <link href="{{url('assets/backend/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
@@ -27,8 +27,8 @@
                                 <div class="">
                                     <div class="text-center">
                                         <a href="index.html" class="">
-                                            <img src="{{url('assets/backend/images/logo-dark.png')}}" alt="" height="24" class="auth-logo logo-dark mx-auto">
-                                            <img src="{{url('assets/backend/images/logo-light.png')}}" alt="" height="24" class="auth-logo logo-light mx-auto">
+                                            <img src="{{url('uploads/setting/'.@settings()->site_logo)}}" alt="KarimaWilliams" height="24" class="auth-logo logo-dark mx-auto">
+                                            <img src="{{url('uploads/setting/'.@settings()->site_logo)}}" alt="KarimaWilliams" height="24" class="auth-logo logo-light mx-auto">
                                         </a>
                                     </div>
                                     <!-- end row -->

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->enum('new',['0','1'])->default('0')->comment('0=No,1=yes');
             $table->enum('featured',['0','1'])->default('0')->comment('0=No,1=yes');
             $table->enum('sale',['0','1'])->default('0')->comment('0=No,1=yes');
+            $table->enum('in_stock',['0','1'])->default('0')->comment('0=No,1=yes');
             $table->enum('status',['0','1'])->nullable()->default('1')->comment('0=diabled,1=enabled');
             $table->timestamps();
         });
